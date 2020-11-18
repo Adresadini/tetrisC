@@ -11,8 +11,8 @@ public:
 public:
 	Board(uint16_t width,uint16_t height,bool multiPlayer);
 
-	const std::optional<uint16_t>& operator[] (const Position& pos) const;
-	std::optional<int>& operator[] (const Position& pos);
+	const std::optional<uint8_t>& operator[] (const Position& pos) const;
+	std::optional<uint8_t>& operator[] (const Position& pos);
 
 	friend std::ostream& operator << (std::ostream&, const Board&);
 
@@ -22,6 +22,6 @@ private:
 	size_t m_size;
 
 private:
-	std::vector<std::optional<int>>m_board;
+	std::vector<std::optional<uint8_t>>m_board;
 };
 
