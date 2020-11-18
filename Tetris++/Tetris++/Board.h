@@ -6,12 +6,12 @@
 class Board
 {
 public:
-	using Position = std::pair<uint8_t, uint8_t>;
+	using Position = std::pair<uint16_t, uint16_t>;
 
 public:
 	Board(uint16_t width,uint16_t height,bool multiPlayer);
 
-	const std::optional<uint8_t>& operator[] (const Position& pos) const;
+	const std::optional<uint16_t>& operator[] (const Position& pos) const;
 	std::optional<int>& operator[] (const Position& pos);
 
 	friend std::ostream& operator << (std::ostream&, const Board&);
