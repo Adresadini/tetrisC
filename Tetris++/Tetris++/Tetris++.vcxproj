@@ -139,9 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BlackHole.h" />
     <ClInclude Include="Board.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BlackHole.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Tetris++.cpp" />
   </ItemGroup>

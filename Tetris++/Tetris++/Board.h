@@ -16,6 +16,8 @@ public:
 
 	friend std::ostream& operator << (std::ostream&, const Board&);
 
+	size_t getWidth();
+	size_t getHeight();
 private:
 	size_t m_width;
 	size_t m_height;

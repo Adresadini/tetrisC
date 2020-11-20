@@ -29,6 +29,16 @@ std::optional<uint8_t>& Board::operator[](const Position& pos)
 	return m_board[line * m_width + column];
 }
 
+size_t Board::getWidth()
+{
+	return m_width;
+}
+
+size_t Board::getHeight()
+{
+	return m_height;
+}
+
 std::ostream& operator<<(std::ostream& out, const Board& board)
 {
 	Board::Position position;
