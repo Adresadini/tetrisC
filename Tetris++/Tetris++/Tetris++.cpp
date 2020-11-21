@@ -6,11 +6,15 @@
 int main()
 {
 	try {
-		Board board(10, 30, 0);
+		Board board(7, 21, 0);
 		board[{1,3}] = 3;
 		std::cout << board;
 		BlackHole hole;
 		hole.eat(board);
+		Sleep(3000);
+		system("CLS");
+		std::cout << board;
+		hole.disappear(board);
 		Sleep(3000);
 		system("CLS");
 		std::cout << board;

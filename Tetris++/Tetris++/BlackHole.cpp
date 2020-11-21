@@ -11,6 +11,11 @@ void BlackHole::eat(Board& board)
 	else board[{m_positionX, m_positionY}] = std::nullopt;
 }
 
+void BlackHole::disappear(Board& board)
+{
+	board[{m_positionX, m_positionY}] = std::nullopt;
+}
+
 
 
 
