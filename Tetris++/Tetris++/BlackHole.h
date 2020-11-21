@@ -1,13 +1,14 @@
 #pragma once
 #include "Board.h"
+
 class BlackHole
 {
 public:
-	BlackHole(Board board);
-
+	BlackHole() = default;
+	void eat(Board& board);
 private:
-	int line;
-	int column;
+	int m_positionX;
+	int m_positionY;
 };
 
 
