@@ -6,7 +6,7 @@
 class TetrisPiece
 {
 public:
-	TetrisPiece();
+	TetrisPiece(uint8_t,uint8_t);
 	enum class Body :uint8_t
 	{
 		Cyan,
@@ -21,6 +21,8 @@ public:
 	void MoveLeft();
 	void MoveDown(const Board);
 	void MoveRight(const Board);
+	void Draw(Board&);
+	void Delete(Board&);
 private:
 	uint8_t m_positionX;
 	uint8_t m_positionY;
