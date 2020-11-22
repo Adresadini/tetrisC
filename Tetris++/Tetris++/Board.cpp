@@ -6,9 +6,6 @@ Board::Board(uint16_t width, uint16_t height, bool multiPlayer)
 {
 	if (!multiPlayer && m_height < 3 * m_width || multiPlayer && m_height < 3 * m_width / 2)
 		throw "Wrong board size";
-	//std::vector<std::optional<uint8_t>>board(m_size,std::nullopt);
-	//this->m_board = board;
-	//this.m_board(m_size, std::nullopt);
 	for (auto i = 0; i < m_size; i++)
 		m_board.push_back(std::nullopt);
 }
@@ -29,12 +26,12 @@ std::optional<uint8_t>& Board::operator[](const Position& pos)
 	return m_board[line * m_width + column];
 }
 
-size_t Board::getWidth()
+size_t Board::getWidth() const
 {
 	return m_width;
 }
 
-size_t Board::getHeight()
+size_t Board::getHeight() const
 {
 	return m_height;
 }

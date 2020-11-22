@@ -8,8 +8,8 @@ public:
 	void eat(Board& board);
 	void disappear(Board& board);
 private:
-	int m_positionX;
-	int m_positionY;
+	uint8_t m_positionX;
+	uint8_t m_positionY;
 };
 
 
