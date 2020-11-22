@@ -142,12 +142,14 @@
     <ClInclude Include="BlackHole.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="TetrisPiece.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlackHole.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tetris++.cpp" />
+    <ClCompile Include="TetrisPiece.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
