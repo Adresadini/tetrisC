@@ -2,19 +2,19 @@
 #include "BlackHole.h"
 #include "Player.h"
 #include "TetrisPiece.h"
-#include <windows.h> // l-am pus pt sleep , il stergem dupa
+#include <windows.h>
 #include <random>
 
 int main()
 {
 	try {
 		Board board(7, 21, 0);
-		TetrisPiece tetrisPiece({ 0,1 },3);
+		TetrisPiece tetrisPiece({ 3,2 },6);
 		tetrisPiece.Draw(board);
 		board[{6, 3}] = 3;
 		Player player("Player1", 420);
 		std::cout << player << board;
-		tetrisPiece.MoveLeft(board);
+		tetrisPiece.RotateRight(board);
 		BlackHole hole;
 		hole.Spawn(board);
 		Sleep(3000);
@@ -23,7 +23,7 @@ int main()
 		hole.Disappear(board);
 		Sleep(3000);
 		system("CLS");
-		tetrisPiece.MoveLeft(board);
+		tetrisPiece.RotateRight(board);
 		std::cout << player << board;
 	}
 	catch (const char* errorMessage)

@@ -12,6 +12,9 @@ public:
 	void MoveDown(Board&);
 	void MoveRight(Board&);
 
+	void RotateLeft(Board&);
+	void RotateRight(Board&);
+
 	void Draw(Board&);
 	void Delete(Board&);
 
