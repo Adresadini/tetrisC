@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "TetrisPiece.h"
 #include <windows.h> // l-am pus pt sleep , il stergem dupa
-
+#include <random>
 
 int main()
 {
@@ -18,11 +18,11 @@ int main()
 		tetrisPiece.MoveDown(board);
 		tetrisPiece.Draw(board);
 		BlackHole hole;
-		hole.eat(board);
+		hole.Spawn(board);
 		Sleep(3000);
 		system("CLS");
 		std::cout << player << board;
-		hole.disappear(board);
+		hole.Disappear(board);
 		Sleep(3000);
 		system("CLS");
 		std::cout << player << board;
@@ -31,4 +31,5 @@ int main()
 	{
 		std::cout << errorMessage;
 	}
+	return 0;
 }

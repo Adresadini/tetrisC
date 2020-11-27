@@ -5,11 +5,10 @@ class BlackHole
 {
 public:
 	BlackHole() = default;
-	void eat(Board& board);
-	void disappear(Board& board);
+	void Spawn(Board& board);
+	void Disappear(Board& board) const;
 private:
-	uint8_t m_positionX;
-	uint8_t m_positionY;
+	Board::Position m_spawnPosition;
 };
 
 
