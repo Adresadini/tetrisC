@@ -9,7 +9,7 @@ int main()
 {
 	try {
 		Board board(7, 21, 0);
-		TetrisPiece tetrisPiece(4,2);
+		TetrisPiece tetrisPiece(4,2,6);
 		tetrisPiece.Draw(board);
 		board[{1, 3}] = 3;
 		Player player("Player1", 420);

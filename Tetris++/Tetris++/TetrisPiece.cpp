@@ -1,11 +1,11 @@
 #include "TetrisPiece.h"
-TetrisPiece::TetrisPiece(uint8_t positionX, uint8_t positionY)
+TetrisPiece::TetrisPiece(uint8_t positionX, uint8_t positionY,uint8_t pieceType)
 	:m_positionX(positionX), m_positionY(positionY)
 {
-	m_piece[2] = 1;
-	m_piece[6] = 1;
-	m_piece[10] = 1;
-	m_piece[14] = 1;
+	if (pieceType >= NumberOfPieces)
+		throw "Wrong piece type";
+	for (auto block : m_pieceType[pieceType])
+		m_piece[block] = pieceType+1;
 }
 void TetrisPiece::MoveLeft()
 {
