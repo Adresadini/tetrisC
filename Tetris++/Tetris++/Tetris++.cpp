@@ -9,14 +9,12 @@ int main()
 {
 	try {
 		Board board(7, 21, 0);
-		TetrisPiece tetrisPiece(4,2,6);
+		TetrisPiece tetrisPiece({ 0,1 },3);
 		tetrisPiece.Draw(board);
-		board[{1, 3}] = 3;
+		board[{6, 3}] = 3;
 		Player player("Player1", 420);
 		std::cout << player << board;
-		tetrisPiece.Delete(board);
-		tetrisPiece.MoveDown(board);
-		tetrisPiece.Draw(board);
+		tetrisPiece.MoveLeft(board);
 		BlackHole hole;
 		hole.Spawn(board);
 		Sleep(3000);
@@ -25,6 +23,7 @@ int main()
 		hole.Disappear(board);
 		Sleep(3000);
 		system("CLS");
+		tetrisPiece.MoveLeft(board);
 		std::cout << player << board;
 	}
 	catch (const char* errorMessage)

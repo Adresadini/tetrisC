@@ -6,18 +6,17 @@
 class TetrisPiece
 {
 public:
-	TetrisPiece(uint8_t, uint8_t,uint8_t);
+	TetrisPiece(Board::Position,uint8_t);
 
-	void MoveLeft();
-	void MoveDown(const Board);
-	void MoveRight(const Board);
+	void MoveLeft(Board&);
+	void MoveDown(Board&);
+	void MoveRight(Board&);
 
 	void Draw(Board&);
 	void Delete(Board&);
 
 private:
-	uint8_t m_positionX;
-	uint8_t m_positionY;
+	Board::Position m_position;
 
 private:
 	static const size_t kWidth = 4;
