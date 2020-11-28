@@ -4,9 +4,8 @@
 class Player
 {
 public:
-	Player(std::string name, uint16_t score);
-	friend std::istream& operator>>(std::istream&, Player&);
-	friend std::ostream& operator<<(std::ostream&, const Player&);
+	Player(std::string name = NULL, uint16_t score = 0);
+	std::string PlayerToString();
 
 private:
 	std::string m_name;

@@ -13,18 +13,18 @@ int main()
 		tetrisPiece.Draw(board);
 		board[{6, 3}] = 3;
 		Player player("Player1", 420);
-		std::cout << player << board;
+		std::cout << player.PlayerToString() << board;
 		tetrisPiece.RotateRight(board);
 		BlackHole hole;
 		hole.Spawn(board);
 		Sleep(3000);
 		system("CLS");
-		std::cout << player << board;
+		std::cout << player.PlayerToString() << board;
 		hole.Disappear(board);
 		Sleep(3000);
 		system("CLS");
 		tetrisPiece.RotateRight(board);
-		std::cout << player << board;
+		std::cout << player.PlayerToString() << board;
 	}
 	catch (const char* errorMessage)
 	{

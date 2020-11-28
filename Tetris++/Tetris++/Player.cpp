@@ -1,19 +1,13 @@
 #include "Player.h"
+#include <string>
 
-Player::Player(std::string name = NULL, uint16_t score = 0)
+Player::Player(std::string name, uint16_t score)
 	:m_name(name), m_score(score)
 {
 
 }
 
-std::istream& operator>>(std::istream& in, Player& player)
+std::string Player::PlayerToString()
 {
-	in >> player.m_name >> player.m_score;
-	return in;
-}
-
-std::ostream& operator<<(std::ostream& out, const Player& player)
-{
-	out << player.m_name << " " << player.m_score << std::endl;
-	return out;
+	return m_name + " " + std::to_string(m_score);
 }
