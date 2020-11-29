@@ -32,3 +32,13 @@ uint16_t Player::GetAverageScore()
 {
 	return m_averageScore;
 }
+
+uint16_t Player::GetScore()
+{
+	return m_score;
+}
+
+std::string Player::GetName()
+{
+	return m_name;
+}

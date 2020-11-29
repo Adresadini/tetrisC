@@ -11,6 +11,9 @@ public:
 	void ModifyScoreInfo();
 	uint16_t GetHighScore();
 	uint16_t GetAverageScore();
+	uint16_t GetScore();
+	std::string GetName();
+
 
 private:
 	std::string m_name;
@@ -18,5 +21,6 @@ private:
 	static uint16_t m_highScore;
 	static uint16_t m_averageScore;
 	static uint8_t m_scoreCount;
+
 };
 
