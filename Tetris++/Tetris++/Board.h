@@ -18,6 +18,7 @@ public:
 
 	size_t getWidth() const;
 	size_t getHeight() const;
+	void DeleteCompleteLines();
 private:
 	size_t m_width;
 	size_t m_height;
@@ -25,4 +26,7 @@ private:
 
 private:
 	std::vector<std::optional<uint8_t>>m_board;
+public:
+	bool VerifyIfLineIsComplete(uint16_t line);
+	void DeleteAndReplaceLine(uint16_t line);
 };

@@ -36,6 +36,8 @@ size_t Board::getHeight() const
 	return m_height;
 }
 
+
+
 std::ostream& operator<<(std::ostream& out, const Board& board)
 {
 	Board::Position position;
@@ -54,4 +56,26 @@ std::ostream& operator<<(std::ostream& out, const Board& board)
 		out << std::endl;
 	}
 	return out;
+}
+
+void Board::DeleteCompleteLines()
+{
+	for (uint16_t line = 0; line < m_height; line++)
+		if (VerifyIfLineIsComplete(line))
+			DeleteAndReplaceLine(line);
+}
+
+bool  Board::VerifyIfLineIsComplete(uint16_t line)
+{
+	for (uint16_t column = 0; column < m_width; column++)
+		if (!m_board[line * m_width + column]) return false;
+	return true;
+}
+
+void Board::DeleteAndReplaceLine(uint16_t line)
+{
+	m_board.erase(m_board.begin() + line * m_width, m_board.begin() + line * m_width + m_width);
+
+	for (uint16_t index = 0; index < m_width; index++)
+		m_board.insert(m_board.begin(), std::nullopt);
 }
