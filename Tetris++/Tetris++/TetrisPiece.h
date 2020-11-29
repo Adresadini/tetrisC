@@ -18,6 +18,9 @@ public:
 	void Draw(Board&);
 	void Delete(Board&);
 
+	size_t getKHeight();
+	size_t getKWidth();
+	Board::Position getPosition();
 private:
 	Board::Position m_position;
 

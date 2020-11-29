@@ -79,8 +79,8 @@ void TetrisPiece::RotateRight(Board& board)
 {
 	std::array<std::optional<uint8_t>, TetrisPiece::kSize> aux;
 	uint8_t iterator = 0;
-	for (int column = 0; column <kWidth; column++)
-		for (int line = kHeight-1; line >=0; line--)
+	for (int column = 0; column < kWidth; column++)
+		for (int line = kHeight - 1; line >= 0; line--)
 		{
 			aux[iterator] = m_piece[line * kWidth + column];
 			iterator++;
@@ -113,4 +113,19 @@ void TetrisPiece::Delete(Board& board)
 				board[{line, column}] = std::nullopt;
 			iterator++;
 		}
+}
+
+size_t TetrisPiece::getKHeight()
+{
+	return kHeight;
+}
+
+size_t TetrisPiece::getKWidth()
+{
+	return kWidth;
+}
+
+Board::Position TetrisPiece::getPosition()
+{
+	return m_position;
 }
