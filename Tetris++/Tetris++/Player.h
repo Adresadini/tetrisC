@@ -23,4 +23,3 @@ private:
 	static uint8_t m_scoreCount;
 
 };
-

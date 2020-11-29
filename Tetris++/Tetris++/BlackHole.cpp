@@ -41,7 +41,3 @@ bool BlackHole::FoundAPiece(const  Board& board, TetrisPiece& piece) const
 
 		board[m_spawnPosition];
 }
-
-
-
-

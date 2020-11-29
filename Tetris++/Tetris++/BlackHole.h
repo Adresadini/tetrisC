@@ -15,5 +15,3 @@ private:
 private:
 	bool FoundAPiece(const  Board& board, TetrisPiece& piece) const;
 };
-
-

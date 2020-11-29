@@ -1,5 +1,11 @@
 #include "Scores.h"
 
+std::istream& operator>>(std::istream& in, std::priority_queue<Player>& queue)
+{
+
+    return in;
+}
+
 std::ostream& operator<<(std::ostream& out, Scores& playerInfo)
 {
     for (Player index : playerInfo.m_vector)
@@ -26,3 +32,13 @@ void Scores::ReadPlayers(std::string fileName)
     std::sort(m_vector.begin(), m_vector.end(), comparePlayers);
 }
 
+bool Scores::IsNewPlayer(Player& newPlayer)
+{
+    for (auto index: m_vector)
+    {
+        if (newPlayer.GetName() == index.GetName())
+            return false;
+    }
+    m_vector.emplace_back(Player(newPlayer));
+    return true;
+}
