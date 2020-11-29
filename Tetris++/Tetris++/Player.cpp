@@ -1,6 +1,10 @@
 #include "Player.h"
 #include <string>
 
+uint16_t Player::m_highScore;
+uint16_t Player::m_averageScore;
+int Player::m_scoreCount;
+
 Player::Player(std::string name, uint16_t score)
 	:m_name(name), m_score(score)
 {
