@@ -13,7 +13,7 @@ Board::Board(uint16_t width, uint16_t height, bool multiPlayer)
 const std::optional<uint8_t>& Board::operator[](const Position& pos) const
 {
 	const auto& [line, column] = pos;
-	if (line >= m_height || column >= m_width)
+	if (line >= m_height || column >= m_width || line < 0 || column < 0)
 		throw "Out of bounds";
 	return m_board[line * m_width + column];
 }
@@ -21,7 +21,7 @@ const std::optional<uint8_t>& Board::operator[](const Position& pos) const
 std::optional<uint8_t>& Board::operator[](const Position& pos)
 {
 	const auto& [line, column] = pos;
-	if (line >= m_height || column >= m_width)
+	if (line >= m_height || column >= m_width || line < 0 || column < 0)
 		throw "Out of bounds";
 	return m_board[line * m_width + column];
 }

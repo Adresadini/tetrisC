@@ -6,7 +6,7 @@
 class Board
 {
 public:
-	using Position = std::pair<uint16_t, uint16_t>;
+	using Position = std::pair<int16_t, int16_t>;
 
 public:
 	Board(uint16_t width,uint16_t height,bool multiPlayer);
