@@ -7,7 +7,7 @@
 class TetrisPiece
 {
 public:
-	TetrisPiece(Board::Position&,PieceTypes&);
+	TetrisPiece(const Board::Position&,const PieceTypes&);
 
 	void MoveLeft(Board&);
 	void MoveDown(Board&);
@@ -16,12 +16,12 @@ public:
 	void RotateLeft(Board&);
 	void RotateRight(Board&);
 
-	void Draw(Board&);
-	void Delete(Board&);
+	void Draw(Board&) const;
+	void Delete(Board&) const;
 
-	size_t getKHeight();
-	size_t getKWidth();
-	Board::Position getPosition();
+	size_t GetKHeight() const;
+	size_t GetKWidth() const;
+	Board::Position GetPosition() const;
 private:
 	Board::Position m_position;
 

@@ -9,7 +9,7 @@
 int main()
 {
 	try {
-		Board::Position pos = { -2,1 };
+		Board::Position pos = { 1,1 };
 		PieceTypes types("PieceTypes.txt");
 		Scores scores;
 		scores.ReadPlayers("Scores.txt");
@@ -18,7 +18,7 @@ int main()
 		TetrisPiece tetrisPiece(pos, types);
 
 		tetrisPiece.Draw(board);
-		board[{10, 3}] = 9;
+		board[{2, 5}] = 9;
 
 		for (uint16_t column = 0; column < 7; column++)
 			board[{9, column }] = 1;
@@ -26,7 +26,7 @@ int main()
 
 		Player player("Player1", 420);
 		std::cout << player.PlayerToString() << std::endl << board;
-		tetrisPiece.MoveDown(board);
+		tetrisPiece.MoveRight(board);
 
 		BlackHole hole;
 		hole.Spawn(board, tetrisPiece);
@@ -41,7 +41,7 @@ int main()
 		Sleep(1000);
 		system("CLS");
 
-		tetrisPiece.MoveDown(board);
+		tetrisPiece.MoveRight(board);
 		std::cout << player.PlayerToString() << std::endl << board;
 
 		std::cout << scores;

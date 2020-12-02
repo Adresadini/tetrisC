@@ -1,7 +1,7 @@
 #include "TetrisPiece.h"
 #include <random>
 
-TetrisPiece::TetrisPiece(Board::Position& pos, PieceTypes& types)
+TetrisPiece::TetrisPiece(const Board::Position& pos,const PieceTypes& types)
 	:m_position(pos)
 {
 	std::random_device random;
@@ -16,12 +16,28 @@ TetrisPiece::TetrisPiece(Board::Position& pos, PieceTypes& types)
 void TetrisPiece::MoveLeft(Board& board)
 {
 	uint8_t iterator = 0;
-	for (uint8_t line = m_position.first; line < m_position.first + (signed)kHeight; line++)
+	for (int8_t line = m_position.first; line < m_position.first + (signed)kHeight; line++)
 		for (int8_t column = m_position.second; column < m_position.second + (signed)kWidth; column++)
 		{
-			
+
 			if (m_piece[iterator] && column - 1 < 0)
 				return;
+			iterator++;
+		}
+	iterator = 0;
+	for (int8_t line = m_position.first; line < m_position.first + (signed)kHeight; line++)
+		for (int8_t column = m_position.second; column < m_position.second + (signed)kWidth; column++)
+		{
+			if (m_piece[iterator])
+			{
+				if (board[{line, column - 1}])
+					return;
+				else
+				{
+					iterator += (signed)kWidth-(column-m_position.second);
+					break;
+				}
+			}
 			iterator++;
 		}
 	Delete(board);
@@ -53,6 +69,22 @@ void TetrisPiece::MoveRight(Board& board)
 			if (m_piece[iterator] && column + 1 >= board.getWidth())
 				return;
 			iterator++;
+		}
+	iterator = kSize-1;
+	for (int8_t line = m_position.first + (signed)kHeight - 1; line >= m_position.first; line--)
+		for (int8_t column = m_position.second + (signed)kWidth-1; column >=m_position.second; column--)
+		{
+			if (m_piece[iterator])
+			{
+				if (board[{line, column + 1}])
+					return;
+				else
+				{
+					iterator -= column-m_position.second+1;
+					break;
+				}
+			}
+			iterator--;
 		}
 	Delete(board);
 	m_position.second++;
@@ -91,19 +123,19 @@ void TetrisPiece::RotateRight(Board& board)
 	Draw(board);
 }
 
-void TetrisPiece::Draw(Board& board)
+void TetrisPiece::Draw(Board& board) const
 {
 	uint8_t iterator = 0;
 	for (int8_t line = m_position.first; line < m_position.first + (signed)kHeight; line++)
 		for (int8_t column = m_position.second; column < m_position.second + (signed)kWidth; column++)
 		{
-			if (m_piece[iterator] && line>=0)
+			if (m_piece[iterator] && line >= 0)
 				board[{line, column}] = m_piece[iterator];
 			iterator++;
 		}
 }
 
-void TetrisPiece::Delete(Board& board)
+void TetrisPiece::Delete(Board& board) const
 {
 	uint8_t iterator = 0;
 	for (int8_t line = m_position.first; line < m_position.first + (signed)kHeight; line++)
@@ -115,17 +147,17 @@ void TetrisPiece::Delete(Board& board)
 		}
 }
 
-size_t TetrisPiece::getKHeight()
+size_t TetrisPiece::GetKHeight() const
 {
 	return kHeight;
 }
 
-size_t TetrisPiece::getKWidth()
+size_t TetrisPiece::GetKWidth() const
 {
 	return kWidth;
 }
 
-Board::Position TetrisPiece::getPosition()
+Board::Position TetrisPiece::GetPosition() const
 {
 	return m_position;
 }
