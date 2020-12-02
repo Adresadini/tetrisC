@@ -1,17 +1,16 @@
 #include "TetrisPiece.h"
-void Rotation(std::optional<uint8_t>& a, std::optional<uint8_t>& b, std::optional<uint8_t>& c, std::optional<uint8_t>& d)
-{
-	std::swap(a, b);
-	std::swap(b, c);
-	std::swap(c, d);
-}
-TetrisPiece::TetrisPiece(Board::Position pos, uint8_t pieceType)
+#include <random>
+
+TetrisPiece::TetrisPiece(Board::Position& pos, PieceTypes& types)
 	:m_position(pos)
 {
-	if (pieceType >= NumberOfPieces)
-		throw "Wrong piece type";
-	for (auto block : m_pieceType[pieceType])
-		m_piece[block] = pieceType + 1;
+	std::random_device random;
+	std::uniform_int_distribution<uint16_t> pieceDistribution(0, types.GetNumberOfPieces() - 1);
+	uint8_t randomPiece = pieceDistribution(random);
+
+	for (auto block : types.GetPiece(randomPiece))
+		m_piece[block] = randomPiece + 1;
+
 }
 
 void TetrisPiece::MoveLeft(Board& board)

@@ -30,6 +30,9 @@
     <ClInclude Include="Scores.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PieceTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp">
@@ -50,9 +53,15 @@
     <ClCompile Include="Scores.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PieceTypes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Scores.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="PieceTypes.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

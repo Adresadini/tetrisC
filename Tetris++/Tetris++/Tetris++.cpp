@@ -3,17 +3,19 @@
 #include "Player.h"
 #include "TetrisPiece.h"
 #include "Scores.h"
+#include "PieceTypes.h"
 #include <windows.h>
 
 int main()
 {
 	try {
-
+		Board::Position pos = { 3,2 };
+		PieceTypes types("PieceTypes.txt");
 		Scores scores;
 		scores.ReadPlayers("Scores.txt");
 
 		Board board(7, 21, 0);
-		TetrisPiece tetrisPiece({ 3,2 }, 6);
+		TetrisPiece tetrisPiece(pos, types);
 		tetrisPiece.Draw(board);
 
 		board[{10, 3}] = 9;
@@ -29,7 +31,7 @@ int main()
 		BlackHole hole;
 		hole.Spawn(board, tetrisPiece);
 
-		board.DeleteCompleteLines();
+		//board.DeleteCompleteLines();
 
 		Sleep(1000);
 		system("CLS");
