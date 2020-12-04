@@ -4,10 +4,20 @@
 #include <optional>
 #include "Board.h"
 #include "PieceTypes.h"
+
 class TetrisPiece
 {
 public:
-	TetrisPiece(const Board::Position&,const PieceTypes&);
+	/*enum class Move : int
+	{
+		Left = 'a',
+		Right = 'd',
+		Down = 's',
+		RotateLeft = 'q',
+		RotateRight = 'e',
+		Stop = 27
+	};*/
+	TetrisPiece(const Board::Position&, const PieceTypes&);
 
 	void MoveLeft(Board&);
 	void MoveDown(Board&);
@@ -23,6 +33,8 @@ public:
 	size_t GetKWidth() const;
 	Board::Position GetPosition() const;
 
+
+	void movePiece(Board& board, bool GameOver);
 	void resetPieceElement(uint16_t position);
 private:
 	Board::Position m_position;

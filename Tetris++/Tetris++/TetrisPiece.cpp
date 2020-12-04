@@ -1,6 +1,6 @@
 #include "TetrisPiece.h"
 #include <random>
-
+#include <conio.h>
 TetrisPiece::TetrisPiece(const Board::Position& pos, const PieceTypes& types)
 	:m_position(pos)
 {
@@ -160,6 +160,34 @@ size_t TetrisPiece::GetKWidth() const
 Board::Position TetrisPiece::GetPosition() const
 {
 	return m_position;
+}
+
+void TetrisPiece::movePiece(Board& board, bool gameOver)
+{
+	if (_kbhit())
+	{
+		switch (_getch())
+		{
+		case 'a':
+			MoveLeft(board);
+			break;
+		case 'd':
+			MoveRight(board);
+			break;
+		case 's':
+			MoveDown(board);
+			break;
+		case 'q':
+			RotateLeft(board);
+			break;
+		case'e':
+			RotateRight(board);
+			break;
+		case 27:
+			gameOver = true;
+			break;
+		}
+	}
 }
 
 void TetrisPiece::resetPieceElement(uint16_t position)

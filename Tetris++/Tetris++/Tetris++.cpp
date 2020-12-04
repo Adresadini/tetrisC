@@ -6,7 +6,7 @@
 #include "PieceTypes.h"
 #include <windows.h>
 
-int main4()
+int main1()
 {
 	try {
 		Board::Position pos = { 1,1 };
@@ -56,5 +56,31 @@ int main4()
 	{
 		std::cout << errorMessage;
 	}
+	return 0;
+}
+
+
+int main()
+{
+	Board board(7, 21, 0);
+	Board::Position pos = { 1,1 };
+	PieceTypes types("PieceTypes.txt");
+	TetrisPiece tetrisPiece(pos, types);
+	tetrisPiece.Draw(board);
+	bool gameOver = false;
+	while (!gameOver)
+	{
+		try {
+			std::cout << board;
+			tetrisPiece.movePiece(board, gameOver);
+			system("CLS");
+			Sleep(10);
+		}
+		catch (const char* errorMessage)
+		{
+			std::cout << errorMessage;
+		}
+	}
+	std::cout << "Game Over!";
 	return 0;
 }
