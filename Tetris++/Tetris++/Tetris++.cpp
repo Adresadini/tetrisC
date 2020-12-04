@@ -20,8 +20,14 @@ int main()
 		tetrisPiece.Draw(board);
 		board[{2, 5}] = 9;
 
+		board[{10, 3}] = 9;
+
 		for (uint16_t column = 0; column < 7; column++)
 			board[{9, column }] = 1;
+		for (uint16_t column = 0; column < 7; column++)
+			board[{10, column }] = 1;
+		
+		
 
 
 		Player player("Player1", 420);
@@ -33,12 +39,12 @@ int main()
 
 		//board.DeleteCompleteLines();
 
-		Sleep(1000);
+		Sleep(3000);
 		system("CLS");
 		std::cout << player.PlayerToString() << std::endl << board;
 		hole.Disappear(board);
 
-		Sleep(1000);
+		Sleep(3000);
 		system("CLS");
 
 		tetrisPiece.MoveRight(board);
