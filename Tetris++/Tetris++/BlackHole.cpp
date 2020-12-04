@@ -24,9 +24,9 @@ void BlackHole::Disappear(Board& board) const
 
 void BlackHole::EatPiece(Board& board, TetrisPiece& piece) const
 {
-	for (size_t line = piece.GetPosition().first; line <= m_spawnPosition.first; line++)
-		for (size_t column = piece.GetPosition().second; column <= m_spawnPosition.second; column++)
-			board[{line, column}] = std::nullopt;
+	for (size_t line = piece.GetPosition().first - 1; line <= m_spawnPosition.first; line++)
+		for (size_t column = piece.GetPosition().second - 1; column <= m_spawnPosition.second; column++)
+			piece.resetPieceElement(line * piece.GetKWidth() + column);
 }
 
 bool BlackHole::FoundAPiece(const  Board& board, TetrisPiece& piece) const

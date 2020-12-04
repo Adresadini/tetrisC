@@ -46,7 +46,7 @@ std::ostream& operator<<(std::ostream& out, const Board& board)
 	{
 		for (column = 0; column < board.m_width; column++)
 		{
-			if (board[position])
+			if (board[position] && board[position] != 0) // TO DO VEZI DE CE NU MERGE resetPieceElement SI STERGE FAZA CU 0
 				out << unsigned(*board[position]);
 			else
 				out << EmptyBoardSpace;

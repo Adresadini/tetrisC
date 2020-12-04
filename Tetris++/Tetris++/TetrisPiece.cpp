@@ -1,7 +1,7 @@
 #include "TetrisPiece.h"
 #include <random>
 
-TetrisPiece::TetrisPiece(const Board::Position& pos,const PieceTypes& types)
+TetrisPiece::TetrisPiece(const Board::Position& pos, const PieceTypes& types)
 	:m_position(pos)
 {
 	std::random_device random;
@@ -34,7 +34,7 @@ void TetrisPiece::MoveLeft(Board& board)
 					return;
 				else
 				{
-					iterator += (signed)kWidth-(column-m_position.second);
+					iterator += (signed)kWidth - (column - m_position.second);
 					break;
 				}
 			}
@@ -70,9 +70,9 @@ void TetrisPiece::MoveRight(Board& board)
 				return;
 			iterator++;
 		}
-	iterator = kSize-1;
+	iterator = kSize - 1;
 	for (int8_t line = m_position.first + (signed)kHeight - 1; line >= m_position.first; line--)
-		for (int8_t column = m_position.second + (signed)kWidth-1; column >=m_position.second; column--)
+		for (int8_t column = m_position.second + (signed)kWidth - 1; column >= m_position.second; column--)
 		{
 			if (m_piece[iterator])
 			{
@@ -80,7 +80,7 @@ void TetrisPiece::MoveRight(Board& board)
 					return;
 				else
 				{
-					iterator -= column-m_position.second+1;
+					iterator -= column - m_position.second + 1;
 					break;
 				}
 			}
@@ -160,4 +160,10 @@ size_t TetrisPiece::GetKWidth() const
 Board::Position TetrisPiece::GetPosition() const
 {
 	return m_position;
+}
+
+void TetrisPiece::resetPieceElement(uint16_t position)
+{
+	m_piece[position] = 0;
+	// NU MERGE, DE CE?
 }

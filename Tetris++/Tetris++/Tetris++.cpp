@@ -6,7 +6,7 @@
 #include "PieceTypes.h"
 #include <windows.h>
 
-int main()
+int main4()
 {
 	try {
 		Board::Position pos = { 1,1 };
@@ -26,8 +26,8 @@ int main()
 			board[{9, column }] = 1;
 		for (uint16_t column = 0; column < 7; column++)
 			board[{10, column }] = 1;
-		
-		
+
+
 
 
 		Player player("Player1", 420);

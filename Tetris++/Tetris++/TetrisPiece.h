@@ -22,6 +22,8 @@ public:
 	size_t GetKHeight() const;
 	size_t GetKWidth() const;
 	Board::Position GetPosition() const;
+
+	void resetPieceElement(uint16_t position);
 private:
 	Board::Position m_position;
 
