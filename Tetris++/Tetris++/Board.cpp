@@ -1,7 +1,7 @@
 #include "Board.h"
 
 const char EmptyBoardSpace = '_';
-Board::Board(uint16_t width, uint16_t height, bool multiPlayer)
+Board::Board(const uint16_t& width, const uint16_t& height, const bool& multiPlayer)
 	:m_width(width), m_height(height), m_size(width* height)
 {
 	if (!multiPlayer && m_height < 3 * m_width || multiPlayer && m_height < 3 * m_width / 2)
@@ -26,12 +26,12 @@ std::optional<uint8_t>& Board::operator[](const Position& pos)
 	return m_board[line * m_width + column];
 }
 
-size_t Board::getWidth() const
+size_t Board::GetWidth() const
 {
 	return m_width;
 }
 
-size_t Board::getHeight() const
+size_t Board::GetHeight() const
 {
 	return m_height;
 }
@@ -65,14 +65,14 @@ void Board::DeleteCompleteLines()
 			DeleteAndReplaceLine(line);
 }
 
-bool  Board::VerifyIfLineIsComplete(uint16_t line)
+bool  Board::VerifyIfLineIsComplete(const uint16_t& line) const
 {
 	for (uint16_t column = 0; column < m_width; column++)
 		if (!m_board[line * m_width + column]) return false;
 	return true;
 }
 
-void Board::DeleteAndReplaceLine(uint16_t line)
+void Board::DeleteAndReplaceLine(const uint16_t& line)
 {
 	m_board.erase(m_board.begin() + line * m_width, m_board.begin() + line * m_width + m_width);
 

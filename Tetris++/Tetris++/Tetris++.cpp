@@ -37,7 +37,7 @@ int main1()
 		BlackHole hole;
 		hole.Spawn(board, tetrisPiece);
 
-		//board.DeleteCompleteLines();
+		board.DeleteCompleteLines();
 
 		Sleep(3000);
 		system("CLS");
@@ -76,7 +76,6 @@ int main()
 			std::cout << board;
 			tetrisPiece.movePiece(board, gameOver);
 			Sleep(0);
-			
 		}
 		catch (const char* errorMessage)
 		{

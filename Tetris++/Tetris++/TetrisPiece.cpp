@@ -50,8 +50,11 @@ void TetrisPiece::MoveDown(Board& board)
 			{
 				if (line >= 0)
 				{
-					if (line + 1 >= board.getHeight() || board[{line + 1, column}])
+					if (line + 1 >= board.GetHeight() || board[{line + 1, column}])
+					{
+						set = true;
 						return;
+					}
 					else
 					{
 						iterator += (kHeight - 1 - (line - m_position.first)) * kWidth;
@@ -61,7 +64,7 @@ void TetrisPiece::MoveDown(Board& board)
 				}
 
 			}
-			if ((signed)iterator - (signed)kWidth>0)
+			if ((signed)iterator - (signed)kWidth > 0)
 				iterator -= kWidth;
 			else
 			{
@@ -86,7 +89,7 @@ void TetrisPiece::MoveRight(Board& board)
 			{
 				if (line >= 0)
 				{
-					if (column + 1 >= board.getWidth() || board[{line, column + 1}])
+					if (column + 1 >= board.GetWidth() || board[{line, column + 1}])
 						return;
 					else
 					{
@@ -171,6 +174,11 @@ size_t TetrisPiece::GetKWidth() const
 Board::Position TetrisPiece::GetPosition() const
 {
 	return m_position;
+}
+
+bool TetrisPiece::IsSet() const
+{
+	return set;
 }
 
 void TetrisPiece::movePiece(Board& board, bool gameOver)

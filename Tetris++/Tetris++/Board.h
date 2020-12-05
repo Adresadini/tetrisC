@@ -9,15 +9,15 @@ public:
 	using Position = std::pair<int16_t, int16_t>;
 
 public:
-	Board(uint16_t width,uint16_t height,bool multiPlayer);
+	Board(const uint16_t& width,const uint16_t& height,const bool& multiPlayer);
 
 	const std::optional<uint8_t>& operator[] (const Position& pos) const;
 	std::optional<uint8_t>& operator[] (const Position& pos);
 
 	friend std::ostream& operator << (std::ostream&, const Board&);
 
-	size_t getWidth() const;
-	size_t getHeight() const;
+	size_t GetWidth() const;
+	size_t GetHeight() const;
 	void DeleteCompleteLines();
 private:
 	size_t m_width;
@@ -27,6 +27,6 @@ private:
 private:
 	std::vector<std::optional<uint8_t>>m_board;
 public:
-	bool VerifyIfLineIsComplete(uint16_t line);
-	void DeleteAndReplaceLine(uint16_t line);
+	bool VerifyIfLineIsComplete(const uint16_t& line) const;
+	void DeleteAndReplaceLine(const uint16_t& line);
 };

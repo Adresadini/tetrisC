@@ -4,8 +4,8 @@
 void BlackHole::Spawn(Board& board, TetrisPiece& tetrisPiece)
 {
 	std::random_device randomNumber;
-	std::uniform_int_distribution<uint16_t> lineDistribution(0, board.getHeight() - 1);
-	std::uniform_int_distribution<uint16_t> columnDistribution(0, board.getWidth() - 1);
+	std::uniform_int_distribution<uint16_t> lineDistribution(0, board.GetHeight() - 1);
+	std::uniform_int_distribution<uint16_t> columnDistribution(0, board.GetWidth() - 1);
 
 	m_spawnPosition.first = lineDistribution(randomNumber);
 	m_spawnPosition.second = columnDistribution(randomNumber);

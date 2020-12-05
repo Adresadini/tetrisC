@@ -8,15 +8,6 @@
 class TetrisPiece
 {
 public:
-	/*enum class Move : int
-	{
-		Left = 'a',
-		Right = 'd',
-		Down = 's',
-		RotateLeft = 'q',
-		RotateRight = 'e',
-		Stop = 27
-	};*/
 	TetrisPiece(const Board::Position&, const PieceTypes&);
 
 	void MoveLeft(Board&);
@@ -33,11 +24,13 @@ public:
 	size_t GetKWidth() const;
 	Board::Position GetPosition() const;
 
+	bool IsSet() const;
 
 	void movePiece(Board& board, bool GameOver);
 	void resetPieceElement(uint16_t position);
 private:
 	Board::Position m_position;
+	bool set = false;
 
 private:
 	static const size_t kWidth = 4;
