@@ -18,8 +18,8 @@ public:
 private:
 	std::string m_name;
 	uint16_t m_score;
-	static uint16_t m_highScore;
-	static uint16_t m_averageScore;
-	static uint8_t m_scoreCount;
+	uint16_t m_highScore;
+	uint16_t m_averageScore;
+	uint8_t m_scoreCount;
 
 };
