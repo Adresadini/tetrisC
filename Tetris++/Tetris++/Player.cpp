@@ -9,7 +9,7 @@ Player::Player(std::string name, uint16_t score)
 	m_scoreCount = 0;
 }
 
-std::string Player::PlayerToString()
+std::string Player::PlayerToString() const
 {
 	return m_name + " " + std::to_string(m_score);
 }
@@ -21,22 +21,32 @@ void Player::ModifyScoreInfo()
 		m_highScore = m_score;
 }
 
-uint16_t Player::GetHighScore()
+uint16_t Player::GetHighScore() const
 {
 	return m_highScore;
 }
 
-uint16_t Player::GetAverageScore()
+uint16_t Player::GetAverageScore() const
 {
 	return m_averageScore;
 }
 
-uint16_t Player::GetScore()
+uint16_t Player::GetScore() const
 {
 	return m_score;
 }
 
-std::string Player::GetName()
+std::string Player::GetName() const
 {
 	return m_name;
+}
+
+void Player::MoveLeft(TetrisPiece& piece)
+{
+	//piece.MoveLeft(board);
+}
+
+void Player::MoveRight(TetrisPiece& piece)
+{
+	//piece.MoveRight(board);
 }
