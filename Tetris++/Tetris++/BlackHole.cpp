@@ -1,4 +1,5 @@
 #include "BlackHole.h"
+
 #include <random>
 
 void BlackHole::Spawn(Board& board, TetrisPiece& tetrisPiece)

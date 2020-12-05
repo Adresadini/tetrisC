@@ -1,15 +1,9 @@
 #include "Scores.h"
 
-std::istream& operator>>(std::istream& in, std::priority_queue<Player>& queue)
-{
-
-    return in;
-}
-
 std::ostream& operator<<(std::ostream& out, Scores& playerInfo)
 {
-    for (Player index : playerInfo.m_vector)
-        out << index.GetName() << " " << index.GetScore() << std::endl;
+    for (auto &index : playerInfo.m_map)
+        out << index.first << " " << index.second << std::endl;
     return out;
 }
 
@@ -27,18 +21,17 @@ void Scores::ReadPlayers(std::string fileName)
         uint16_t score;
         file >> name;
         file >> score;
-        m_vector.emplace_back(Player(name, score));
+        m_map.insert(std::make_pair(name, score));
     }
-    std::sort(m_vector.begin(), m_vector.end(), comparePlayers);
 }
 
 bool Scores::IsNewPlayer(Player& newPlayer)
 {
-    for (auto index: m_vector)
+    for (auto index: m_map)
     {
-        if (newPlayer.GetName() == index.GetName())
+        if (newPlayer.GetName() == index.first)
             return false;
     }
-    m_vector.emplace_back(Player(newPlayer));
+    m_map.insert(std::make_pair(newPlayer.GetName(),newPlayer.GetScore()));
     return true;
 }
