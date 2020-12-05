@@ -20,7 +20,7 @@ int main1()
 		tetrisPiece.Draw(board);
 		board[{2, 5}] = 9;
 
-		board[{10, 3}] = 9;
+		//board[{10, 3}] = 9;
 
 		for (uint16_t column = 0; column < 7; column++)
 			board[{9, column }] = 1;
@@ -63,18 +63,20 @@ int main1()
 int main()
 {
 	Board board(7, 21, 0);
-	Board::Position pos = { 1,1 };
+	Board::Position spawnPosition = { -2,1 };
 	PieceTypes types("PieceTypes.txt");
-	TetrisPiece tetrisPiece(pos, types);
+	TetrisPiece tetrisPiece(spawnPosition, types);
 	tetrisPiece.Draw(board);
+	board[{10, 3}] = 9;
 	bool gameOver = false;
 	while (!gameOver)
 	{
 		try {
+			system("CLS");
 			std::cout << board;
 			tetrisPiece.movePiece(board, gameOver);
-			system("CLS");
-			Sleep(10);
+			Sleep(0);
+			
 		}
 		catch (const char* errorMessage)
 		{
