@@ -36,9 +36,19 @@ uint16_t Player::GetScore() const
 	return m_score;
 }
 
+void Player::SetScore(uint16_t& score)
+{
+	m_score = score;
+}
+
 std::string Player::GetName() const
 {
 	return m_name;
+}
+
+void Player::SetName(std::string& name)
+{
+	m_name = name;
 }
 
 void Player::MoveLeft(TetrisPiece& piece)

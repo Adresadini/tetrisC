@@ -13,7 +13,9 @@ public:
 	uint16_t GetHighScore() const;
 	uint16_t GetAverageScore() const;
 	uint16_t GetScore() const;
+	void SetScore(uint16_t& score);
 	std::string GetName() const;
+	void SetName(std::string& name);
 
 	void MoveLeft(TetrisPiece& piece);
 	void MoveRight(TetrisPiece& piece);
