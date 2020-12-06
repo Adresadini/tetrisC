@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <map>
+#include <algorithm>
 
 #include "Player.h"
 
@@ -13,7 +14,10 @@ public:
 	Scores()=default;
 	
 	void ReadPlayers(std::string fileName);
+	void PrintPlayers(std::string &fileName);
+	
 	friend std::ostream& operator <<(std::ostream&, Scores& );
+	
 	bool IsNewPlayer(Player& player);
 
 private:

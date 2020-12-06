@@ -1,15 +1,23 @@
 #include "Scores.h"
 
+std::multimap<uint16_t, std::string> invert(std::map<std::string, uint16_t> &m_map)
+{
+    std::multimap<uint16_t, std::string> multiMap;
+    
+    std::map<std::string, uint16_t> ::iterator index;
+    for (index = m_map.begin(); index != m_map.end(); index++)
+    {
+        multiMap.insert(std::make_pair(index->second, index->first));
+    }
+
+    return multiMap;
+}
+
 std::ostream& operator<<(std::ostream& out, Scores& playerInfo)
 {
     for (auto &index : playerInfo.m_map)
         out << index.first << " " << index.second << std::endl;
     return out;
-}
-
-bool comparePlayers(Player p1, Player p2)
-{
-    return (p1.GetScore() > p2.GetScore());
 }
 
 void Scores::ReadPlayers(std::string fileName)
@@ -23,6 +31,10 @@ void Scores::ReadPlayers(std::string fileName)
         file >> score;
         m_map.insert(std::make_pair(name, score));
     }
+}
+
+void Scores::PrintPlayers(std::string& fileName)
+{
 }
 
 bool Scores::IsNewPlayer(Player& newPlayer)

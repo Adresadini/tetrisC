@@ -1,5 +1,4 @@
 #include "Player.h"
-
 #include <string>
 
 Player::Player(std::string name, uint16_t score)

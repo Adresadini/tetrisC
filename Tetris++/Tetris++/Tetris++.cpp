@@ -7,7 +7,7 @@
 
 #include <windows.h>
 
-int main1()
+int main()
 {
 	try {
 		Board::Position pos = { 1,1 };
@@ -27,9 +27,6 @@ int main1()
 			board[{9, column }] = 1;
 		for (uint16_t column = 0; column < 7; column++)
 			board[{10, column }] = 1;
-
-
-
 
 		Player player("Player1", 420);
 		std::cout << player.PlayerToString() << std::endl << board;
@@ -57,32 +54,5 @@ int main1()
 	{
 		std::cout << errorMessage;
 	}
-	return 0;
-}
-
-
-int main()
-{
-	Board board(7, 21, 0);
-	Board::Position spawnPosition = { -2,1 };
-	PieceTypes types("PieceTypes.txt");
-	TetrisPiece tetrisPiece(spawnPosition, types);
-	tetrisPiece.Draw(board);
-	board[{10, 3}] = 9;
-	bool gameOver = false;
-	while (!gameOver)
-	{
-		try {
-			system("CLS");
-			std::cout << board;
-			tetrisPiece.movePiece(board, gameOver);
-			Sleep(0);
-		}
-		catch (const char* errorMessage)
-		{
-			std::cout << errorMessage;
-		}
-	}
-	std::cout << "Game Over!";
 	return 0;
 }
