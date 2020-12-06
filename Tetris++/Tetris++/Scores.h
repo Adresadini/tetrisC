@@ -14,7 +14,7 @@ public:
 	Scores()=default;
 	
 	void ReadPlayers(std::string fileName);
-	void PrintPlayers(std::string &fileName);
+	//void PrintPlayers(const std::string &fileName);
 	
 	friend std::ostream& operator <<(std::ostream&, Scores& );
 	

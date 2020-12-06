@@ -1,3 +1,7 @@
-Popescu 1 
-Alexandru 4 
-Ionel 5
+Ion 10
+Ionut 9
+Player2 7
+Player1 5
+Edi 4
+Popescu 4
+Vlad 2

@@ -5,6 +5,7 @@
 #include "Scores.h"
 #include "PieceTypes.h"
 
+#include <fstream>
 #include <windows.h>
 
 int main()
@@ -48,7 +49,10 @@ int main()
 		tetrisPiece.MoveRight(board);
 		std::cout << player.PlayerToString() << std::endl << board;
 
-		std::cout << scores;
+		//std::cout << scores;
+		//scores.PrintPlayers("Scores.txt");
+		std::ofstream out("Scores.txt");
+		out << scores;
 	}
 	catch (const char* errorMessage)
 	{
