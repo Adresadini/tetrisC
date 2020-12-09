@@ -95,7 +95,10 @@ void TetrisPiece::MoveRight(Board& board)
 
 void TetrisPiece::RotateLeft(Board& board)
 {
+	if (m_position.first < 0)
+		return;
 	std::array<std::optional<uint8_t>, TetrisPiece::kSize> aux;
+	Board::Position auxPos = m_position;
 	uint8_t iterator = 0;
 	for (int8_t column = kWidth - 1; column >= 0; column--)
 		for (int8_t line = 0; line < kHeight; line++)
@@ -108,17 +111,37 @@ void TetrisPiece::RotateLeft(Board& board)
 		{
 			iterator = (line - m_position.first) * kWidth + column - m_position.second;
 			if (aux[iterator])
+			{
+				if (column >= board.GetWidth())
+					auxPos.second--;
+				if (column < 0)
+					auxPos.second += 2;
+				if (line >= board.GetHeight())
+					auxPos.first--;
+			}
+		}
+	for (int8_t line = auxPos.first; line < auxPos.first + (signed)kHeight; line++)
+		for (int8_t column = auxPos.second; column < auxPos.second + (signed)kWidth; column++)
+		{
+			iterator = (line - auxPos.first) * kWidth + column - auxPos.second;
+			if (aux[iterator])
+			{
 				if (board[{line, column}] && board[{line, column}] != 0 && board[{line, column}] != aux[iterator])
 					return;
+			}
 		}
 	Delete(board);
 	std::swap(aux, m_piece);
+	std::swap(auxPos, m_position);
 	Draw(board);
 }
 
 void TetrisPiece::RotateRight(Board& board)
 {
+	if (m_position.first < 0)
+		return;
 	std::array<std::optional<uint8_t>, TetrisPiece::kSize> aux;
+	Board::Position auxPos = m_position;
 	uint8_t iterator = 0;
 	for (int8_t column = 0; column < kWidth; column++)
 		for (int8_t line = kHeight - 1; line >= 0; line--)
@@ -131,11 +154,28 @@ void TetrisPiece::RotateRight(Board& board)
 		{
 			iterator = (line - m_position.first) * kWidth + column - m_position.second;
 			if (aux[iterator])
-				if (board[{line, column}] && board[{line, column}] != 0 && board[{line, column}]!=aux[iterator])
+			{
+				if (column >= board.GetWidth())
+					auxPos.second--;
+				if (column < 0)
+					auxPos.second += 2;
+				if (line >= board.GetHeight())
+					auxPos.first--;
+			}
+		}
+	for (int8_t line = auxPos.first; line < auxPos.first + (signed)kHeight; line++)
+		for (int8_t column = auxPos.second; column < auxPos.second + (signed)kWidth; column++)
+		{
+			iterator = (line - auxPos.first) * kWidth + column - auxPos.second;
+			if (aux[iterator])
+			{
+				if (board[{line, column}] && board[{line, column}] != 0 && board[{line, column}] != aux[iterator])
 					return;
+			}
 		}
 	Delete(board);
 	std::swap(aux, m_piece);
+	std::swap(auxPos, m_position);
 	Draw(board);
 }
 
@@ -145,7 +185,7 @@ void TetrisPiece::Draw(Board& board) const
 	for (int8_t line = m_position.first; line < m_position.first + (signed)kHeight; line++)
 		for (int8_t column = m_position.second; column < m_position.second + (signed)kWidth; column++)
 		{
-			iterator = (line-m_position.first) * kWidth + column-m_position.second;
+			iterator = (line - m_position.first) * kWidth + column - m_position.second;
 			if (line >= 0 && m_piece[iterator])
 				board[{line, column}] = m_piece[iterator];
 		}
