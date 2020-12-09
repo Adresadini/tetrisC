@@ -71,6 +71,7 @@ int main()
 	tetrisPiece.Draw(board);
 	hole.Spawn(board, tetrisPiece);
 	bool gameOver = false;
+	board[{5, 4}] = 8;
 	while (!gameOver)
 	{
 		try {

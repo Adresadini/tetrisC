@@ -24,7 +24,7 @@ std::ostream& operator<<(std::ostream& out, Scores& playerInfo)
     return out;
 }
 
-void Scores::ReadPlayers(std::string fileName)
+void Scores::ReadPlayers(const std::string& fileName)
 {
     std::ifstream file(fileName);
     while (!file.eof())
@@ -49,7 +49,7 @@ void Scores::ReadPlayers(std::string fileName)
     }
 }*/
 
-bool Scores::IsNewPlayer(Player& newPlayer)
+bool Scores::IsNewPlayer(const Player& newPlayer)
 {
     for (auto &index: m_map)
     {

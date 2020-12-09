@@ -13,12 +13,12 @@ public:
 	
 	Scores()=default;
 	
-	void ReadPlayers(std::string fileName);
+	void ReadPlayers(const std::string& fileName);
 	//void PrintPlayers(const std::string &fileName);
 	
 	friend std::ostream& operator <<(std::ostream&, Scores& );
 	
-	bool IsNewPlayer(Player& player);
+	bool IsNewPlayer(const Player& player);
 
 private:
 	
