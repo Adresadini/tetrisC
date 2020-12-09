@@ -8,10 +8,10 @@
 #include <fstream>
 #include <windows.h>
 
-int main()
+int main3()
 {
 	try {
-		Board::Position pos = { 1,1 };
+		Board::Position pos = { -2,1 };
 		PieceTypes types("PieceTypes.txt");
 		Scores scores;
 		scores.ReadPlayers("Scores.txt");
@@ -58,5 +58,32 @@ int main()
 	{
 		std::cout << errorMessage;
 	}
+	return 0;
+}
+
+int main()
+{
+	Board board(7, 21, 0);
+	Board::Position pos = { -2,1 };
+	BlackHole hole;
+	PieceTypes types("PieceTypes.txt");
+	TetrisPiece tetrisPiece(pos, types);
+	tetrisPiece.Draw(board);
+	hole.Spawn(board, tetrisPiece);
+	bool gameOver = false;
+	while (!gameOver)
+	{
+		try {
+			std::cout << board;
+			tetrisPiece.movePiece(board, gameOver);
+			system("CLS");
+			Sleep(10);
+		}
+		catch (const char* errorMessage)
+		{
+			std::cout << errorMessage;
+		}
+	}
+	std::cout << "Game Over!";
 	return 0;
 }

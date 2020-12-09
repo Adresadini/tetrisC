@@ -1,6 +1,6 @@
 #include "PieceTypes.h"
 
-PieceTypes::PieceTypes(const std::string filename)
+PieceTypes::PieceTypes(const std::string& filename)
 {
 	std::ifstream in(filename);
 	in >> m_numberOfPieces;
@@ -23,7 +23,7 @@ size_t PieceTypes::GetNumberOfPieces() const
 	return m_numberOfPieces;
 }
 
-std::array<uint16_t, PieceTypes::PiecesSize> PieceTypes::GetPiece(uint8_t& number) const
+std::array<uint16_t, PieceTypes::PiecesSize> PieceTypes::GetPiece(const uint8_t& number) const
 {
 	return m_pieceType.at(number);
 }

@@ -9,8 +9,8 @@ public:
 	static const size_t PiecesSize = 4;
 
 public:
-	PieceTypes(std::string filename);
-	std::array<uint16_t, PiecesSize> GetPiece(uint8_t&) const;
+	PieceTypes(const std::string& filename);
+	std::array<uint16_t, PiecesSize> GetPiece(const uint8_t&) const;
 	size_t GetNumberOfPieces() const;
 
 private:
