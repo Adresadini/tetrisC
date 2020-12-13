@@ -34,7 +34,7 @@ int main3()
 		tetrisPiece.MoveRight(board);
 
 		BlackHole hole;
-		hole.Spawn(board, tetrisPiece);
+		//hole.Spawn(board, tetrisPiece);
 
 		board.DeleteCompleteLines();
 
@@ -88,3 +88,4 @@ int main()
 	std::cout << "Game Over!";
 	return 0;
 }
+

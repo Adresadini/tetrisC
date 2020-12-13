@@ -12,5 +12,4 @@ private:
 
 private:
 	bool FoundAPiece(const  Board& board, TetrisPiece& piece) const;
-	void EatPiece(Board& board, TetrisPiece& piece) const;
 };

@@ -28,7 +28,7 @@ public:
 	bool IsSet() const;
 
 	void movePiece(Board& board, bool GameOver);
-	void resetPieceElement(uint16_t position);
+	void resetPieceElement(Board::Position);
 private:
 	Board::Position m_position;
 	bool set = false;

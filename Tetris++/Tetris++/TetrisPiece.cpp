@@ -251,7 +251,8 @@ void TetrisPiece::movePiece(Board& board, bool gameOver)
 	}
 }
 
-void TetrisPiece::resetPieceElement(uint16_t position)
+void TetrisPiece::resetPieceElement(Board::Position position)
 {
-	m_piece[position] = std::nullopt;
+	m_piece[(position.first - m_position.first) * kWidth + 
+		position.second - m_position.second] = std::nullopt;
 }
