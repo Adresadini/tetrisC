@@ -1,7 +1,7 @@
+Vlad 2
+Popescu 4
+Player1 5
 Ion 10
+Edi 4
 Ionut 9
 Player2 7
-Player1 5
-Edi 4
-Popescu 4
-Vlad 2

@@ -1,10 +1,10 @@
 #include "Scores.h"
 
-std::multimap<uint16_t, std::string, std::greater<uint16_t>> invert(std::map<std::string, uint16_t> &m_map)
+std::multimap<uint16_t, Player, std::greater<uint16_t>> invert(std::map<Player, uint16_t> &m_map)
 {
-    std::multimap<uint16_t, std::string, std::greater<uint16_t>> multiMap;
+    std::multimap<uint16_t, Player, std::greater<uint16_t>> multiMap;
     
-    std::map<std::string, uint16_t> ::iterator index;
+    std::map<Player, uint16_t> ::iterator index;
     for (index = m_map.begin(); index != m_map.end(); index++)
     {
         multiMap.insert(std::make_pair(index->second, index->first));
@@ -15,8 +15,8 @@ std::multimap<uint16_t, std::string, std::greater<uint16_t>> invert(std::map<std
 
 std::ostream& operator<<(std::ostream& out, Scores& playerInfo)
 {
-    std::multimap<uint16_t, std::string, std::greater<uint16_t>> newMap = invert(playerInfo.m_map);
-    std::multimap<uint16_t, std::string>::iterator index;
+    std::multimap<uint16_t, Player, std::greater<uint16_t>> newMap = invert(playerInfo.m_map);
+    std::multimap<uint16_t, Player>::iterator index;
     for (index = newMap.begin(); index != newMap.end(); index++)
     {
         out << index->second << " " << index->first << std::endl;
@@ -37,17 +37,17 @@ void Scores::ReadPlayers(const std::string& fileName)
     }
 }
 
-/*void Scores::PrintPlayers(const std::string& fileName)
+void Scores::PrintPlayers(const std::string& fileName)
 {
     std::ofstream file(fileName);
-    file.open("Scores.txt", std::ofstream::out | std::ofstream::trunc);
-    std::multimap<uint16_t, std::string, std::greater<uint16_t>> newMap = invert(m_map);
+    file.open("Scores.txt", std::ios_base::app);
+    std::multimap<uint16_t, Player, std::greater<uint16_t>> newMap = invert(m_map);
     std::multimap<uint16_t, std::string>::iterator index;
     for (index = newMap.begin(); index != newMap.end(); index++)
     {
         file << index->second <<" "<< index->first << std::endl;
     }
-}*/
+}
 
 bool Scores::IsNewPlayer(const Player& newPlayer)
 {

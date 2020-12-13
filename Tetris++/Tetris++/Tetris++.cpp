@@ -50,9 +50,9 @@ int main3()
 		std::cout << player.PlayerToString() << std::endl << board;
 
 		//std::cout << scores;
-		//scores.PrintPlayers("Scores.txt");
-		std::ofstream out("Scores.txt");
-		out << scores;
+		scores.PrintPlayers("Scores.txt");
+		/*std::ofstream out("Scores.txt");
+		out << scores;*/
 	}
 	catch (const char* errorMessage)
 	{

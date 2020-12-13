@@ -14,13 +14,13 @@ public:
 	Scores()=default;
 	
 	void ReadPlayers(const std::string& fileName);
-	//void PrintPlayers(const std::string &fileName);
+	void PrintPlayers(const std::string &fileName);
 	
 	friend std::ostream& operator <<(std::ostream&, Scores& );
-	
+
 	bool IsNewPlayer(const Player& player);
 
 private:
 	
-	std::map<std::string, uint16_t> m_map;
+	std::map<Player, uint16_t> m_map;
 };

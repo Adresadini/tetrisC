@@ -20,6 +20,9 @@ public:
 
 	void MovePiece(TetrisPiece& piece, Board& board, bool gameOver);
 
+	Player operator ==(Player);
+	Player operator !=(Player);
+	Player operator =(Player);
 private:
 	std::string m_name;
 	uint16_t m_score;
