@@ -13,7 +13,7 @@ void BlackHole::Spawn(Board& board, TetrisPiece& tetrisPiece)
 
 	if (FoundAPiece(board, tetrisPiece))
 	{
-		tetrisPiece.resetPieceElement(m_spawnPosition);
+		tetrisPiece.ResetPieceElement(m_spawnPosition);
 		board[m_spawnPosition] = std::nullopt;
 	}
 	else if (!board[m_spawnPosition])

@@ -227,7 +227,7 @@ bool TetrisPiece::IsSet() const
 	return set;
 }
 
-void TetrisPiece::movePiece(Board& board, bool gameOver)
+void TetrisPiece::MovePiece(Board& board, bool gameOver)
 {
 	if (_kbhit())
 	{
@@ -255,7 +255,7 @@ void TetrisPiece::movePiece(Board& board, bool gameOver)
 	}
 }
 
-void TetrisPiece::resetPieceElement(Board::Position position)
+void TetrisPiece::ResetPieceElement(Board::Position position)
 {
 	m_piece[(position.first - m_position.first) * kWidth +
 		position.second - m_position.second] = std::nullopt;

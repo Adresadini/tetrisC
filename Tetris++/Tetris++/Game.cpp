@@ -18,7 +18,7 @@ void Game::Run()
 			m_board.DeleteCompleteLines();
 			// TO DO: optimize this function : Delete Complet Lines
 			std::cout << m_board;
-			m_CurrentPiece->movePiece(m_board, m_gameOver);
+			m_CurrentPiece->MovePiece(m_board, m_gameOver);
 			Board::Position piecePosition = m_CurrentPiece->GetPosition();
 			m_CurrentPiece->MoveDown(m_board);
 			if (m_CurrentPiece->GetPosition().first == piecePosition.first)

@@ -6,7 +6,7 @@
 class Player
 {
 public:
-	Player(std::string name = NULL, uint16_t score = 0);
+	Player(const std::string& name = NULL, const uint16_t& score = 0);
 
 	std::string PlayerToString() const;
 	
@@ -14,12 +14,11 @@ public:
 	uint16_t GetHighScore() const;
 	uint16_t GetAverageScore() const;
 	uint16_t GetScore() const;
-	void SetScore(uint16_t& score);
+	void SetScore(const uint16_t& score);
 	std::string GetName() const;
-	void SetName(std::string& name);
+	void SetName(const std::string& name);
 
-	void MoveLeft(TetrisPiece& piece);
-	void MoveRight(TetrisPiece& piece);
+	void MovePiece();
 
 private:
 	std::string m_name;

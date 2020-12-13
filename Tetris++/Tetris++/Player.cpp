@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <string>
 
-Player::Player(std::string name, uint16_t score)
+Player::Player(const std::string& name, const uint16_t& score)
 	:m_name(name), m_score(score)
 {
 	m_highScore = 0;
@@ -36,7 +36,7 @@ uint16_t Player::GetScore() const
 	return m_score;
 }
 
-void Player::SetScore(uint16_t& score)
+void Player::SetScore(const uint16_t& score)
 {
 	m_score = score;
 }
@@ -46,17 +46,12 @@ std::string Player::GetName() const
 	return m_name;
 }
 
-void Player::SetName(std::string& name)
+void Player::SetName(const std::string& name)
 {
 	m_name = name;
 }
 
-void Player::MoveLeft(TetrisPiece& piece)
+void Player::MovePiece()
 {
-	//piece.MoveLeft(board);
-}
 
-void Player::MoveRight(TetrisPiece& piece)
-{
-	//piece.MoveRight(board);
 }
