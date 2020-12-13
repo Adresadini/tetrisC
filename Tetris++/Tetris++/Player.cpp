@@ -1,12 +1,16 @@
 #include "Player.h"
 #include <string>
 
-Player::Player(const std::string& name, const uint16_t& score)
+const std::string playerControls1 = { 'a','d','s','q','e' };
+const std::string playerControls2 = { 'j','k','l','u','o' };
+
+Player::Player(const std::string& name, const uint16_t& score, const bool isPlayerTwo)
 	:m_name(name), m_score(score)
 {
 	m_highScore = 0;
 	m_averageScore = 0;
 	m_scoreCount = 0;
+	!isPlayerTwo ? m_playerControls = playerControls1 : m_playerControls = playerControls2;
 }
 
 std::string Player::PlayerToString() const
@@ -51,7 +55,7 @@ void Player::SetName(const std::string& name)
 	m_name = name;
 }
 
-void Player::MovePiece()
+void Player::MovePiece(TetrisPiece& piece, Board& board, bool gameOver)
 {
-
+	piece.MovePiece(board, gameOver);
 }

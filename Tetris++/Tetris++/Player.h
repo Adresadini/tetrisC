@@ -6,10 +6,10 @@
 class Player
 {
 public:
-	Player(const std::string& name = NULL, const uint16_t& score = 0);
+	Player(const std::string& name = NULL, const uint16_t& score = 0, const bool isPlayerTwo = false);
 
 	std::string PlayerToString() const;
-	
+
 	void ModifyScoreInfo();
 	uint16_t GetHighScore() const;
 	uint16_t GetAverageScore() const;
@@ -18,7 +18,7 @@ public:
 	std::string GetName() const;
 	void SetName(const std::string& name);
 
-	void MovePiece();
+	void MovePiece(TetrisPiece& piece, Board& board, bool gameOver);
 
 private:
 	std::string m_name;
@@ -26,5 +26,5 @@ private:
 	uint16_t m_highScore;
 	uint16_t m_averageScore;
 	uint8_t m_scoreCount;
-
+	std::string m_playerControls;
 };
