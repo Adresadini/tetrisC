@@ -14,15 +14,15 @@ public:
 	uint16_t GetHighScore() const;
 	uint16_t GetAverageScore() const;
 	uint16_t GetScore() const;
+	uint8_t GetScoreCount() const;
 	void SetScore(const uint16_t& score);
 	std::string GetName() const;
 	void SetName(const std::string& name);
 
 	void MovePiece(TetrisPiece& piece, Board& board, bool gameOver);
 
-	Player operator ==(Player);
-	Player operator !=(Player);
-	Player operator =(Player);
+	friend std::ostream& operator <<(std::ostream&, Player);
+	
 private:
 	std::string m_name;
 	uint16_t m_score;

@@ -40,6 +40,11 @@ uint16_t Player::GetScore() const
 	return m_score;
 }
 
+uint8_t Player::GetScoreCount() const
+{
+	return m_scoreCount;
+}
+
 void Player::SetScore(const uint16_t& score)
 {
 	m_score = score;
@@ -58,4 +63,10 @@ void Player::SetName(const std::string& name)
 void Player::MovePiece(TetrisPiece& piece, Board& board, bool gameOver)
 {
 	piece.MovePiece(board, gameOver);
+}
+
+std::ostream& operator<<(std::ostream& out, Player player)
+{
+	out << player.GetName() << " " << player.GetAverageScore() << " " << player.GetScoreCount();
+	return out;
 }

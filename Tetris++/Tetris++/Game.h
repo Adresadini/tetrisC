@@ -19,5 +19,6 @@ private:
 	Board::Position m_pos;
 	TetrisPiece* m_CurrentPiece;
 	BlackHole m_hole;
+	Scores m_scores;
 };
 

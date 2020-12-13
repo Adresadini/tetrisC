@@ -30,10 +30,10 @@ void Scores::ReadPlayers(const std::string& fileName)
     while (!file.eof())
     {
         std::string name;
-        uint16_t score;
+        uint16_t highScore;
         file >> name;
-        file >> score;
-        m_map.insert(std::make_pair(name, score));
+        file >> highScore;
+        m_map.insert(std::make_pair(name, highScore));
     }
 }
 
@@ -42,7 +42,7 @@ void Scores::PrintPlayers(const std::string& fileName)
     std::ofstream file(fileName);
     file.open("Scores.txt", std::ios_base::app);
     std::multimap<uint16_t, Player, std::greater<uint16_t>> newMap = invert(m_map);
-    std::multimap<uint16_t, std::string>::iterator index;
+    std::multimap<uint16_t, Player>::iterator index;
     for (index = newMap.begin(); index != newMap.end(); index++)
     {
         file << index->second <<" "<< index->first << std::endl;
@@ -53,7 +53,7 @@ bool Scores::IsNewPlayer(const Player& newPlayer)
 {
     for (auto &index: m_map)
     {
-        if (newPlayer.GetName() == index.first)
+        if (newPlayer.GetName() == index.first.GetName())
             return false;
     }
     m_map.insert(std::make_pair(newPlayer.GetName(), newPlayer.GetScore()));
