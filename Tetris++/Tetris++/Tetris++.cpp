@@ -4,7 +4,7 @@
 #include "TetrisPiece.h"
 #include "Scores.h"
 #include "PieceTypes.h"
-
+#include "Game.h"
 #include <fstream>
 #include <windows.h>
 
@@ -61,7 +61,7 @@ int main3()
 	return 0;
 }
 
-int main()
+int main1()
 {
 	Board board(7, 21, 0);
 	Board::Position pos = { -2,1 };
@@ -89,3 +89,9 @@ int main()
 	return 0;
 }
 
+int main()
+{
+	Game x(7, 21, 0, "PieceTypes.txt");
+	x.Run();
+	return 0;
+}
