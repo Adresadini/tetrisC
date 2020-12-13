@@ -61,34 +61,6 @@ int main3()
 	return 0;
 }
 
-int main1()
-{
-	Board board(7, 21, 0);
-	Board::Position pos = { -2,1 };
-	BlackHole hole;
-	PieceTypes types("PieceTypes.txt");
-	TetrisPiece tetrisPiece(pos, types);
-	tetrisPiece.Draw(board);
-	hole.Spawn(board, tetrisPiece);
-	bool gameOver = false;
-	board[{5, 4}] = 8;
-	while (!gameOver)
-	{
-		try {
-			std::cout << board;
-			tetrisPiece.movePiece(board, gameOver);
-			system("CLS");
-			Sleep(10);
-		}
-		catch (const char* errorMessage)
-		{
-			std::cout << errorMessage;
-		}
-	}
-	std::cout << "Game Over!";
-	return 0;
-}
-
 int main()
 {
 	Game x(7, 21, 0, "PieceTypes.txt");

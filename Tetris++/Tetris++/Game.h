@@ -18,5 +18,6 @@ private:
 	bool m_gameOver;
 	Board::Position m_pos;
 	TetrisPiece* m_CurrentPiece;
+	BlackHole m_hole;
 };
 

@@ -179,7 +179,7 @@ void TetrisPiece::RotateRight(Board& board)
 	Draw(board);
 }
 
-void TetrisPiece::Draw(Board& board) const
+void TetrisPiece::Draw(Board& board)
 {
 	uint8_t iterator;
 	for (int8_t line = m_position.first; line < m_position.first + (signed)kHeight; line++)
@@ -187,7 +187,11 @@ void TetrisPiece::Draw(Board& board) const
 		{
 			iterator = (line - m_position.first) * kWidth + column - m_position.second;
 			if (line >= 0 && m_piece[iterator])
+			{
+				if (board[{line, column}] == 0)
+					m_piece[iterator] = std::nullopt;
 				board[{line, column}] = m_piece[iterator];
+			}
 		}
 }
 
@@ -253,6 +257,6 @@ void TetrisPiece::movePiece(Board& board, bool gameOver)
 
 void TetrisPiece::resetPieceElement(Board::Position position)
 {
-	m_piece[(position.first - m_position.first) * kWidth + 
+	m_piece[(position.first - m_position.first) * kWidth +
 		position.second - m_position.second] = std::nullopt;
 }

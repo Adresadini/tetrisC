@@ -18,7 +18,7 @@ public:
 	void RotateLeft(Board&);
 	void RotateRight(Board&);
 
-	void Draw(Board&) const;
+	void Draw(Board&);
 	void Delete(Board&) const;
 
 	size_t GetKHeight() const;
