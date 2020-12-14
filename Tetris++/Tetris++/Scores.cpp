@@ -2,13 +2,13 @@
 
 std::multimap<uint16_t, Player, std::greater<uint16_t>> invert(std::map<Player, uint16_t>& m_map)
 {
-	std::multimap<uint16_t, Player, std::greater<uint16_t>> multiMap;
+	/*std::multimap<uint16_t, Player, std::greater<uint16_t>> multiMap;
 	std::map<Player, uint16_t> ::iterator index;
 	for (index = m_map.begin(); index != m_map.end(); index++)
 	{
 		multiMap.insert(std::make_pair(index->second, index->first));
-	}
-	return multiMap;
+	}*/
+	return std::multimap<uint16_t,Player,std::greater<uint16_t>>();
 }
 
 std::ostream& operator<<(std::ostream& out, Scores& playerInfo)
