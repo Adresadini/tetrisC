@@ -252,7 +252,10 @@ void TetrisPiece::MovePiece(Board& board, bool gameOver)
 			gameOver = true;
 			break;
 		}
+		system("CLS");
+		std::cout << board;
 	}
+	
 }
 
 void TetrisPiece::ResetPieceElement(Board::Position position)
