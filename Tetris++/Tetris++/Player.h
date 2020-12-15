@@ -22,7 +22,8 @@ public:
 	void MovePiece(TetrisPiece& piece, Board& board, bool gameOver);
 
 	friend std::ostream& operator <<(std::ostream&, Player);
-	
+	bool operator <(const Player&)const;
+
 private:
 	std::string m_name;
 	uint16_t m_score;

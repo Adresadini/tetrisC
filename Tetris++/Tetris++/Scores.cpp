@@ -2,13 +2,13 @@
 
 std::multimap<uint16_t, Player, std::greater<uint16_t>> invert(std::map<Player, uint16_t>& m_map)
 {
-	/*std::multimap<uint16_t, Player, std::greater<uint16_t>> multiMap;
+	std::multimap<uint16_t, Player, std::greater<uint16_t>> multiMap;
 	std::map<Player, uint16_t> ::iterator index;
 	for (index = m_map.begin(); index != m_map.end(); index++)
 	{
 		multiMap.insert(std::make_pair(index->second, index->first));
-	}*/
-	return std::multimap<uint16_t,Player,std::greater<uint16_t>>();
+	}
+	return multiMap;
 }
 
 std::ostream& operator<<(std::ostream& out, Scores& playerInfo)
@@ -37,7 +37,7 @@ void Scores::ReadPlayers(const std::string& fileName)
 
 void Scores::PrintPlayers(const std::string& fileName)
 {
-	std::ofstream file(fileName);
+	std::ofstream file;
 	file.open("Scores.txt", std::ios_base::app);
 	std::multimap<uint16_t, Player, std::greater<uint16_t>> newMap = invert(m_map);
 	std::multimap<uint16_t, Player>::iterator index;

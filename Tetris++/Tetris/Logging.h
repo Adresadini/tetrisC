@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-#ifdef LOGGING_EXPORTS
+#ifdef TETRIS_EXPORTS
 #define LOGGING_API __declspec(dllexport)
 #else
 #define LOGGING_API __declspec(dllimport)

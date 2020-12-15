@@ -16,9 +16,10 @@ private:
 	Board m_board;
 	PieceTypes m_types;
 	bool m_gameOver;
-	Board::Position m_pos;
 	TetrisPiece* m_CurrentPiece;
 	BlackHole m_hole;
 	Scores m_scores;
+private:
+	const Board::Position POS = { -2,1 };
 };
 

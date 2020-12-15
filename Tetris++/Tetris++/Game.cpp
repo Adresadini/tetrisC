@@ -3,9 +3,8 @@
 Game::Game(const uint16_t& width, const uint16_t& height, const bool& multiPlayer, std::string filename)
 	:m_board(width, height, multiPlayer), m_types(filename)
 {
-	m_pos = { -2,1 };
 	m_gameOver = false;
-	m_CurrentPiece = new TetrisPiece(m_pos, m_types);
+	m_CurrentPiece = new TetrisPiece(POS, m_types);
 }
 
 void Game::Run()
@@ -22,7 +21,7 @@ void Game::Run()
 			if (m_CurrentPiece->IsSet())
 			{
 				delete m_CurrentPiece;
-				m_CurrentPiece = new TetrisPiece(m_pos, m_types);
+				m_CurrentPiece = new TetrisPiece(POS, m_types);
 				m_hole.Disappear(m_board);
 				m_board.DeleteCompleteLines();			// TO DO: optimize this function : Delete Complet Lines
 				m_hole.Spawn(m_board, *m_CurrentPiece);

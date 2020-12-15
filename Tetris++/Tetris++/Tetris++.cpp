@@ -8,7 +8,7 @@
 #include <fstream>
 #include <windows.h>
 
-int main3()
+int main()
 {
 	try {
 		Board::Position pos = { -2,1 };
@@ -61,7 +61,7 @@ int main3()
 	return 0;
 }
 
-int main()
+int main3()
 {
 	Game x(7, 21, 0, "PieceTypes.txt");
 	x.Run();
