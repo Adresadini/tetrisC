@@ -14,6 +14,8 @@ public:
 	Game(const uint16_t& width, const uint16_t& height, const bool& multiPlayer, std::string filename);
 	void Run();
 	void VisualInterface();
+	void DisplayBoard(sf::RenderWindow& window);
+
 public:
 	const float sizeOfBlockLine = 35.f;
 

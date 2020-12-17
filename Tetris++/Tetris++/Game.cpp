@@ -47,23 +47,60 @@ void Game::VisualInterface()
 	{
 		sf::Event evnt;
 		while (window.pollEvent(evnt))
-		{
-			if (evnt.type == evnt.Closed)
-			{
+			if (evnt.type == sf::Event::Closed)
 				window.close();
-			}
 
+		window.clear(sf::Color::White);
+
+		DisplayBoard(window);
+		if (m_CurrentPiece->IsSet())
+		{
+			delete m_CurrentPiece;
+			m_CurrentPiece = new TetrisPiece(POS, m_types);
 		}
-		window.clear();
-		float linePosition = -(sizeOfBlockLine);
+		m_CurrentPiece->MoveDown(m_board);
+		Sleep(250);
+
+		window.display();
+
+	}
+}
+
+	void setBlock(std::optional<uint8_t> block, sf::RectangleShape & shape)
+	{
+		if (block == std::nullopt)
+			shape.setFillColor(sf::Color::Black);
+		if (block == 0)
+			shape.setFillColor(sf::Color::White);
+		if (block == 1)
+			shape.setFillColor(sf::Color::Blue);
+		if (block == 2)
+			shape.setFillColor(sf::Color::Red);
+		if (block == 3)
+			shape.setFillColor(sf::Color::Green);
+		if (block == 4)
+			shape.setFillColor(sf::Color::Yellow);
+		if (block == 5)
+			shape.setFillColor(sf::Color::Magenta);
+		if (block == 6)
+			shape.setFillColor(sf::Color::Cyan);
+
+	}
+
+	void Game::DisplayBoard(sf::RenderWindow & window)
+	{
+		sf::RectangleShape shape(sf::Vector2(sizeOfBlokLine, sizeOfBlokLine));
+
+		float linePosition = -(sizeOfBlokLine);
 		for (uint16_t line = 0; line < m_board.GetHeight(); line++)
 		{
-			linePosition += sizeOfBlockLine + 1;
-			float columnPosition = -(sizeOfBlockLine);
-			for (uint16_t column = 0; column < m_board.GetHeight(); column++)
+			linePosition += sizeOfBlokLine + 1;
+			float columnPosition = -(sizeOfBlokLine);
+			for (uint16_t column = 0; column < m_board.GetWidth(); column++)
 			{
 				columnPosition += sizeOfBlockLine + 1;
 				shape.setPosition(columnPosition, linePosition);
+				setBlock(m_board[{line, column}], shape);
 				window.draw(shape);
 			}
 		}
