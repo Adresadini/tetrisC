@@ -29,6 +29,7 @@ public:
 
 	void MovePiece(Board& board, bool GameOver);
 	void ResetPieceElement(Board::Position);
+	bool isEmpty() const;
 private:
 	Board::Position m_position;
 	bool set = false;

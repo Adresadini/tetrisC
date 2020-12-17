@@ -192,6 +192,8 @@ void TetrisPiece::Draw(Board& board)
 				{
 					m_piece[iterator] = std::nullopt;
 					board[{line, column}] = 0;
+					if (isEmpty())
+						set = true;
 				}
 				else
 					board[{line, column}] = m_piece[iterator];
@@ -266,4 +268,16 @@ void TetrisPiece::ResetPieceElement(Board::Position position)
 {
 	m_piece[(position.first - m_position.first) * kWidth +
 		position.second - m_position.second] = std::nullopt;
+}
+
+bool TetrisPiece::isEmpty() const
+{
+	for (int8_t column = 0; column < kWidth; column++)
+		for (int8_t line = kHeight - 1; line >= 0; line--)
+		{
+			int8_t iterator = line * kWidth + column;
+			if (m_piece[iterator])
+				return false;
+		}
+	return true;
 }
