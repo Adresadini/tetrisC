@@ -1,4 +1,3 @@
-#include <SFML/Graphics.hpp>
 #include "Board.h"
 #include "BlackHole.h"
 #include "Player.h"
@@ -65,6 +64,6 @@ int main1()
 int main()
 {
 	Game x(7, 21, 0, "PieceTypes.txt");
-	x.Run();
+	x.VisualInterface();
 	return 0;
 }
