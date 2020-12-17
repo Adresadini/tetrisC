@@ -1,3 +1,4 @@
+#include <SFML/Graphics.hpp>
 #include "Board.h"
 #include "BlackHole.h"
 #include "Player.h"
