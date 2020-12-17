@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Graphics.hpp>
 #include "Board.h"
 #include "BlackHole.h"
 #include "Player.h"
@@ -12,6 +13,10 @@ class Game
 public:
 	Game(const uint16_t& width, const uint16_t& height, const bool& multiPlayer, std::string filename);
 	void Run();
+	void VisualInterface();
+public:
+	const float sizeOfBlokLine = 35.f;
+
 private:
 	Board m_board;
 	PieceTypes m_types;
