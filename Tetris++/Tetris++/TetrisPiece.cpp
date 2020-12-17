@@ -189,8 +189,12 @@ void TetrisPiece::Draw(Board& board)
 			if (line >= 0 && m_piece[iterator])
 			{
 				if (board[{line, column}] == 0)
+				{
 					m_piece[iterator] = std::nullopt;
-				board[{line, column}] = m_piece[iterator];
+					board[{line, column}] = 0;
+				}
+				else
+					board[{line, column}] = m_piece[iterator];
 			}
 		}
 }
@@ -255,7 +259,7 @@ void TetrisPiece::MovePiece(Board& board, bool gameOver)
 		system("CLS");
 		std::cout << board;
 	}
-	
+
 }
 
 void TetrisPiece::ResetPieceElement(Board::Position position)
