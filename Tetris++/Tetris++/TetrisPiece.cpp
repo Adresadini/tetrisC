@@ -48,11 +48,11 @@ void TetrisPiece::MoveDown(Board& board)
 			iterator = (line - m_position.first) * kWidth + column - m_position.second;
 			if (m_piece[iterator])
 			{
-				if (line >= 0)
+				if (line > 0)
 				{
 					if (line + 1 >= board.GetHeight() || board[{line + 1, column}] && board[{line + 1, column}] != 0)
 					{
-						set = true;
+						m_set = true;
 						return;
 					}
 					else
@@ -192,8 +192,8 @@ void TetrisPiece::Draw(Board& board)
 				{
 					m_piece[iterator] = std::nullopt;
 					board[{line, column}] = 0;
-					if (isEmpty())
-						set = true;
+					if (IsEmpty())
+						m_set = true;
 				}
 				else
 					board[{line, column}] = m_piece[iterator];
@@ -230,7 +230,7 @@ Board::Position TetrisPiece::GetPosition() const
 
 bool TetrisPiece::IsSet() const
 {
-	return set;
+	return m_set;
 }
 
 void TetrisPiece::MovePiece(Board& board, bool gameOver)
@@ -264,13 +264,7 @@ void TetrisPiece::MovePiece(Board& board, bool gameOver)
 
 }
 
-void TetrisPiece::ResetPieceElement(Board::Position position)
-{
-	m_piece[(position.first - m_position.first) * kWidth +
-		position.second - m_position.second] = std::nullopt;
-}
-
-bool TetrisPiece::isEmpty() const
+bool TetrisPiece::IsEmpty() const
 {
 	for (int8_t column = 0; column < kWidth; column++)
 		for (int8_t line = kHeight - 1; line >= 0; line--)

@@ -28,11 +28,10 @@ public:
 	bool IsSet() const;
 
 	void MovePiece(Board& board, bool GameOver);
-	void ResetPieceElement(Board::Position);
-	bool isEmpty() const;
+	bool IsEmpty() const;
 private:
 	Board::Position m_position;
-	bool set = false;
+	bool m_set = false;
 
 private:
 	static const size_t kWidth = 4;

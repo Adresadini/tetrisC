@@ -15,16 +15,18 @@ public:
 	void Run();
 	void VisualInterface();
 public:
-	const float sizeOfBlokLine = 35.f;
+	const float sizeOfBlockLine = 35.f;
 
 private:
 	Board m_board;
 	PieceTypes m_types;
 	bool m_gameOver;
-	TetrisPiece* m_CurrentPiece;
+	TetrisPiece* m_currentPiece;
 	BlackHole m_hole;
 	Scores m_scores;
 private:
 	const Board::Position POS = { -2,1 };
+private:
+	void CheckTopLine();
 };
 

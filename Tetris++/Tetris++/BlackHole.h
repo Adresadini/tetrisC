@@ -11,5 +11,5 @@ private:
 	Board::Position m_spawnPosition;
 
 private:
-	bool FoundAPiece(const  Board& board, TetrisPiece& piece) const;
+	//bool FoundAPiece(const  Board& board, TetrisPiece& piece) const;
 };
