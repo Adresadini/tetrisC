@@ -20,10 +20,10 @@ void Game::Run()
 			if (m_currentPiece->IsSet())
 			{
 				CheckTopLine();
+				m_board.DeleteCompleteLines();			// TO DO: optimize this function : Delete Complete Lines
 				delete m_currentPiece;
 				m_currentPiece = new TetrisPiece(POS, m_types);
 				m_hole.Disappear(m_board);
-				m_board.DeleteCompleteLines();			// TO DO: optimize this function : Delete Complete Lines
 				m_hole.Spawn(m_board, *m_currentPiece);
 			}
 			Sleep(250);
@@ -43,7 +43,8 @@ void Game::VisualInterface()
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 	sf::RectangleShape shape(sf::Vector2(sizeOfBlockLine, sizeOfBlockLine));
 
-	while (window.isOpen())
+		m_hole.Spawn(m_board, *m_currentPiece);
+	while (window.isOpen()&&!m_gameOver)
 	{
 		sf::Event evnt;
 		while (window.pollEvent(evnt))
@@ -51,16 +52,19 @@ void Game::VisualInterface()
 				window.close();
 
 		window.clear(sf::Color::White);
-
 		DisplayBoard(window);
-		if (m_CurrentPiece->IsSet())
+		if (m_currentPiece->IsSet())
 		{
-			delete m_CurrentPiece;
-			m_CurrentPiece = new TetrisPiece(POS, m_types);
+			CheckTopLine();
+			delete m_currentPiece;
+			m_currentPiece = new TetrisPiece(POS, m_types);
+			m_hole.Disappear(m_board);
+			m_board.DeleteCompleteLines();
+			m_hole.Spawn(m_board, *m_currentPiece);
 		}
-		m_CurrentPiece->MoveDown(m_board);
-		Sleep(250);
-
+		m_currentPiece->MoveDown(m_board);
+		Sleep(50);
+		
 		window.display();
 
 	}
@@ -84,18 +88,19 @@ void Game::VisualInterface()
 			shape.setFillColor(sf::Color::Magenta);
 		if (block == 6)
 			shape.setFillColor(sf::Color::Cyan);
-
+		if (block == 7)
+			shape.setFillColor(sf::Color(11,24,90));
 	}
 
 	void Game::DisplayBoard(sf::RenderWindow & window)
 	{
-		sf::RectangleShape shape(sf::Vector2(sizeOfBlokLine, sizeOfBlokLine));
+		sf::RectangleShape shape(sf::Vector2(sizeOfBlockLine, sizeOfBlockLine));
 
-		float linePosition = -(sizeOfBlokLine);
+		float linePosition = -(sizeOfBlockLine);
 		for (uint16_t line = 0; line < m_board.GetHeight(); line++)
 		{
-			linePosition += sizeOfBlokLine + 1;
-			float columnPosition = -(sizeOfBlokLine);
+			linePosition += sizeOfBlockLine + 1;
+			float columnPosition = -(sizeOfBlockLine);
 			for (uint16_t column = 0; column < m_board.GetWidth(); column++)
 			{
 				columnPosition += sizeOfBlockLine + 1;
@@ -106,7 +111,7 @@ void Game::VisualInterface()
 		}
 		window.display();
 	}
-}
+
 
 void Game::CheckTopLine()
 {

@@ -19,18 +19,3 @@ void BlackHole::Disappear(Board& board) const
 {
 	board[m_spawnPosition] = std::nullopt;
 }
-
-
-
-//bool BlackHole::FoundAPiece(const  Board& board, TetrisPiece& piece) const //Not useful anymore
-//{
-//	return m_spawnPosition.first >= piece.GetPosition().first &&
-//
-//		m_spawnPosition.first < piece.GetPosition().first + piece.GetKHeight() &&
-//
-//		m_spawnPosition.second >= piece.GetPosition().second &&
-//
-//		m_spawnPosition.second < piece.GetPosition().second + piece.GetKWidth() &&
-//
-//		board[m_spawnPosition];
-//}
