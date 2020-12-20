@@ -65,13 +65,21 @@ void Player::MovePiece(TetrisPiece& piece, Board& board, bool gameOver)
 	piece.MovePiece(board, gameOver);
 }
 
-bool Player::operator<(const Player& player) const
+bool Player::operator>(const Player& player) const
 {
-	return player.GetHighScore() < this->GetHighScore();
+	return player.GetHighScore() > this->GetHighScore();
 }
 
 std::ostream& operator<<(std::ostream& out, Player player)
 {
-	out << player.GetName() << " " << player.GetAverageScore() << " " << player.GetScoreCount();
+	out << player.GetName() << " " << player.GetAverageScore() << " " << player.GetScoreCount() << " " << player.GetHighScore();
 	return out;
 }
+
+std::istream& operator>>(std::istream& in, Player player)
+{
+	in >> player.m_name >> player.m_averageScore >> player.m_scoreCount >> player.m_highScore;
+	return in;
+}
+
+

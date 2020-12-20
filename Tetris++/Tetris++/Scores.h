@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <map>
+#include <set>
 #include <algorithm>
 
 #include "Player.h"
@@ -13,14 +13,12 @@ public:
 	
 	Scores()=default;
 	
-	void ReadPlayers(const std::string& fileName);
+	void ReadPlayers(const std::string& fileName, Player);
 	void PrintPlayers(const std::string &fileName);
-	
-	friend std::ostream& operator <<(std::ostream&, Scores& );
 
 	bool IsNewPlayer(const Player& player);
 
 private:
 	
-	std::map<Player, uint16_t> m_map;
+	std::set<Player, std::greater<Player>> m_set;
 };

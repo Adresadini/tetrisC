@@ -14,7 +14,8 @@ int main1()
 		Board::Position pos = { -2,1 };
 		PieceTypes types("PieceTypes.txt");
 		Scores scores;
-		scores.ReadPlayers("Scores.txt");
+		Player player1;
+		scores.ReadPlayers("Scores.txt", player1);
 
 		Board board(7, 21, 0);
 		TetrisPiece tetrisPiece(pos, types);
