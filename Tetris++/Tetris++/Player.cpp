@@ -1,16 +1,13 @@
 #include "Player.h"
 #include <string>
 
-const std::string playerControls1 = { 'a','d','s','q','e' };
-const std::string playerControls2 = { 'j','k','l','u','o' };
-
 Player::Player(const std::string& name, const uint16_t& score, const bool isPlayerTwo)
 	:m_name(name), m_score(score)
 {
 	m_highScore = 0;
 	m_averageScore = 0;
 	m_scoreCount = 0;
-	!isPlayerTwo ? m_playerControls = playerControls1 : m_playerControls = playerControls2;
+	InitKeyBindings(isPlayerTwo);
 }
 
 std::string Player::PlayerToString() const
@@ -30,9 +27,19 @@ uint16_t Player::GetHighScore() const
 	return m_highScore;
 }
 
+void Player::SetHighScore(uint16_t highScore)
+{
+	m_highScore = highScore;
+}
+
 uint16_t Player::GetAverageScore() const
 {
 	return m_averageScore;
+}
+
+void Player::SetAverageScore(uint16_t averageScore)
+{
+	m_averageScore = averageScore;
 }
 
 uint16_t Player::GetScore() const
@@ -43,6 +50,11 @@ uint16_t Player::GetScore() const
 uint8_t Player::GetScoreCount() const
 {
 	return m_scoreCount;
+}
+
+void Player::SetScoreCount(uint16_t scoreCount)
+{
+	m_scoreCount = scoreCount;
 }
 
 void Player::SetScore(const uint16_t& score)
@@ -58,6 +70,27 @@ std::string Player::GetName() const
 void Player::SetName(const std::string& name)
 {
 	m_name = name;
+}
+
+void Player::InitKeyBindings(bool isPlayerTwo)
+{
+	//Initializing player keybinds in the following order: left, right, down, rotate left, rotate right
+	if (!isPlayerTwo) //For Player 1
+	{
+		m_input.push_back(sf::Keyboard::A);
+		m_input.push_back(sf::Keyboard::D);
+		m_input.push_back(sf::Keyboard::S);
+		m_input.push_back(sf::Keyboard::Q);
+		m_input.push_back(sf::Keyboard::E);
+	}
+	else //For Player 2
+	{
+		m_input.push_back(sf::Keyboard::Numpad4);
+		m_input.push_back(sf::Keyboard::Numpad6);
+		m_input.push_back(sf::Keyboard::Numpad5);
+		m_input.push_back(sf::Keyboard::Numpad7);
+		m_input.push_back(sf::Keyboard::Numpad9);
+	}
 }
 
 void Player::MovePiece(TetrisPiece& piece, Board& board, bool gameOver)
