@@ -65,6 +65,7 @@ int main1()
 int main()
 {
 	Game x(9, 27, 0, "PieceTypes.txt");
-	x.VisualInterface();
+	//x.VisualInterface();
+	x.Run();
 	return 0;
 }

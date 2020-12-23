@@ -1,8 +1,8 @@
 7
-1 5 9 13
-5 6 10 11
-6 7 9 10
-1 5 9 10
-2 6 9 10
-5 6 9 10
-5 6 7 10
+1 5 9 13 Line
+5 6 10 11 Special
+6 7 9 10 Special
+1 5 9 10 Normal
+2 6 9 10 Normal
+5 6 9 10 Normal
+5 6 7 10 Special

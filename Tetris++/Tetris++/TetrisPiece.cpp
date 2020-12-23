@@ -11,7 +11,7 @@ TetrisPiece::TetrisPiece(const Board::Position& pos, const PieceTypes& types)
 
 	for (auto block : types.GetPiece(randomPiece))
 		m_piece[block] = randomPiece + 1;
-
+	m_scaleType = types.GetScale(randomPiece);
 }
 
 void TetrisPiece::MoveLeft(Board& board)
@@ -133,6 +133,7 @@ void TetrisPiece::RotateLeft(Board& board)
 	Delete(board);
 	std::swap(aux, m_piece);
 	std::swap(auxPos, m_position);
+	m_vertical = !m_vertical;
 	Draw(board);
 }
 
@@ -176,6 +177,7 @@ void TetrisPiece::RotateRight(Board& board)
 	Delete(board);
 	std::swap(aux, m_piece);
 	std::swap(auxPos, m_position);
+	m_vertical = !m_vertical;
 	Draw(board);
 }
 

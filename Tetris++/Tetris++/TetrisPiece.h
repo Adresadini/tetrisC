@@ -31,7 +31,11 @@ public:
 	bool IsEmpty() const;
 private:
 	Board::Position m_position;
+	PieceTypes::scaleType m_scaleType;
+
+private:
 	bool m_set = false;
+	bool m_vertical = true;
 
 private:
 	static const size_t kWidth = 4;
