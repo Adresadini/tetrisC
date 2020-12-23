@@ -181,10 +181,19 @@ void TetrisPiece::RotateRight(Board& board)
 	Draw(board);
 }
 
-void TetrisPiece::Scale(Board& board)
+void TetrisPiece::Scale(Board& board) //TO DO:collision for scaling
 {
 	Delete(board);
-	FillBorder();
+	if (!m_scaled)
+	{
+		if (m_scaleType != PieceTypes::scaleType::Line)
+			FillBorders();
+		if (m_scaleType != PieceTypes::scaleType::Normal)
+			FixMiddle();
+	}
+	else
+		ScaleDown();
+	m_scaled = !m_scaled;
 	Draw(board);
 }
 
@@ -288,13 +297,13 @@ bool TetrisPiece::IsEmpty() const
 	return true;
 }
 
-void TetrisPiece::FillBorder()
+void TetrisPiece::FillBorders()
 {
 	for (int8_t column = 1; column < (signed)kWidth - 1; column++)
 		if (m_piece[kWidth + column])
 			if (m_piece[column] != pieceType && m_piece[column - 1] != pieceType && m_piece[column + 1] != pieceType)
 				m_piece[column] = 10 + pieceType;
-	for (int8_t line = 1; line < (signed)kHeight-1; line++)
+	for (int8_t line = 1; line < (signed)kHeight - 1; line++)
 		if (m_piece[line * kWidth + kWidth - 2])
 			if (m_piece[line * kWidth + kWidth - 1] != pieceType && m_piece[(line - 1) * kWidth + kWidth - 1] != pieceType && m_piece[(line + 1) * kWidth + kWidth - 1] != pieceType)
 				m_piece[line * kWidth + kWidth - 1] = 10 + pieceType;
@@ -306,13 +315,40 @@ void TetrisPiece::FillBorder()
 		if (m_piece[line * kWidth + 1])
 			if (m_piece[line * kWidth] != pieceType && m_piece[(line - 1) * kWidth] != pieceType && m_piece[(line + 1) * kWidth] != pieceType)
 				m_piece[line * kWidth] = 10 + pieceType;
-	if(m_piece[1] && m_piece[kWidth])
-		m_piece[0]= 10 + pieceType;
-	if(m_piece[kWidth-2] && m_piece[2*kWidth-1])
-		m_piece[kWidth-1] = 10 + pieceType;
-	if (m_piece[(kHeight-1)*kWidth-1] && m_piece[kHeight * kWidth - 2])
-		m_piece[kHeight*kWidth - 1] = 10 + pieceType;
-	if (m_piece[kHeight * (kWidth - 2)] && m_piece[kHeight * (kWidth - 1)+1])
-		m_piece[kHeight * (kWidth-1)] = 10 + pieceType;
+	if (m_piece[1] && m_piece[kWidth])
+		m_piece[0] = 10 + pieceType;
+	if (m_piece[kWidth - 2] && m_piece[2 * kWidth - 1])
+		m_piece[kWidth - 1] = 10 + pieceType;
+	if (m_piece[(kHeight - 1) * kWidth - 1] && m_piece[kHeight * kWidth - 2])
+		m_piece[kHeight * kWidth - 1] = 10 + pieceType;
+	if (m_piece[kHeight * (kWidth - 2)] && m_piece[kHeight * (kWidth - 1) + 1])
+		m_piece[kHeight * (kWidth - 1)] = 10 + pieceType;
 
+}
+
+void TetrisPiece::FixMiddle()
+{
+	if (m_vertical)
+		for (int8_t column = 1; column < kWidth - 1; column++)
+			for (int8_t line = 0; line < kHeight; line++)
+			{
+				if (!m_piece[line * kWidth + column])
+					m_piece[line * kWidth + column] = 10 + pieceType;
+			}
+	else
+		for (int8_t column = 0; column < kWidth; column++)
+			for (int8_t line = 1; line < kHeight - 1; line++)
+			{
+				if (!m_piece[line * kWidth + column])
+					m_piece[line * kWidth + column] = 10 + pieceType;
+			}
+}
+
+void TetrisPiece::ScaleDown()
+{
+	for (int8_t block = 0; block < kSize; block++)
+		if (m_piece[block] == 10 + pieceType)
+		{
+			m_piece[block] = std::nullopt;
+		}
 }

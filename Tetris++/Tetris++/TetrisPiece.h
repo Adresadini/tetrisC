@@ -47,5 +47,7 @@ private:
 	std::array<std::optional<uint8_t>, TetrisPiece::kSize> m_piece;
 
 private:
-	void FillBorder();
+	void FillBorders();
+	void FixMiddle();
+	void ScaleDown();
 };
