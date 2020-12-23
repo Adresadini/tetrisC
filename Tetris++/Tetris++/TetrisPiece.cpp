@@ -8,9 +8,9 @@ TetrisPiece::TetrisPiece(const Board::Position& pos, const PieceTypes& types)
 	std::random_device random;
 	std::uniform_int_distribution<uint16_t> pieceDistribution(0, types.GetNumberOfPieces() - 1);
 	uint8_t randomPiece = pieceDistribution(random);
-
+	pieceType = randomPiece + 1;
 	for (auto block : types.GetPiece(randomPiece))
-		m_piece[block] = randomPiece + 1;
+		m_piece[block] = pieceType;
 	m_scaleType = types.GetScale(randomPiece);
 }
 
@@ -126,7 +126,7 @@ void TetrisPiece::RotateLeft(Board& board)
 			iterator = (line - auxPos.first) * kWidth + column - auxPos.second;
 			if (aux[iterator])
 			{
-				if (board[{line, column}] && board[{line, column}] != 0 && board[{line, column}] != aux[iterator])
+				if (board[{line, column}] && board[{line, column}] != 0 && !aux[iterator])
 					return;
 			}
 		}
@@ -170,7 +170,7 @@ void TetrisPiece::RotateRight(Board& board)
 			iterator = (line - auxPos.first) * kWidth + column - auxPos.second;
 			if (aux[iterator])
 			{
-				if (board[{line, column}] && board[{line, column}] != 0 && board[{line, column}] != aux[iterator])
+				if (board[{line, column}] && board[{line, column}] != 0 && !aux[iterator])
 					return;
 			}
 		}
@@ -178,6 +178,13 @@ void TetrisPiece::RotateRight(Board& board)
 	std::swap(aux, m_piece);
 	std::swap(auxPos, m_position);
 	m_vertical = !m_vertical;
+	Draw(board);
+}
+
+void TetrisPiece::Scale(Board& board)
+{
+	Delete(board);
+	FillBorder();
 	Draw(board);
 }
 
@@ -256,6 +263,9 @@ void TetrisPiece::MovePiece(Board& board, bool gameOver)
 		case'e':
 			RotateRight(board);
 			break;
+		case 'w':
+			Scale(board);
+			break;
 		case 27:
 			gameOver = true;
 			break;
@@ -276,4 +286,33 @@ bool TetrisPiece::IsEmpty() const
 				return false;
 		}
 	return true;
+}
+
+void TetrisPiece::FillBorder()
+{
+	for (int8_t column = 1; column < (signed)kWidth - 1; column++)
+		if (m_piece[kWidth + column])
+			if (m_piece[column] != pieceType && m_piece[column - 1] != pieceType && m_piece[column + 1] != pieceType)
+				m_piece[column] = 10 + pieceType;
+	for (int8_t line = 1; line < (signed)kHeight-1; line++)
+		if (m_piece[line * kWidth + kWidth - 2])
+			if (m_piece[line * kWidth + kWidth - 1] != pieceType && m_piece[(line - 1) * kWidth + kWidth - 1] != pieceType && m_piece[(line + 1) * kWidth + kWidth - 1] != pieceType)
+				m_piece[line * kWidth + kWidth - 1] = 10 + pieceType;
+	for (int8_t column = (signed)kWidth - 2; column > 0; column--)
+		if (m_piece[(kHeight - 2) * kWidth + column])
+			if (m_piece[(kHeight - 1) * kWidth + column] != pieceType && m_piece[(kHeight - 1) * kWidth + column - 1] != pieceType && m_piece[(kHeight - 1) * kWidth + column + 1] != pieceType)
+				m_piece[(kHeight - 1) * kWidth + column] = 10 + pieceType;
+	for (int8_t line = (signed)kHeight - 2; line > 0; line--)
+		if (m_piece[line * kWidth + 1])
+			if (m_piece[line * kWidth] != pieceType && m_piece[(line - 1) * kWidth] != pieceType && m_piece[(line + 1) * kWidth] != pieceType)
+				m_piece[line * kWidth] = 10 + pieceType;
+	if(m_piece[1] && m_piece[kWidth])
+		m_piece[0]= 10 + pieceType;
+	if(m_piece[kWidth-2] && m_piece[2*kWidth-1])
+		m_piece[kWidth-1] = 10 + pieceType;
+	if (m_piece[(kHeight-1)*kWidth-1] && m_piece[kHeight * kWidth - 2])
+		m_piece[kHeight*kWidth - 1] = 10 + pieceType;
+	if (m_piece[kHeight * (kWidth - 2)] && m_piece[kHeight * (kWidth - 1)+1])
+		m_piece[kHeight * (kWidth-1)] = 10 + pieceType;
+
 }

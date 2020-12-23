@@ -43,8 +43,8 @@ void Game::VisualInterface()
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 	sf::RectangleShape shape(sf::Vector2(sizeOfBlockLine, sizeOfBlockLine));
 
-		m_hole.Spawn(m_board, *m_currentPiece);
-	while (window.isOpen()&&!m_gameOver)
+	m_hole.Spawn(m_board, *m_currentPiece);
+	while (window.isOpen() && !m_gameOver)
 	{
 		sf::Event evnt;
 		while (window.pollEvent(evnt))
@@ -61,56 +61,61 @@ void Game::VisualInterface()
 			m_hole.Disappear(m_board);
 			m_board.DeleteCompleteLines();
 			m_hole.Spawn(m_board, *m_currentPiece);
+			Sleep(30);
+			m_currentPiece->Scale(m_board);
 		}
 		m_currentPiece->MoveDown(m_board);
-		Sleep(50);
-		
+		Sleep(100);
+
 		window.display();
 
 	}
 }
 
-	void setBlock(std::optional<uint8_t> block, sf::RectangleShape & shape)
+void setBlock(std::optional<uint8_t> block, sf::RectangleShape& shape)
+{
+	if (block == std::nullopt)
+		shape.setFillColor(sf::Color::Black);
+	else
 	{
-		if (block == std::nullopt)
-			shape.setFillColor(sf::Color::Black);
 		if (block == 0)
 			shape.setFillColor(sf::Color::White);
-		if (block == 1)
+		if (block.value() % 10 == 1)
 			shape.setFillColor(sf::Color::Blue);
-		if (block == 2)
+		if (block.value() % 10 == 2)
 			shape.setFillColor(sf::Color::Red);
-		if (block == 3)
+		if (block.value() % 10 == 3)
 			shape.setFillColor(sf::Color::Green);
-		if (block == 4)
+		if (block.value() % 10 == 4)
 			shape.setFillColor(sf::Color::Yellow);
-		if (block == 5)
+		if (block.value() % 10 == 5)
 			shape.setFillColor(sf::Color::Magenta);
-		if (block == 6)
+		if (block.value() % 10 == 6)
 			shape.setFillColor(sf::Color::Cyan);
-		if (block == 7)
-			shape.setFillColor(sf::Color(11,24,90));
+		if (block.value() % 10 == 7)
+			shape.setFillColor(sf::Color(11, 24, 90));
 	}
+}
 
-	void Game::DisplayBoard(sf::RenderWindow & window)
+void Game::DisplayBoard(sf::RenderWindow& window)
+{
+	sf::RectangleShape shape(sf::Vector2(sizeOfBlockLine, sizeOfBlockLine));
+
+	float linePosition = -(sizeOfBlockLine);
+	for (uint16_t line = 0; line < m_board.GetHeight(); line++)
 	{
-		sf::RectangleShape shape(sf::Vector2(sizeOfBlockLine, sizeOfBlockLine));
-
-		float linePosition = -(sizeOfBlockLine);
-		for (uint16_t line = 0; line < m_board.GetHeight(); line++)
+		linePosition += sizeOfBlockLine + 1;
+		float columnPosition = -(sizeOfBlockLine);
+		for (uint16_t column = 0; column < m_board.GetWidth(); column++)
 		{
-			linePosition += sizeOfBlockLine + 1;
-			float columnPosition = -(sizeOfBlockLine);
-			for (uint16_t column = 0; column < m_board.GetWidth(); column++)
-			{
-				columnPosition += sizeOfBlockLine + 1;
-				shape.setPosition(columnPosition, linePosition);
-				setBlock(m_board[{line, column}], shape);
-				window.draw(shape);
-			}
+			columnPosition += sizeOfBlockLine + 1;
+			shape.setPosition(columnPosition, linePosition);
+			setBlock(m_board[{line, column}], shape);
+			window.draw(shape);
 		}
-		window.display();
 	}
+	window.display();
+}
 
 
 void Game::CheckTopLine()
