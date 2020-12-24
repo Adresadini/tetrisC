@@ -61,9 +61,9 @@ void Player::InitKeyBindings(bool isPlayerTwo)
 {
 	//Initializing player keybinds in the following order: left, right, down, rotate left, rotate right
 	if (!isPlayerTwo)
-		m_input = new sf::Keyboard::Key[]{ sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::Q, sf::Keyboard::Key::E };
+		m_input = new sf::Keyboard::Key[5]{ sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::Q, sf::Keyboard::Key::E };
 	else
-		m_input = new sf::Keyboard::Key[]{ sf::Keyboard::Key::Numpad4, sf::Keyboard::Key::Numpad6, sf::Keyboard::Key::Numpad5, sf::Keyboard::Key::Numpad7, sf::Keyboard::Key::Numpad9 };
+		m_input = new sf::Keyboard::Key[5]{ sf::Keyboard::Key::Numpad4, sf::Keyboard::Key::Numpad6, sf::Keyboard::Key::Numpad5, sf::Keyboard::Key::Numpad7, sf::Keyboard::Key::Numpad9 };
 }
 
 void Player::MovePiece(TetrisPiece& piece, Board& board, bool gameOver)
