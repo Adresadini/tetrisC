@@ -48,9 +48,12 @@ void Game::VisualInterface()
 	{
 		sf::Event evnt;
 		while (window.pollEvent(evnt))
-			if (evnt.type == sf::Event::Closed)
+			switch (evnt.type)
+			{
+			case sf::Event::Closed:
 				window.close();
-
+				break;
+			}
 		window.clear(sf::Color::White);
 		DisplayBoard(window);
 		if (m_currentPiece->IsSet())

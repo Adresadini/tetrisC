@@ -27,19 +27,9 @@ uint16_t Player::GetHighScore() const
 	return m_highScore;
 }
 
-void Player::SetHighScore(uint16_t highScore)
-{
-	m_highScore = highScore;
-}
-
 uint16_t Player::GetAverageScore() const
 {
 	return m_averageScore;
-}
-
-void Player::SetAverageScore(uint16_t averageScore)
-{
-	m_averageScore = averageScore;
 }
 
 uint16_t Player::GetScore() const
@@ -50,11 +40,6 @@ uint16_t Player::GetScore() const
 uint8_t Player::GetScoreCount() const
 {
 	return m_scoreCount;
-}
-
-void Player::SetScoreCount(uint16_t scoreCount)
-{
-	m_scoreCount = scoreCount;
 }
 
 void Player::SetScore(const uint16_t& score)
@@ -75,22 +60,10 @@ void Player::SetName(const std::string& name)
 void Player::InitKeyBindings(bool isPlayerTwo)
 {
 	//Initializing player keybinds in the following order: left, right, down, rotate left, rotate right
-	if (!isPlayerTwo) //For Player 1
-	{
-		m_input.push_back(sf::Keyboard::A);
-		m_input.push_back(sf::Keyboard::D);
-		m_input.push_back(sf::Keyboard::S);
-		m_input.push_back(sf::Keyboard::Q);
-		m_input.push_back(sf::Keyboard::E);
-	}
-	else //For Player 2
-	{
-		m_input.push_back(sf::Keyboard::Numpad4);
-		m_input.push_back(sf::Keyboard::Numpad6);
-		m_input.push_back(sf::Keyboard::Numpad5);
-		m_input.push_back(sf::Keyboard::Numpad7);
-		m_input.push_back(sf::Keyboard::Numpad9);
-	}
+	if (!isPlayerTwo)
+		m_input = new sf::Keyboard::Key[]{ sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::Q, sf::Keyboard::Key::E };
+	else
+		m_input = new sf::Keyboard::Key[]{ sf::Keyboard::Key::Numpad4, sf::Keyboard::Key::Numpad6, sf::Keyboard::Key::Numpad5, sf::Keyboard::Key::Numpad7, sf::Keyboard::Key::Numpad9 };
 }
 
 void Player::MovePiece(TetrisPiece& piece, Board& board, bool gameOver)
