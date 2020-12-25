@@ -66,7 +66,7 @@ void Player::InitKeyBindings(bool isPlayerTwo)
 		m_input = new sf::Keyboard::Key[5]{ sf::Keyboard::Key::Numpad4, sf::Keyboard::Key::Numpad6, sf::Keyboard::Key::Numpad5, sf::Keyboard::Key::Numpad7, sf::Keyboard::Key::Numpad9 };
 }
 
-void Player::MovePiece(sf::Event& event, TetrisPiece& piece, Board& board, bool& gameOver)
+void Player::MovePiece(const sf::Event& event, TetrisPiece& piece, Board& board)
 {
 	if (event.key.code == m_input[0])
 	{
@@ -100,13 +100,13 @@ bool Player::operator>(const Player& player) const
 	return player.GetHighScore() > this->GetHighScore();
 }
 
-std::ostream& operator<<(std::ostream& out, Player player)
+std::ostream& operator<<(std::ostream& out, const Player& player)
 {
 	out << player.GetName() << " " << player.GetAverageScore() << " " << player.GetScoreCount() << " " << player.GetHighScore();
 	return out;
 }
 
-std::istream& operator>>(std::istream& in, Player player)
+std::istream& operator>>(std::istream& in, Player& player)
 {
 	in >> player.m_name >> player.m_averageScore >> player.m_scoreCount >> player.m_highScore;
 	return in;

@@ -39,6 +39,7 @@ void Game::Run()
 
 void Game::VisualInterface()
 {
+	::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
 	sf::RenderWindow window(sf::VideoMode(m_board.GetWidth() * (sizeOfBlockLine + 1), m_board.GetHeight() * (sizeOfBlockLine + 1)), "Tetris++",
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 	sf::RectangleShape shape(sf::Vector2(sizeOfBlockLine, sizeOfBlockLine));
@@ -59,7 +60,7 @@ void Game::VisualInterface()
 					m_gameOver = true;
 					break;
 				}
-				player1.MovePiece(evnt, *m_currentPiece, m_board, m_gameOver);
+				player1.MovePiece(evnt, *m_currentPiece, m_board);
 			}
 		window.clear(sf::Color::White);
 		DisplayBoard(window);
