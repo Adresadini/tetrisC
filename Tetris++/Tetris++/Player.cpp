@@ -66,9 +66,33 @@ void Player::InitKeyBindings(bool isPlayerTwo)
 		m_input = new sf::Keyboard::Key[5]{ sf::Keyboard::Key::Numpad4, sf::Keyboard::Key::Numpad6, sf::Keyboard::Key::Numpad5, sf::Keyboard::Key::Numpad7, sf::Keyboard::Key::Numpad9 };
 }
 
-void Player::MovePiece(TetrisPiece& piece, Board& board, bool gameOver)
+void Player::MovePiece(sf::Event& event, TetrisPiece& piece, Board& board, bool& gameOver)
 {
-	piece.MovePiece(board, gameOver);
+	if (event.key.code == m_input[0])
+	{
+		piece.MoveLeft(board);
+		return;
+	}
+	if (event.key.code == m_input[1])
+	{
+		piece.MoveRight(board);
+		return;
+	}
+	if (event.key.code == m_input[2])
+	{
+		piece.MoveDown(board);
+		return;
+	}
+	if (event.key.code == m_input[3])
+	{
+		piece.RotateLeft(board);
+		return;
+	}
+	if (event.key.code == m_input[4])
+	{
+		piece.RotateRight(board);
+		return;
+	}
 }
 
 bool Player::operator>(const Player& player) const

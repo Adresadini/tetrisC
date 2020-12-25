@@ -21,7 +21,7 @@ public:
 	void SetName(const std::string& name);
 
 	void InitKeyBindings(bool isPlayerTwo);
-	void MovePiece(TetrisPiece& piece, Board& board, bool gameOver);
+	void MovePiece(sf::Event& event, TetrisPiece& piece, Board& board, bool& gameOver);
 
 	friend std::ostream& operator <<(std::ostream&, Player);
 	friend std::istream& operator >>(std::istream&, Player);

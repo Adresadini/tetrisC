@@ -26,6 +26,7 @@ private:
 	TetrisPiece* m_currentPiece;
 	BlackHole m_hole;
 	Scores m_scores;
+
 private:
 	const Board::Position POS = { -2,1 };
 private:

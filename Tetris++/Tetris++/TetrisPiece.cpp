@@ -251,7 +251,7 @@ bool TetrisPiece::IsSet() const
 	return m_set;
 }
 
-void TetrisPiece::MovePiece(Board& board, bool gameOver)
+void TetrisPiece::MovePiece(Board& board, bool& gameOver)
 {
 	if (_kbhit())
 	{

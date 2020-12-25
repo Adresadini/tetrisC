@@ -42,7 +42,7 @@ void Game::VisualInterface()
 	sf::RenderWindow window(sf::VideoMode(m_board.GetWidth() * (sizeOfBlockLine + 1), m_board.GetHeight() * (sizeOfBlockLine + 1)), "Tetris++",
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 	sf::RectangleShape shape(sf::Vector2(sizeOfBlockLine, sizeOfBlockLine));
-
+	Player player1("Player1", 0);  //For Testing purposes
 	m_hole.Spawn(m_board, *m_currentPiece);
 	while (window.isOpen() && !m_gameOver)
 	{
@@ -53,6 +53,13 @@ void Game::VisualInterface()
 			case sf::Event::Closed:
 				window.close();
 				break;
+			case sf::Event::KeyPressed:
+				if (evnt.key.code == sf::Keyboard::Escape)
+				{
+					m_gameOver = true;
+					break;
+				}
+				player1.MovePiece(evnt, *m_currentPiece, m_board, m_gameOver);
 			}
 		window.clear(sf::Color::White);
 		DisplayBoard(window);

@@ -14,7 +14,7 @@ public:
 	void MoveLeft(Board&);
 	void MoveDown(Board&);
 	void MoveRight(Board&);
-	void MovePiece(Board& board, bool GameOver);
+	void MovePiece(Board& board, bool& GameOver);
 
 	void RotateLeft(Board&);
 	void RotateRight(Board&);
