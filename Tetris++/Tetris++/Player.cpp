@@ -61,9 +61,9 @@ void Player::InitKeyBindings(bool isPlayerTwo)
 {
 	//Initializing player keybinds in the following order: left, right, down, rotate left, rotate right
 	if (!isPlayerTwo)
-		m_input = new sf::Keyboard::Key[5]{ sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::Q, sf::Keyboard::Key::E };
+		m_input = new sf::Keyboard::Key[6]{ sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::Q, sf::Keyboard::Key::E,sf::Keyboard::Key::W };
 	else
-		m_input = new sf::Keyboard::Key[5]{ sf::Keyboard::Key::Numpad4, sf::Keyboard::Key::Numpad6, sf::Keyboard::Key::Numpad5, sf::Keyboard::Key::Numpad7, sf::Keyboard::Key::Numpad9 };
+		m_input = new sf::Keyboard::Key[6]{ sf::Keyboard::Key::Numpad4, sf::Keyboard::Key::Numpad6, sf::Keyboard::Key::Numpad5, sf::Keyboard::Key::Numpad7, sf::Keyboard::Key::Numpad9,sf::Keyboard::Key::Numpad8 };
 }
 
 void Player::MovePiece(const sf::Event& event, TetrisPiece& piece, Board& board)
@@ -91,6 +91,11 @@ void Player::MovePiece(const sf::Event& event, TetrisPiece& piece, Board& board)
 	if (event.key.code == m_input[4])
 	{
 		piece.RotateRight(board);
+		return;
+	}
+	if (event.key.code == m_input[5])
+	{
+		piece.Scale(board);
 		return;
 	}
 }

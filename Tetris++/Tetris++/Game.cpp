@@ -72,10 +72,9 @@ void Game::VisualInterface()
 			m_hole.Disappear(m_board);
 			m_board.DeleteCompleteLines();
 			m_hole.Spawn(m_board, *m_currentPiece);
-			m_currentPiece->Scale(m_board);
 		}
 		m_currentPiece->MoveDown(m_board);
-		Sleep(100);
+		Sleep(200);
 
 		window.display();
 
