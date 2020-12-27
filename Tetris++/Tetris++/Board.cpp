@@ -1,5 +1,6 @@
 #include "Board.h"
 
+
 const char EmptyBoardSpace = '_';
 Board::Board(const uint16_t& width, const uint16_t& height, const bool& multiPlayer)
 	:m_width(width), m_height(height), m_size(width* height)
@@ -56,13 +57,6 @@ std::ostream& operator<<(std::ostream& out, const Board& board)
 		out << std::endl;
 	}
 	return out;
-}
-
-void Board::DeleteCompleteLines()
-{
-	for (uint16_t line = 0; line < m_height; line++)
-		if (VerifyIfLineIsComplete(line))
-			DeleteAndReplaceLine(line);
 }
 
 bool  Board::VerifyIfLineIsComplete(const uint16_t& line) const

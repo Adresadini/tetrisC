@@ -1,10 +1,9 @@
 #pragma once
+#include "PieceTypes.h"
+#include"Board.h"
 #include <array>
 #include <iostream>
 #include <optional>
-
-#include "Board.h"
-#include "PieceTypes.h"
 
 class TetrisPiece
 {
@@ -29,7 +28,7 @@ public:
 
 	bool IsSet() const;
 	bool IsEmpty() const;
-
+	void DeleteCompleteLines(Board& board);
 private:
 	Board::Position m_position;
 	PieceTypes::scaleType m_scaleType;

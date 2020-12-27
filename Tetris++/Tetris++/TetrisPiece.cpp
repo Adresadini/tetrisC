@@ -297,6 +297,14 @@ bool TetrisPiece::IsEmpty() const
 	return true;
 }
 
+void TetrisPiece::DeleteCompleteLines(Board& board)
+{
+	for (int line = m_position.first; line < m_position.first + (signed)kHeight && line < board.GetHeight(); line++)
+		if (board.VerifyIfLineIsComplete(line))
+			board.DeleteAndReplaceLine(line);
+
+}
+
 void TetrisPiece::FillBorders()
 {
 	for (int8_t column = 1; column < (signed)kWidth - 1; column++)

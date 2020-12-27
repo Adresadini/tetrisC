@@ -19,8 +19,8 @@ void Game::Run()
 			m_currentPiece->MoveDown(m_board);
 			if (m_currentPiece->IsSet())
 			{
+				m_currentPiece->DeleteCompleteLines(m_board);
 				CheckTopLine();
-				m_board.DeleteCompleteLines();			// TO DO: optimize this function : Delete Complete Lines
 				delete m_currentPiece;
 				m_currentPiece = new TetrisPiece(POS, m_types);
 				m_hole.Disappear(m_board);
@@ -66,11 +66,11 @@ void Game::VisualInterface()
 		DisplayBoard(window);
 		if (m_currentPiece->IsSet())
 		{
+			m_hole.Disappear(m_board);
+			m_currentPiece->DeleteCompleteLines(m_board);
 			CheckTopLine();
 			delete m_currentPiece;
 			m_currentPiece = new TetrisPiece(POS, m_types);
-			m_hole.Disappear(m_board);
-			m_board.DeleteCompleteLines();
 			m_hole.Spawn(m_board, *m_currentPiece);
 		}
 		m_currentPiece->MoveDown(m_board);
