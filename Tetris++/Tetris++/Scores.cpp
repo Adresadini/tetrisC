@@ -24,11 +24,10 @@ void Scores::PrintPlayers(const std::string& fileName)
 
 bool Scores::IsNewPlayer(const Player& newPlayer)
 {
-	for (auto& index : m_set)
+	if (m_set.find(newPlayer.GetName()) == m_set.end())
 	{
-		if (newPlayer.GetName() == index.GetName())
-			return false;
+		m_set.insert(newPlayer);
+		return true;
 	}
-	m_set.insert(newPlayer);
-	return true;
+	return false;
 }

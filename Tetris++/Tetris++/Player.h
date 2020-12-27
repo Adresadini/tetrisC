@@ -25,6 +25,7 @@ public:
 
 	friend std::ostream& operator <<(std::ostream&, const Player&);
 	friend std::istream& operator >>(std::istream&, Player&);
+	bool operator ==(Player player);
 	bool operator >(const Player&)const;
 
 private:

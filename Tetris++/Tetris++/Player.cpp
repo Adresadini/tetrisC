@@ -100,6 +100,11 @@ void Player::MovePiece(const sf::Event& event, TetrisPiece& piece, Board& board)
 	}
 }
 
+bool Player::operator==(Player player)
+{
+	return (this->GetName() == player.GetName());
+}
+
 bool Player::operator>(const Player& player) const
 {
 	return player.GetHighScore() > this->GetHighScore();
