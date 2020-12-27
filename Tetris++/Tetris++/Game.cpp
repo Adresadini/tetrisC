@@ -3,6 +3,7 @@
 Game::Game(const uint16_t& width, const uint16_t& height, const bool& multiPlayer, std::string filename)
 	:m_board(width, height, multiPlayer), m_types(filename)
 {
+
 	m_gameOver = false;
 	m_currentPiece = new TetrisPiece(POS, m_types);
 }
@@ -39,12 +40,17 @@ void Game::Run()
 
 void Game::VisualInterface()
 {
-	::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
+	//::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
+
 	sf::RenderWindow window(sf::VideoMode(m_board.GetWidth() * (sizeOfBlockLine + 1), m_board.GetHeight() * (sizeOfBlockLine + 1)), "Tetris++",
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
-	sf::RectangleShape shape(sf::Vector2(sizeOfBlockLine, sizeOfBlockLine));
+
 	Player player1("Player1", 0);  //For Testing purposes
+
 	m_hole.Spawn(m_board, *m_currentPiece);
+
+
+
 	while (window.isOpen() && !m_gameOver)
 	{
 		sf::Event evnt;
@@ -81,10 +87,14 @@ void Game::VisualInterface()
 	}
 }
 
+	
+
 void setBlock(std::optional<uint8_t> block, sf::RectangleShape& shape)
 {
 	if (block == std::nullopt)
+	{
 		shape.setFillColor(sf::Color::Black);
+	}
 	else
 	{
 		if (block == 0)

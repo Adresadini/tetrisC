@@ -15,7 +15,6 @@ public:
 	void Run();
 	void VisualInterface();
 	void DisplayBoard(sf::RenderWindow& window);
-
 public:
 	const float sizeOfBlockLine = 35.f;
 
@@ -26,7 +25,7 @@ private:
 	TetrisPiece* m_currentPiece;
 	BlackHole m_hole;
 	Scores m_scores;
-
+	
 private:
 	const Board::Position POS = { -2,1 };
 private:
