@@ -6,6 +6,7 @@
 #include "TetrisPiece.h"
 #include "Scores.h"
 #include "PieceTypes.h"
+#include "RandomSquare.h"
 #include <fstream>
 #include <windows.h>
 class Game
@@ -19,6 +20,7 @@ public:
 	const float sizeOfBlockLine = 35.f;
 
 private:
+	RandomSquare* m_square;
 	Board m_board;
 	PieceTypes m_types;
 	bool m_gameOver;

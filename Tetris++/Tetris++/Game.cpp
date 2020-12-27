@@ -3,9 +3,9 @@
 Game::Game(const uint16_t& width, const uint16_t& height, const bool& multiPlayer, std::string filename)
 	:m_board(width, height, multiPlayer), m_types(filename)
 {
-
 	m_gameOver = false;
 	m_currentPiece = new TetrisPiece(POS, m_types);
+	m_square = new RandomSquare(m_board);
 }
 
 void Game::Run()
@@ -40,7 +40,7 @@ void Game::Run()
 
 void Game::VisualInterface()
 {
-	//::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
+	::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
 
 	sf::RenderWindow window(sf::VideoMode(m_board.GetWidth() * (sizeOfBlockLine + 1), m_board.GetHeight() * (sizeOfBlockLine + 1)), "Tetris++",
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
@@ -79,9 +79,14 @@ void Game::VisualInterface()
 			m_currentPiece = new TetrisPiece(POS, m_types);
 			m_hole.Spawn(m_board, *m_currentPiece);
 		}
+		if (m_square->isSet())
+		{
+			delete m_square;
+			m_square = new RandomSquare(m_board);
+		}
 		m_currentPiece->MoveDown(m_board);
+		m_square->MoveDown(m_board);
 		Sleep(200);
-
 		window.display();
 
 	}
