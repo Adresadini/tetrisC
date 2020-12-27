@@ -156,7 +156,9 @@
   <ItemGroup>
     <ClInclude Include="BlackHole.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="ButtonState.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="MenuButton.h" />
     <ClInclude Include="PieceTypes.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandomSquare.h" />
@@ -167,6 +169,7 @@
     <ClCompile Include="BlackHole.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="PieceTypes.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RandomSquare.cpp" />
