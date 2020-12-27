@@ -12,21 +12,23 @@ RandomSquare::RandomSquare(Board& board)
 
 	m_isSet = false;
 
-	std::uniform_int_distribution<uint16_t> colorDistribution(1,7);
+	std::uniform_int_distribution<uint16_t> colorDistribution(1, 7);
 	m_value = colorDistribution(random);
 }
 
 void RandomSquare::MoveDown(Board& board)
 {
-	if (m_position.first != board.GetHeight() - 1 &&
-		!board[{m_position.first + 1, m_position.second}]|| board[{m_position.first + 1, m_position.second}]==0)
-	{
-		Delete(board);
-		++m_position.first;
-		Draw(board);
-	}
+	if (m_position.first != board.GetHeight() - 1)
+		if (!board[{m_position.first + 1, m_position.second}] || board[{m_position.first + 1, m_position.second}] == 0)
+		{
+			Delete(board);
+			++m_position.first;
+			Draw(board);
+		}
+		else
+			m_isSet = true;
 	else
-	 m_isSet = true;
+		m_isSet = true;
 
 }
 

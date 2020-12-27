@@ -67,6 +67,7 @@ void Game::VisualInterface()
 					break;
 				}
 				player1.MovePiece(evnt, *m_currentPiece, m_board);
+				break;
 			}
 		window.clear(sf::Color::White);
 		DisplayBoard(window);
