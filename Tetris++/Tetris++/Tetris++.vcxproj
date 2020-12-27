@@ -158,11 +158,13 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="ButtonState.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="MenuButton.h" />
     <ClInclude Include="PieceTypes.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandomSquare.h" />
     <ClInclude Include="Scores.h" />
+    <ClInclude Include="StateMainMenu.h" />
     <ClInclude Include="TetrisPiece.h" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +176,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RandomSquare.cpp" />
     <ClCompile Include="Scores.cpp" />
+    <ClCompile Include="StateMainMenu.cpp" />
     <ClCompile Include="Tetris++.cpp" />
     <ClCompile Include="TetrisPiece.cpp" />
   </ItemGroup>
