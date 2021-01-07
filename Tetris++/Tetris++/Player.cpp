@@ -59,7 +59,7 @@ void Player::SetName(const std::string& name)
 
 void Player::InitKeyBindings(bool isPlayerTwo)
 {
-	//Initializing player keybinds in the following order: left, right, down, rotate left, rotate right
+	//Initializing player keybinds in the following order: left, right, down, rotate left, rotate right, scale
 	if (!isPlayerTwo)
 		m_input = new sf::Keyboard::Key[6]{ sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::Q, sf::Keyboard::Key::E,sf::Keyboard::Key::W };
 	else
@@ -80,7 +80,7 @@ void Player::MovePiece(const sf::Event& event, TetrisPiece& piece, Board& board)
 	}
 	if (event.key.code == m_input[2])
 	{
-		piece.MoveDown(board);
+		piece.DropDown(board);
 		return;
 	}
 	if (event.key.code == m_input[3])

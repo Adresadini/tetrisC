@@ -15,6 +15,7 @@ public:
 	void MoveDown(Board&);
 	void MoveRight(Board&);
 	void MovePiece(Board& board, bool& GameOver);
+	void DropDown(Board&);
 
 	void RotateLeft(Board&);
 	void RotateRight(Board&);
@@ -39,6 +40,7 @@ private:
 	bool m_set = false;
 	bool m_vertical = true;
 	bool m_scaled = false;
+	bool m_disableScaling = false;
 
 private:
 	static const size_t kWidth = 4;
