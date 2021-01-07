@@ -27,6 +27,7 @@ private:
 	TetrisPiece* m_currentPiece;
 	BlackHole m_hole;
 	Scores m_scores;
+	uint8_t m_speed = 250;
 	
 private:
 	const Board::Position POS = { -2,1 };

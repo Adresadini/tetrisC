@@ -127,7 +127,7 @@ void TetrisPiece::RotateLeft(Board& board)
 			iterator = (line - auxPos.first) * kWidth + column - auxPos.second;
 			if (aux[iterator])
 			{
-				if (board[{line, column}] && board[{line, column}] != 0 && !aux[iterator])
+				if (board[{line, column}] && board[{line, column}] != 0 && board[{line, column}].value() % 10 != aux[iterator].value() % 10)
 					return;
 			}
 		}
@@ -171,7 +171,7 @@ void TetrisPiece::RotateRight(Board& board)
 			iterator = (line - auxPos.first) * kWidth + column - auxPos.second;
 			if (aux[iterator])
 			{
-				if (board[{line, column}] && board[{line, column}] != 0 && !aux[iterator])
+				if (board[{line, column}] && board[{line, column}] != 0 && board[{line, column}].value() % 10 != aux[iterator].value() % 10)
 					return;
 			}
 		}
@@ -308,23 +308,27 @@ void TetrisPiece::DeleteCompleteLines(Board& board)
 
 void TetrisPiece::FillBorders()
 {
-	for (int8_t column = 1; column < (signed)kWidth - 1; column++)
+	for (int8_t column = 1; column < (signed)kWidth - 1; column++) //fill horizontal borders
+	{
 		if (m_piece[kWidth + column])
 			if (m_piece[column] != pieceType && m_piece[column - 1] != pieceType && m_piece[column + 1] != pieceType)
 				m_piece[column] = 10 + pieceType;
-	for (int8_t line = 1; line < (signed)kHeight - 1; line++)
-		if (m_piece[line * kWidth + kWidth - 2])
-			if (m_piece[line * kWidth + kWidth - 1] != pieceType && m_piece[(line - 1) * kWidth + kWidth - 1] != pieceType && m_piece[(line + 1) * kWidth + kWidth - 1] != pieceType)
-				m_piece[line * kWidth + kWidth - 1] = 10 + pieceType;
-	for (int8_t column = (signed)kWidth - 2; column > 0; column--)
 		if (m_piece[(kHeight - 2) * kWidth + column])
 			if (m_piece[(kHeight - 1) * kWidth + column] != pieceType && m_piece[(kHeight - 1) * kWidth + column - 1] != pieceType && m_piece[(kHeight - 1) * kWidth + column + 1] != pieceType)
 				m_piece[(kHeight - 1) * kWidth + column] = 10 + pieceType;
-	for (int8_t line = (signed)kHeight - 2; line > 0; line--)
+	}
+
+	for (int8_t line = 1; line < (signed)kHeight - 1; line++) //fill vertical borders
+	{
+		if (m_piece[line * kWidth + kWidth - 2])
+			if (m_piece[line * kWidth + kWidth - 1] != pieceType && m_piece[(line - 1) * kWidth + kWidth - 1] != pieceType && m_piece[(line + 1) * kWidth + kWidth - 1] != pieceType)
+				m_piece[line * kWidth + kWidth - 1] = 10 + pieceType;
 		if (m_piece[line * kWidth + 1])
 			if (m_piece[line * kWidth] != pieceType && m_piece[(line - 1) * kWidth] != pieceType && m_piece[(line + 1) * kWidth] != pieceType)
 				m_piece[line * kWidth] = 10 + pieceType;
-	if (m_piece[1] && m_piece[kWidth])
+	}
+
+	if (m_piece[1] && m_piece[kWidth])   //fill corners
 		m_piece[0] = 10 + pieceType;
 	if (m_piece[kWidth - 2] && m_piece[2 * kWidth - 1])
 		m_piece[kWidth - 1] = 10 + pieceType;

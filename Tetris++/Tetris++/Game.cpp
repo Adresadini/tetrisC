@@ -5,7 +5,6 @@ Game::Game(const uint16_t& width, const uint16_t& height, const bool& multiPlaye
 {
 	m_gameOver = false;
 	m_currentPiece = new TetrisPiece(POS, m_types);
-	m_square = new RandomSquare(m_board);
 }
 
 //void Game::Run()
@@ -77,23 +76,28 @@ void Game::VisualInterface()
 			m_currentPiece->DeleteCompleteLines(m_board);
 			CheckTopLine();
 			delete m_currentPiece;
+			delete m_square;
+			m_square = new RandomSquare(m_board);
+			DisplayBoard(window);
+			while (!m_square->isSet())
+			{
+				window.clear(sf::Color::White);
+				DisplayBoard(window);
+				m_square->MoveDown(m_board);
+				Sleep(5);
+				
+				window.display();
+			}
 			m_currentPiece = new TetrisPiece(POS, m_types);
 			m_hole.Spawn(m_board, *m_currentPiece);
 		}
-		if (m_square->isSet())
-		{
-			delete m_square;
-			m_square = new RandomSquare(m_board);
-		}
 		m_currentPiece->MoveDown(m_board);
-		m_square->MoveDown(m_board);
-		Sleep(200);
+		Sleep(m_speed);
 		window.display();
-
 	}
 }
 
-	
+
 
 void setBlock(std::optional<uint8_t> block, sf::RectangleShape& shape)
 {
