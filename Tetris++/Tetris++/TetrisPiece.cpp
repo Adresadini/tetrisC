@@ -39,6 +39,7 @@ void TetrisPiece::MoveLeft(Board& board)
 	Draw(board);
 }
 
+
 void TetrisPiece::MoveDown(Board& board)
 {
 	uint8_t iterator = kSize - 1;

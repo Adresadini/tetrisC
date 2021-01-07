@@ -4,6 +4,7 @@
 #include <array>
 #include <iostream>
 #include <optional>
+#include "RandomSquare.h"
 
 class TetrisPiece
 {
