@@ -155,10 +155,10 @@ void TetrisPiece::RotateRight(Board& board)
 			aux[iterator] = m_piece[line * kWidth + column];
 			iterator++;
 		}
-	for (int8_t line = m_position.first; line < m_position.first + (signed)kHeight; line++)
-		for (int8_t column = m_position.second; column < m_position.second + (signed)kWidth; column++)
+	for (int8_t line = auxPos.first; line < auxPos.first + (signed)kHeight; line++)
+		for (int8_t column = auxPos.second; column < auxPos.second + (signed)kWidth; column++)
 		{
-			iterator = (line - m_position.first) * kWidth + column - m_position.second;
+			iterator = (line - auxPos.first) * kWidth + column - auxPos.second;
 			if (aux[iterator])
 			{
 				if (column >= board.GetWidth())
@@ -186,23 +186,50 @@ void TetrisPiece::RotateRight(Board& board)
 	Draw(board);
 }
 
-void TetrisPiece::Scale(Board& board) //TO DO:collision for scaling
+void TetrisPiece::Scale(Board& board)
 {
-	if (!m_disableScaling)
+	if (m_disableScaling || m_position.first<0)
+		return;
+	std::array<std::optional<uint8_t>, TetrisPiece::kSize> aux = m_piece;
+	Board::Position auxPos = m_position;
+	if (!m_scaled)
 	{
-		Delete(board);
-		if (!m_scaled)
-		{
-			if (m_scaleType != PieceTypes::scaleType::Line)
-				FillBorders();
-			if (m_scaleType != PieceTypes::scaleType::Normal)
-				FixMiddle();
-		}
-		else
-			ScaleDown();
-		m_scaled = !m_scaled;
-		Draw(board);
+		if (m_scaleType != PieceTypes::scaleType::Line)
+			FillBorders(aux);
+		if (m_scaleType != PieceTypes::scaleType::Normal)
+			FixMiddle(aux);
+		for (int8_t line = auxPos.first; line < auxPos.first + (signed)kHeight; line++)
+			for (int8_t column = auxPos.second; column < auxPos.second + (signed)kWidth; column++)
+			{
+				uint8_t iterator = (line - auxPos.first) * kWidth + column - auxPos.second;
+				if (aux[iterator])
+				{
+					if (column >= board.GetWidth())
+						auxPos.second--;
+					if (column < 0)
+						auxPos.second += 2;
+					if (line >= board.GetHeight())
+						auxPos.first--;
+				}
+			}
+		for (int8_t line = auxPos.first; line < auxPos.first + (signed)kHeight; line++)
+			for (int8_t column = auxPos.second; column < auxPos.second + (signed)kWidth; column++)
+			{
+				uint8_t iterator = (line - auxPos.first) * kWidth + column - auxPos.second;
+				if (aux[iterator])
+				{
+					if (board[{line, column}] && board[{line, column}] != 0 && board[{line, column}].value() % 10 != aux[iterator].value() % 10)
+						return;
+				}
+			}
 	}
+	else
+		ScaleDown(aux);
+	m_scaled = !m_scaled;
+	Delete(board);
+	m_piece=aux;
+	m_position = auxPos;
+	Draw(board);
 
 }
 
@@ -323,62 +350,62 @@ void TetrisPiece::DeleteCompleteLines(Board& board)
 
 }
 
-void TetrisPiece::FillBorders()
+void TetrisPiece::FillBorders(std::array<std::optional<uint8_t>, TetrisPiece::kSize>& aux)
 {
-	for (int8_t column = 1; column < (signed)kWidth - 1; column++) //fill horizontal borders
+	for (int8_t column = 1; column < (signed)kWidth - 1; column++) //fills horizontal borders
 	{
-		if (m_piece[kWidth + column])
-			if (m_piece[column] != pieceType && m_piece[column - 1] != pieceType && m_piece[column + 1] != pieceType)
-				m_piece[column] = 10 + pieceType;
-		if (m_piece[(kHeight - 2) * kWidth + column])
-			if (m_piece[(kHeight - 1) * kWidth + column] != pieceType && m_piece[(kHeight - 1) * kWidth + column - 1] != pieceType && m_piece[(kHeight - 1) * kWidth + column + 1] != pieceType)
-				m_piece[(kHeight - 1) * kWidth + column] = 10 + pieceType;
+		if (aux[kWidth + column])
+			if (aux[column] != pieceType && aux[column - 1] != pieceType && aux[column + 1] != pieceType)
+				aux[column] = 10 + pieceType;
+		if (aux[(kHeight - 2) * kWidth + column])
+			if (aux[(kHeight - 1) * kWidth + column] != pieceType && aux[(kHeight - 1) * kWidth + column - 1] != pieceType && aux[(kHeight - 1) * kWidth + column + 1] != pieceType)
+				aux[(kHeight - 1) * kWidth + column] = 10 + pieceType;
 	}
 
-	for (int8_t line = 1; line < (signed)kHeight - 1; line++) //fill vertical borders
+	for (int8_t line = 1; line < (signed)kHeight - 1; line++) //fills vertical borders
 	{
-		if (m_piece[line * kWidth + kWidth - 2])
-			if (m_piece[line * kWidth + kWidth - 1] != pieceType && m_piece[(line - 1) * kWidth + kWidth - 1] != pieceType && m_piece[(line + 1) * kWidth + kWidth - 1] != pieceType)
-				m_piece[line * kWidth + kWidth - 1] = 10 + pieceType;
-		if (m_piece[line * kWidth + 1])
-			if (m_piece[line * kWidth] != pieceType && m_piece[(line - 1) * kWidth] != pieceType && m_piece[(line + 1) * kWidth] != pieceType)
-				m_piece[line * kWidth] = 10 + pieceType;
+		if (aux[line * kWidth + kWidth - 2])
+			if (aux[line * kWidth + kWidth - 1] != pieceType && aux[(line - 1) * kWidth + kWidth - 1] != pieceType && aux[(line + 1) * kWidth + kWidth - 1] != pieceType)
+				aux[line * kWidth + kWidth - 1] = 10 + pieceType;
+		if (aux[line * kWidth + 1])
+			if (aux[line * kWidth] != pieceType && aux[(line - 1) * kWidth] != pieceType && aux[(line + 1) * kWidth] != pieceType)
+				aux[line * kWidth] = 10 + pieceType;
 	}
 
-	if (m_piece[1] && m_piece[kWidth])   //fill corners
-		m_piece[0] = 10 + pieceType;
-	if (m_piece[kWidth - 2] && m_piece[2 * kWidth - 1])
-		m_piece[kWidth - 1] = 10 + pieceType;
-	if (m_piece[(kHeight - 1) * kWidth - 1] && m_piece[kHeight * kWidth - 2])
-		m_piece[kHeight * kWidth - 1] = 10 + pieceType;
-	if (m_piece[kHeight * (kWidth - 2)] && m_piece[kHeight * (kWidth - 1) + 1])
-		m_piece[kHeight * (kWidth - 1)] = 10 + pieceType;
+	if (aux[1] && aux[kWidth])   //fills corners
+		aux[0] = 10 + pieceType;
+	if (aux[kWidth - 2] && aux[2 * kWidth - 1])
+		aux[kWidth - 1] = 10 + pieceType;
+	if (aux[(kHeight - 1) * kWidth - 1] && aux[kHeight * kWidth - 2])
+		aux[kHeight * kWidth - 1] = 10 + pieceType;
+	if (aux[kHeight * (kWidth - 2)] && aux[kHeight * (kWidth - 1) + 1])
+		aux[kHeight * (kWidth - 1)] = 10 + pieceType;
 
 }
 
-void TetrisPiece::FixMiddle()
+void TetrisPiece::FixMiddle(std::array<std::optional<uint8_t>, TetrisPiece::kSize>& aux)
 {
 	if (m_vertical)
 		for (int8_t column = 1; column < kWidth - 1; column++)
 			for (int8_t line = 0; line < kHeight; line++)
 			{
-				if (!m_piece[line * kWidth + column])
-					m_piece[line * kWidth + column] = 10 + pieceType;
+				if (!aux[line * kWidth + column])
+					aux[line * kWidth + column] = 10 + pieceType;
 			}
 	else
 		for (int8_t column = 0; column < kWidth; column++)
 			for (int8_t line = 1; line < kHeight - 1; line++)
 			{
-				if (!m_piece[line * kWidth + column])
-					m_piece[line * kWidth + column] = 10 + pieceType;
+				if (!aux[line * kWidth + column])
+					aux[line * kWidth + column] = 10 + pieceType;
 			}
 }
 
-void TetrisPiece::ScaleDown()
+void TetrisPiece::ScaleDown(std::array<std::optional<uint8_t>, TetrisPiece::kSize>& aux)
 {
 	for (int8_t block = 0; block < kSize; block++)
-		if (m_piece[block] == 10 + pieceType)
+		if (aux[block] == 10 + pieceType)
 		{
-			m_piece[block] = std::nullopt;
+			aux[block] = std::nullopt;
 		}
 }

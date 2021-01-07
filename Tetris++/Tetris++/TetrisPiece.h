@@ -49,7 +49,7 @@ private:
 	std::array<std::optional<uint8_t>, TetrisPiece::kSize> m_piece;
 
 private:
-	void FillBorders();
-	void FixMiddle();
-	void ScaleDown();
+	void FillBorders(std::array<std::optional<uint8_t>, TetrisPiece::kSize>& aux);
+	void FixMiddle(std::array<std::optional<uint8_t>, TetrisPiece::kSize>& aux);
+	void ScaleDown(std::array<std::optional<uint8_t>, TetrisPiece::kSize>& aux);
 };
