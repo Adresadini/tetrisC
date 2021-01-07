@@ -16,6 +16,8 @@ TetrisPiece::TetrisPiece(const Board::Position& pos, const PieceTypes& types)
 
 void TetrisPiece::MoveLeft(Board& board)
 {
+	if (m_set)
+		m_set = !m_set;
 	uint8_t iterator = 0;
 	for (int8_t line = m_position.first; line < m_position.first + (signed)kHeight; line++)
 		for (int8_t column = m_position.second; column < m_position.second + (signed)kWidth; column++)
@@ -71,6 +73,8 @@ void TetrisPiece::MoveDown(Board& board)
 
 void TetrisPiece::MoveRight(Board& board)
 {
+	if (m_set)
+		m_set = !m_set;
 	uint8_t iterator;
 	for (int8_t line = m_position.first + (signed)kHeight - 1; line >= m_position.first; line--)
 		for (int8_t column = m_position.second + (signed)kWidth - 1; column >= m_position.second; column--)
@@ -184,18 +188,22 @@ void TetrisPiece::RotateRight(Board& board)
 
 void TetrisPiece::Scale(Board& board) //TO DO:collision for scaling
 {
-	Delete(board);
-	if (!m_scaled)
+	if (!m_disableScaling)
 	{
-		if (m_scaleType != PieceTypes::scaleType::Line)
-			FillBorders();
-		if (m_scaleType != PieceTypes::scaleType::Normal)
-			FixMiddle();
+		Delete(board);
+		if (!m_scaled)
+		{
+			if (m_scaleType != PieceTypes::scaleType::Line)
+				FillBorders();
+			if (m_scaleType != PieceTypes::scaleType::Normal)
+				FixMiddle();
+		}
+		else
+			ScaleDown();
+		m_scaled = !m_scaled;
+		Draw(board);
 	}
-	else
-		ScaleDown();
-	m_scaled = !m_scaled;
-	Draw(board);
+
 }
 
 void TetrisPiece::Draw(Board& board)
@@ -213,6 +221,7 @@ void TetrisPiece::Draw(Board& board)
 					board[{line, column}] = 0;
 					if (IsEmpty())
 						m_set = true;
+					m_disableScaling = true;
 				}
 				else
 					board[{line, column}] = m_piece[iterator];
@@ -284,6 +293,14 @@ void TetrisPiece::MovePiece(Board& board, bool& gameOver)
 		std::cout << board;
 	}
 
+}
+
+void TetrisPiece::DropDown(Board& board)
+{
+	Delete(board);
+	while (!m_set)
+		MoveDown(board);
+	Draw(board);
 }
 
 bool TetrisPiece::IsEmpty() const
