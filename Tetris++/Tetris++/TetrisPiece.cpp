@@ -288,39 +288,6 @@ bool TetrisPiece::IsSet() const
 	return m_set;
 }
 
-void TetrisPiece::MovePiece(Board& board, bool& gameOver)
-{
-	if (_kbhit())
-	{
-		switch (_getch())
-		{
-		case 'a':
-			MoveLeft(board);
-			break;
-		case 'd':
-			MoveRight(board);
-			break;
-		case 's':
-			MoveDown(board);
-			break;
-		case 'q':
-			RotateLeft(board);
-			break;
-		case'e':
-			RotateRight(board);
-			break;
-		case 'w':
-			Scale(board);
-			break;
-		case 27:
-			gameOver = true;
-			break;
-		}
-		system("CLS");
-		std::cout << board;
-	}
-
-}
 
 void TetrisPiece::DropDown(Board& board)
 {

@@ -63,7 +63,7 @@ void Player::InitKeyBindings(bool isPlayerTwo)
 	if (!isPlayerTwo)
 		m_input = new sf::Keyboard::Key[6]{ sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::Q, sf::Keyboard::Key::E,sf::Keyboard::Key::W };
 	else
-		m_input = new sf::Keyboard::Key[6]{ sf::Keyboard::Key::Numpad4, sf::Keyboard::Key::Numpad6, sf::Keyboard::Key::Numpad5, sf::Keyboard::Key::Numpad7, sf::Keyboard::Key::Numpad9,sf::Keyboard::Key::Numpad8 };
+		m_input = new sf::Keyboard::Key[6]{ sf::Keyboard::Key::Numpad4, sf::Keyboard::Key::Numpad6, sf::Keyboard::Key::Numpad2, sf::Keyboard::Key::Numpad7, sf::Keyboard::Key::Numpad9,sf::Keyboard::Key::Numpad8 };
 }
 
 void Player::MovePiece(const sf::Event& event, TetrisPiece& piece, Board& board)

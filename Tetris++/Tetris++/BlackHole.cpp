@@ -1,7 +1,7 @@
 #include "BlackHole.h"
 #include <random>
 
-void BlackHole::Spawn(Board& board, TetrisPiece& tetrisPiece)
+void BlackHole::Spawn(Board& board)
 {
 	std::random_device randomNumber;
 	std::uniform_int_distribution<uint16_t> lineDistribution(5, board.GetHeight() - 1);

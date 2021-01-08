@@ -3,10 +3,18 @@
 
 const char EmptyBoardSpace = '_';
 Board::Board(const uint16_t& width, const uint16_t& height, const bool& multiPlayer)
-	:m_width(width), m_height(height), m_size(width* height)
+	:m_width(width), m_height(height)
 {
 	if (!multiPlayer && m_height < 3 * m_width || multiPlayer && m_height < 3 * m_width / 2)
 		throw "Wrong board size";
+	if (multiPlayer)
+	{
+		m_width *= 2;
+
+	}
+
+	m_size = m_width * m_height;
+
 	for (auto i = 0; i < m_size; i++)
 		m_board.push_back(std::nullopt);
 }
@@ -47,7 +55,7 @@ std::ostream& operator<<(std::ostream& out, const Board& board)
 	{
 		for (column = 0; column < board.m_width; column++)
 		{
-			if (board[position]) 
+			if (board[position])
 				out << unsigned(*board[position]);
 			else
 				out << EmptyBoardSpace;

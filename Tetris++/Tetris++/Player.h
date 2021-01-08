@@ -22,7 +22,6 @@ public:
 
 	void InitKeyBindings(bool isPlayerTwo);
 	void MovePiece(const sf::Event& event, TetrisPiece& piece, Board& board);
-
 	friend std::ostream& operator <<(std::ostream&, const Player&);
 	friend std::istream& operator >>(std::istream&, Player&);
 	bool operator ==(Player player);
