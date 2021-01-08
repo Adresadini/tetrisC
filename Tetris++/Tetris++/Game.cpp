@@ -127,6 +127,7 @@ void Game::SingleplayerLogic(sf::RenderWindow& window)
 
 				window.display();
 			}
+			m_square->DeleteColmpletLine(m_board);
 			currentPiece = new TetrisPiece(m_startPositionPlayer1, m_types);
 			m_hole.Spawn(m_board);
 		}

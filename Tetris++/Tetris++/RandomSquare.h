@@ -16,6 +16,7 @@ public:
 	void Draw(Board& board) const;
 	bool isSet() const;
 	void Delete(Board& board) const;
+	void DeleteColmpletLine(Board& board) const;
 	int16_t FindTheLowestEmptyPosition(const Board& board);
 	Board::Position getPosition() const;
 };
