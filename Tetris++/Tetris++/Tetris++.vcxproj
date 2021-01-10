@@ -185,11 +185,6 @@
     <Text Include="Scores.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Tetris\Tetris.vcxproj">
-      <Project>{b16dee84-ce45-4966-89d8-02edc53188ad}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="test.gif" />
     <Image Include="tiles.png">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -197,6 +192,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logging\Logging.vcxproj">
+      <Project>{cba477af-3246-4c1d-bd6b-f88a7e977440}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

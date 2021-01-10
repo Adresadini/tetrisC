@@ -1,5 +1,4 @@
 #pragma once
-
 #include <string>
 #include <iostream>
 
@@ -31,4 +30,3 @@ private:
 	std::ostream& os;
 	Level minimumLevel;
 };
-
