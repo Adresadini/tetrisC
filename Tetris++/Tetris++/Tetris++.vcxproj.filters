@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Menu">
       <UniqueIdentifier>{d8829ad3-c1ff-48b0-a028-920bbce5720f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{eac3667a-6a49-43b3-84a5-aa414d81962b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{4430abb4-d260-44d3-b402-ba0351d6acd4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -45,9 +51,6 @@
     <ClInclude Include="RandomSquare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StateMainMenu.h">
       <Filter>Header Files\Menu</Filter>
     </ClInclude>
@@ -56,6 +59,15 @@
     </ClInclude>
     <ClInclude Include="ButtonState.h">
       <Filter>Header Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -87,10 +99,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MenuButton.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Menu</Filter>
     </ClCompile>
     <ClCompile Include="StateMainMenu.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

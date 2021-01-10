@@ -14,7 +14,12 @@ public:
         return m_stateRunning; 
     };
 
-    virtual std::unique_ptr< GameState > getNextState() = 0;
+    virtual std::unique_ptr< GameState > GetNextState() = 0;
+    virtual void StopState() = 0;
+    virtual void HandleInput() = 0;
+    virtual void Update() = 0;
+    virtual void Draw() = 0;
+
 
 protected:
     bool m_stateRunning;
