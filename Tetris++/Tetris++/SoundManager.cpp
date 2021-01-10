@@ -1,6 +1,6 @@
 #include "SoundManager.h"
 
-SoundManager::SoundManager() {
+/*SoundManager::SoundManager() {
     InitMusic();
 }
 
@@ -60,4 +60,4 @@ void SoundManager::StopSound(const std::string& key) {
     if (sound.getStatus() == sf::SoundSource::Status::Playing) {
         sound.stop();
     }
-}
+}*/

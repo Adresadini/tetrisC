@@ -17,8 +17,8 @@ public:
     explicit StateMainMenu(Game& game);
     ~StateMainMenu() override;
 
-    std::unique_ptr< GameState > nextState;
-    std::unique_ptr< GameState > getNextState() override;
+    std::unique_ptr< GameState > m_nextState;
+    std::unique_ptr< GameState > GetNextState() override;
 
 private:
     const int m_buttonTextureRows = 2;

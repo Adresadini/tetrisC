@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{4430abb4-d260-44d3-b402-ba0351d6acd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Intro">
+      <UniqueIdentifier>{545fc994-9693-4f78-9aee-5e270720047f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Intro">
+      <UniqueIdentifier>{88535b57-36b4-41f6-9059-64da81efe313}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -75,6 +81,12 @@
     <ClInclude Include="Texture.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro.h">
+      <Filter>Header Files\Intro</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp">
@@ -121,6 +133,12 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro.cpp">
+      <Filter>Source Files\Intro</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
