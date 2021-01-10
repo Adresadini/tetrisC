@@ -9,4 +9,5 @@
 
 class LOGGING_API Logger
 {
+
 };
