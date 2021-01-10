@@ -166,8 +166,10 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandomSquare.h" />
     <ClInclude Include="Scores.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StateMainMenu.h" />
     <ClInclude Include="TetrisPiece.h" />
+    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
@@ -180,9 +182,11 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RandomSquare.cpp" />
     <ClCompile Include="Scores.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StateMainMenu.cpp" />
     <ClCompile Include="Tetris++.cpp" />
     <ClCompile Include="TetrisPiece.cpp" />
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="PieceTypes.txt" />
