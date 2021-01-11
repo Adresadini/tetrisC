@@ -176,7 +176,8 @@ void Game::MultiplayerTeamLogic(sf::RenderWindow& window)
 		{
 			m_hole.Disappear(m_board);
 			playerOnePiece->DeleteCompleteLines(m_board);
-			CheckTopLine();
+			if (playerTwoPiece->IsSet())
+				CheckTopLine();
 			delete playerOnePiece;
 
 			playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
@@ -185,7 +186,8 @@ void Game::MultiplayerTeamLogic(sf::RenderWindow& window)
 		if (playerTwoPiece->IsSet())
 		{
 			playerTwoPiece->DeleteCompleteLines(m_board);
-			CheckTopLine();
+			if (playerOnePiece->IsSet())
+				CheckTopLine();
 			delete playerTwoPiece;
 			playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types);
 		}
