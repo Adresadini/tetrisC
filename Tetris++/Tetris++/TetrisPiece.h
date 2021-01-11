@@ -50,4 +50,6 @@ private:
 	void FillBorders(std::array<std::optional<uint8_t>, TetrisPiece::kSize>& aux);
 	void FixMiddle(std::array<std::optional<uint8_t>, TetrisPiece::kSize>& aux);
 	void ScaleDown(std::array<std::optional<uint8_t>, TetrisPiece::kSize>& aux);
+
+	void RemovePart(const uint8_t& block);
 };

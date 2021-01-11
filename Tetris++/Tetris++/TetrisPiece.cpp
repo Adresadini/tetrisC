@@ -56,6 +56,9 @@ void TetrisPiece::MoveDown(Board& board)
 					if (line + 1 >= board.GetHeight() || board[{line + 1, column}] && board[{line + 1, column}] != 0)
 					{
 						m_set = true;
+						RemovePart(iterator);
+						if (!IsEmpty())
+							m_set = false;
 						return;
 					}
 					else
@@ -375,4 +378,17 @@ void TetrisPiece::ScaleDown(std::array<std::optional<uint8_t>, TetrisPiece::kSiz
 		{
 			aux[block] = std::nullopt;
 		}
+}
+
+void TetrisPiece::RemovePart(const uint8_t& block)
+{
+	m_piece[block] = std::nullopt;
+	if (block-1<kSize && m_piece[block - 1] && block%kWidth > (block-1)%kWidth)
+		RemovePart(block - 1);
+	if (block + 1 < kSize && m_piece[block + 1] && block % kWidth < (block + 1) % kWidth)
+		RemovePart(block + 1);
+	if (block - kWidth <kSize && m_piece[block - kWidth])
+		RemovePart(block - kWidth);
+	if (block + kWidth < kSize && m_piece[block + kWidth])
+		RemovePart(block + kWidth);
 }
