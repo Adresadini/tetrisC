@@ -59,11 +59,11 @@ void Player::SetName(const std::string& name)
 
 void Player::InitKeyBindings(bool isPlayerTwo)
 {
-	//Initializing player keybinds in the following order: left, right, down, rotate left, rotate right, scale
+	//Initializing player keybinds in the following order: left, right, down, rotate left, rotate right, scale,Drop down
 	if (!isPlayerTwo)
-		m_input = new sf::Keyboard::Key[6]{ sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::Q, sf::Keyboard::Key::E,sf::Keyboard::Key::W };
+		m_input = { sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::Q, sf::Keyboard::Key::E, sf::Keyboard::Key::W ,sf::Keyboard::Key::Space };
 	else
-		m_input = new sf::Keyboard::Key[6]{ sf::Keyboard::Key::Numpad4, sf::Keyboard::Key::Numpad6, sf::Keyboard::Key::Numpad2, sf::Keyboard::Key::Numpad7, sf::Keyboard::Key::Numpad9,sf::Keyboard::Key::Numpad8 };
+		m_input = { sf::Keyboard::Key::Numpad4, sf::Keyboard::Key::Numpad6, sf::Keyboard::Key::Numpad2, sf::Keyboard::Key::Numpad7, sf::Keyboard::Key::Numpad9,sf::Keyboard::Key::Numpad8,sf::Keyboard::Key::Numpad5 };
 }
 
 void Player::MovePiece(const sf::Event& event, TetrisPiece& piece, Board& board)
@@ -80,7 +80,7 @@ void Player::MovePiece(const sf::Event& event, TetrisPiece& piece, Board& board)
 	}
 	if (event.key.code == m_input[2])
 	{
-		piece.DropDown(board);
+		piece.MoveDown(board);
 		return;
 	}
 	if (event.key.code == m_input[3])
@@ -96,6 +96,11 @@ void Player::MovePiece(const sf::Event& event, TetrisPiece& piece, Board& board)
 	if (event.key.code == m_input[5])
 	{
 		piece.Scale(board);
+		return;
+	}
+	if (event.key.code == m_input[6])
+	{
+		piece.DropDown(board);
 		return;
 	}
 }

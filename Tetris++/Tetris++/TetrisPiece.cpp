@@ -191,7 +191,7 @@ void TetrisPiece::RotateRight(Board& board)
 
 void TetrisPiece::Scale(Board& board)
 {
-	if (m_disableScaling || m_position.first<0)
+	if (m_disableScaling || m_position.first < 0)
 		return;
 	std::array<std::optional<uint8_t>, TetrisPiece::kSize> aux = m_piece;
 	Board::Position auxPos = m_position;
@@ -230,7 +230,7 @@ void TetrisPiece::Scale(Board& board)
 		ScaleDown(aux);
 	m_scaled = !m_scaled;
 	Delete(board);
-	m_piece=aux;
+	m_piece = aux;
 	m_position = auxPos;
 	Draw(board);
 
@@ -383,11 +383,11 @@ void TetrisPiece::ScaleDown(std::array<std::optional<uint8_t>, TetrisPiece::kSiz
 void TetrisPiece::RemovePart(const uint8_t& block)
 {
 	m_piece[block] = std::nullopt;
-	if (block-1<kSize && m_piece[block - 1] && block%kWidth > (block-1)%kWidth)
+	if (block - 1 < kSize && m_piece[block - 1] && block % kWidth > (block - 1) % kWidth)
 		RemovePart(block - 1);
 	if (block + 1 < kSize && m_piece[block + 1] && block % kWidth < (block + 1) % kWidth)
 		RemovePart(block + 1);
-	if (block - kWidth <kSize && m_piece[block - kWidth])
+	if (block - kWidth < kSize && m_piece[block - kWidth])
 		RemovePart(block - kWidth);
 	if (block + kWidth < kSize && m_piece[block + kWidth])
 		RemovePart(block + kWidth);
