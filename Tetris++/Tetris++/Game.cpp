@@ -35,26 +35,65 @@ void setBlock(std::optional<uint8_t> block, sf::RectangleShape& shape)
 	if (block == std::nullopt)
 	{
 		shape.setFillColor(sf::Color::Black);
+		return;
 	}
-	else
-	{
-		if (block == 0)
+	if (block.value() < 20)
+		switch (block.value() % 10)
+		{
+		case 0:
 			shape.setFillColor(sf::Color::White);
-		if (block.value() % 10 == 1)
-			shape.setFillColor(sf::Color::Blue);
-		if (block.value() % 10 == 2)
-			shape.setFillColor(sf::Color::Red);
-		if (block.value() % 10 == 3)
-			shape.setFillColor(sf::Color::Green);
-		if (block.value() % 10 == 4)
-			shape.setFillColor(sf::Color::Yellow);
-		if (block.value() % 10 == 5)
-			shape.setFillColor(sf::Color::Magenta);
-		if (block.value() % 10 == 6)
-			shape.setFillColor(sf::Color::Cyan);
-		if (block.value() % 10 == 7)
-			shape.setFillColor(sf::Color(11, 24, 90));
-	}
+			break;
+		case 1:
+			shape.setFillColor(sf::Color(26, 255, 255));
+			break;
+		case 2:
+			shape.setFillColor(sf::Color(255, 0, 0));
+			break;
+		case 3:
+			shape.setFillColor(sf::Color(51, 204, 51));
+			break;
+		case 4:
+			shape.setFillColor(sf::Color(255, 153, 0));
+			break;
+		case 5:
+			shape.setFillColor(sf::Color(0, 0, 255));
+			break;
+		case 6:
+			shape.setFillColor(sf::Color(255, 255, 0));
+			break;
+		case 7:
+			shape.setFillColor(sf::Color(204, 0, 204));
+			break;
+		}
+	else
+		switch (block.value() % 10)
+		{
+		case 0:
+			shape.setFillColor(sf::Color::White);
+			break;
+		case 1:
+			shape.setFillColor(sf::Color(0, 128, 128));
+			break;
+		case 2:
+			shape.setFillColor(sf::Color(204, 0, 153));
+			break;
+		case 3:
+			shape.setFillColor(sf::Color(51, 102, 0));
+			break;
+		case 4:
+			shape.setFillColor(sf::Color(153, 102, 51));
+			break;
+		case 5:
+			shape.setFillColor(sf::Color(115, 0, 230));
+			break;
+		case 6:
+			shape.setFillColor(sf::Color(255, 153, 102));
+			break;
+		case 7:
+			shape.setFillColor(sf::Color(153, 51, 51));
+			break;
+		}
+	
 }
 
 void Game::DisplayBoard(sf::RenderWindow& window)
@@ -86,7 +125,7 @@ void Game::CheckTopLine()
 
 void Game::SingleplayerLogic(sf::RenderWindow& window)
 {
-	TetrisPiece* currentPiece = new TetrisPiece(m_startPositionPlayer1, m_types);
+	TetrisPiece* currentPiece = new TetrisPiece(m_startPositionPlayer1, m_types, false);
 	Player player1("Player1", 0);  //For Testing purposes
 	m_hole.Spawn(m_board);
 	while (window.isOpen() && !m_gameOver)
@@ -128,7 +167,7 @@ void Game::SingleplayerLogic(sf::RenderWindow& window)
 				window.display();
 			}
 			m_square->DeleteColmpletLine(m_board);
-			currentPiece = new TetrisPiece(m_startPositionPlayer1, m_types);
+			currentPiece = new TetrisPiece(m_startPositionPlayer1, m_types, false);
 			m_hole.Spawn(m_board);
 		}
 		currentPiece->MoveDown(m_board);
@@ -139,9 +178,9 @@ void Game::SingleplayerLogic(sf::RenderWindow& window)
 
 void Game::MultiplayerTeamLogic(sf::RenderWindow& window)
 {
-	TetrisPiece* playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
-	TetrisPiece* playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types);
-
+	TetrisPiece* playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types, false);
+	TetrisPiece* playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types, true);
+	playerTwoPiece->SetPieceForPlayerTwo();
 
 	Player player1("Player1", 0);
 	Player player2("Player2", 0, true);
@@ -180,7 +219,7 @@ void Game::MultiplayerTeamLogic(sf::RenderWindow& window)
 				CheckTopLine();
 			delete playerOnePiece;
 
-			playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
+			playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types, false);
 			m_hole.Spawn(m_board);
 		}
 		if (playerTwoPiece->IsSet())
@@ -189,7 +228,8 @@ void Game::MultiplayerTeamLogic(sf::RenderWindow& window)
 			if (playerOnePiece->IsSet())
 				CheckTopLine();
 			delete playerTwoPiece;
-			playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types);
+			playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types, true);
+			playerTwoPiece->SetPieceForPlayerTwo();
 		}
 
 		playerOnePiece->MoveDown(m_board);
