@@ -33,5 +33,14 @@ namespace TetrisTests
 				board[position];
 				});
 		}
+
+		TEST_METHOD(GetAtMinusOneOneConst)
+		{
+			const Board board(10, 20, false);
+			Board::Position position{ -1,1 };
+			Assert::ExpectException<std::out_of_range>([&]() {
+				board[position];
+				});
+		}
 	};
 }
