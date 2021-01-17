@@ -20,8 +20,6 @@ TetrisPiece::TetrisPiece(const Board::Position& pos, const PieceTypes& types,con
 
 void TetrisPiece::MoveLeft(Board& board)
 {
-	if (m_set)
-		m_set = !m_set;
 	uint8_t iterator = 0;
 	for (int8_t line = m_position.first; line < m_position.first + (signed)kHeight; line++)
 		for (int8_t column = m_position.second; column < m_position.second + (signed)kWidth; column++)
@@ -80,8 +78,6 @@ void TetrisPiece::MoveDown(Board& board)
 
 void TetrisPiece::MoveRight(Board& board)
 {
-	if (m_set)
-		m_set = !m_set;
 	uint8_t iterator;
 	for (int8_t line = m_position.first + (signed)kHeight - 1; line >= m_position.first; line--)
 		for (int8_t column = m_position.second + (signed)kWidth - 1; column >= m_position.second; column--)

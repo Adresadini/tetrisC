@@ -9,7 +9,7 @@
 #include <map>
 #include <string>
 
-#include "SoundManager.h"
+#include "Sounds.h"
 
 class TextureManager {
 private:
