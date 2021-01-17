@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 
-#include "..\Tetris++\TetrisPiece.h"
+#include "TetrisPiece.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
