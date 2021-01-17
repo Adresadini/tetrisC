@@ -9,7 +9,7 @@
 class TetrisPiece
 {
 public:
-	TetrisPiece(const Board::Position&, const PieceTypes&,const bool& isPlayerTwo);
+	TetrisPiece(const Board::Position&, const PieceTypes&, const bool& isPlayerTwo = false);
 
 	void MoveLeft(Board&);
 	void MoveDown(Board&);
@@ -31,7 +31,7 @@ public:
 	bool IsEmpty() const;
 	void DeleteCompleteLines(Board& board);
 
-	void SetPieceForPlayerTwo();
+	void DeleteCompletLinesAndColumns(Board& board, const bool& isPlyerTwo);
 private:
 	Board::Position m_position;
 	PieceTypes::scaleType m_scaleType;

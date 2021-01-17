@@ -19,7 +19,7 @@ void Game::VisualInterface()
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 
 	if (m_multiplayer)
-		MultiplayerTeamLogic(window);
+		MultiplayerVersusLogic(window);
 	else
 		SingleplayerLogic(window);
 }
@@ -121,7 +121,7 @@ void Game::CheckTopLine()
 
 void Game::SingleplayerLogic(sf::RenderWindow& window)
 {
-	TetrisPiece* currentPiece = new TetrisPiece(m_startPositionPlayer1, m_types, false);
+	TetrisPiece* currentPiece = new TetrisPiece(m_startPositionPlayer1, m_types);
 	Player player1("Player1", 0);  //For Testing purposes
 	m_hole.Spawn(m_board);
 	while (window.isOpen() && !m_gameOver)
@@ -163,7 +163,7 @@ void Game::SingleplayerLogic(sf::RenderWindow& window)
 				window.display();
 			}
 			m_square->DeleteColmpletLine(m_board);
-			currentPiece = new TetrisPiece(m_startPositionPlayer1, m_types, false);
+			currentPiece = new TetrisPiece(m_startPositionPlayer1, m_types);
 			m_hole.Spawn(m_board);
 		}
 		currentPiece->MoveDown(m_board);
@@ -174,9 +174,8 @@ void Game::SingleplayerLogic(sf::RenderWindow& window)
 
 void Game::MultiplayerTeamLogic(sf::RenderWindow& window)
 {
-	TetrisPiece* playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types, false);
+	TetrisPiece* playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
 	TetrisPiece* playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types, true);
-	playerTwoPiece->SetPieceForPlayerTwo();
 
 	Player player1("Player1", 0);
 	Player player2("Player2", 0, true);
@@ -215,7 +214,7 @@ void Game::MultiplayerTeamLogic(sf::RenderWindow& window)
 				CheckTopLine();
 			delete playerOnePiece;
 
-			playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types, false);
+			playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
 			m_hole.Spawn(m_board);
 		}
 		if (playerTwoPiece->IsSet())
@@ -225,7 +224,6 @@ void Game::MultiplayerTeamLogic(sf::RenderWindow& window)
 				CheckTopLine();
 			delete playerTwoPiece;
 			playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types, true);
-			playerTwoPiece->SetPieceForPlayerTwo();
 		}
 
 		playerOnePiece->MoveDown(m_board);
@@ -237,3 +235,65 @@ void Game::MultiplayerTeamLogic(sf::RenderWindow& window)
 
 }
 
+
+void Game::MultiplayerVersusLogic(sf::RenderWindow& window)
+{
+	TetrisPiece* playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
+	TetrisPiece* playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types, true);
+
+	Player player1("Player1", 0);
+	Player player2("Player2", 0, true);
+
+
+	m_hole.Spawn(m_board);
+	while (window.isOpen() && !m_gameOver)
+	{
+		sf::Event evnt;
+		while (window.pollEvent(evnt))
+			switch (evnt.type)
+			{
+			case sf::Event::Closed:
+				window.close();
+				break;
+			case sf::Event::KeyPressed:
+				if (evnt.key.code == sf::Keyboard::Escape)
+				{
+					m_gameOver = true;
+					break;
+				}
+				player1.MovePiece(evnt, *playerOnePiece, m_board);
+				player2.MovePiece(evnt, *playerTwoPiece, m_board);
+				break;
+			}
+		window.clear(sf::Color::White);
+		DisplayBoard(window);
+
+		// TO DO: baga Logica pt RandomSquare
+
+		if (playerOnePiece->IsSet())
+		{
+			m_hole.Disappear(m_board);
+			playerOnePiece->DeleteCompletLinesAndColumns(m_board, false);
+			if (playerTwoPiece->IsSet())
+				CheckTopLine();
+			delete playerOnePiece;
+
+			playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
+			m_hole.Spawn(m_board);
+		}
+		if (playerTwoPiece->IsSet())
+		{
+			playerTwoPiece->DeleteCompletLinesAndColumns(m_board, true);
+			if (playerOnePiece->IsSet())
+				CheckTopLine();
+			delete playerTwoPiece;
+			playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types, true);
+		}
+
+		playerOnePiece->MoveDown(m_board);
+		playerTwoPiece->MoveDown(m_board);
+		Sleep(m_speed);
+		window.display();
+	}
+
+}

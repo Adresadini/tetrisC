@@ -17,6 +17,7 @@ public:
 	void DisplayBoard(sf::RenderWindow& window);
 	void SingleplayerLogic(sf::RenderWindow& window);
 	void MultiplayerTeamLogic(sf::RenderWindow& window);
+	void MultiplayerVersusLogic(sf::RenderWindow& window);
 public:
 	const float sizeOfBlockLine = 35.f;
 

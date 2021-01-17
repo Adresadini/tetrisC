@@ -2,7 +2,7 @@
 #include <random>
 #include <conio.h>
 
-TetrisPiece::TetrisPiece(const Board::Position& pos, const PieceTypes& types,const bool& isPlayerTwo)
+TetrisPiece::TetrisPiece(const Board::Position& pos, const PieceTypes& types, const bool& isPlayerTwo)
 	:m_position(pos)
 {
 	std::random_device random;
@@ -320,10 +320,14 @@ void TetrisPiece::DeleteCompleteLines(Board& board)
 
 }
 
-void TetrisPiece::SetPieceForPlayerTwo()
+void TetrisPiece::DeleteCompletLinesAndColumns(Board& board, const bool& isPlyerTwo)
 {
-	pieceType += 20;
+	for (int line = m_position.first; line < m_position.first + (signed)kHeight && line < board.GetHeight(); line++)
+		if (board.VerifyIfAnyPlayerHaveALineComplete(line, isPlyerTwo))
+			board.DeletePlayerLine(line, isPlyerTwo);
 }
+
+
 
 void TetrisPiece::FillBorders(std::array<std::optional<uint8_t>, TetrisPiece::kSize>& aux)
 {

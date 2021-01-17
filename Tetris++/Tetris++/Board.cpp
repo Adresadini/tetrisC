@@ -81,3 +81,37 @@ void Board::DeleteAndReplaceLine(const uint16_t& line)
 	for (uint16_t index = 0; index < m_width; index++)
 		m_board.insert(m_board.begin(), std::nullopt);
 }
+
+void Board::DeleteaAndReplaceElement(const uint16_t& line, const uint16_t& column)
+{
+	for (uint16_t index = line; index > 0; index--)
+		m_board[line * m_width + column] = m_board[(line-1) * m_width + column];
+	m_board[column] = std::nullopt;
+}
+
+bool Board::VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool& isPlayerTwo) const
+{
+	uint8_t downLimit = isPlayerTwo * 20;
+	uint8_t upLimit = isPlayerTwo * 20 + 20;
+
+	uint8_t numberOfSameElements = 0;
+
+	for (uint16_t column = 0; column < m_width; column++)
+		if (m_board[line * m_width + column] != std::nullopt &&
+			m_board[line * m_width + column] > downLimit &&
+			m_board[line * m_width + column] < upLimit)
+			numberOfSameElements++;
+
+	return numberOfSameElements >= m_width / 2;
+}
+
+void Board::DeletePlayerLine(const uint16_t& line, const bool& isPlayerTwo)
+{
+	uint8_t downLimit = isPlayerTwo * 20;
+	uint8_t upLimit = isPlayerTwo * 20 + 20;
+	for (uint16_t column = 0; column < m_width; column++)
+		if (m_board[line * m_width + column] != std::nullopt &&
+			m_board[line * m_width + column] > downLimit &&
+			m_board[line * m_width + column] < upLimit)
+			DeleteaAndReplaceElement(line, column);
+}
