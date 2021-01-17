@@ -1,6 +1,6 @@
 #pragma once
 #include "PieceTypes.h"
-#include"Board.h"
+#include "Board.h"
 #include <array>
 #include <iostream>
 #include <optional>

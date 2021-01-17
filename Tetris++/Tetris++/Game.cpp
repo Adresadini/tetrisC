@@ -22,10 +22,6 @@ void Game::VisualInterface()
 		MultiplayerTeamLogic(window);
 	else
 		SingleplayerLogic(window);
-
-
-
-
 }
 
 
