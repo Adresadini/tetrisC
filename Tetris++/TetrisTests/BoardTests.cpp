@@ -24,5 +24,14 @@ namespace TetrisTests
 			Board::Position position{ 1,1 };
 			Assert::IsFalse(board[position].has_value());
 		}
+
+		TEST_METHOD(GetAtMinusOneOne)
+		{
+			Board board(10, 20, false);
+			Board::Position position{ -1,1 };
+			Assert::ExpectException<const char*>([&]() {
+				board[position];
+				});
+		}
 	};
 }
