@@ -1,31 +1,37 @@
-#include "Sounds.h"
+#include "SoundManage.h"
 
-/*Sounds::Sounds() {
+SoundManage::SoundManage()
+{
     InitMusic();
 }
 
-Sounds::~Sounds() {
+SoundManage::~SoundManage()
+{
     m_sounds.clear();
     m_soundBuffers.clear();
 }
-/*
-void Sounds::InitMusic() {
+
+void SoundManage::InitMusic()
+{
     m_backgroundTheme.openFromFile(Audio::GAME_THEME);
     m_backgroundTheme.setLoop(true);
 }
 
-void Sounds::StopMusic() {
+void SoundManage::StopMusic()
+{
     m_backgroundTheme.stop();
 }
 
-void Sounds::PlayMusic() {
+void SoundManage::PlayMusic()
+{
     sf::SoundSource::Status status = m_backgroundTheme.getStatus();
     if (status != sf::SoundSource::Status::Playing) {
         m_backgroundTheme.play();
     }
 }
 
-void Sounds::ChangeMusicState() {
+void SoundManage::ChangeMusicState()
+{
     sf::SoundSource::Status status = m_backgroundTheme.getStatus();
     if (status == sf::SoundSource::Status::Stopped) {
         PlayMusic();
@@ -36,7 +42,8 @@ void Sounds::ChangeMusicState() {
     }
 }
 
-void Sounds::AddSound(const std::string& key) {
+void SoundManage::AddSound(const std::string& key)
+{
     sf::SoundBuffer buffer;
     buffer.loadFromFile(key);
     m_soundBuffers[key] = buffer;
@@ -45,19 +52,22 @@ void Sounds::AddSound(const std::string& key) {
     m_sounds[key] = sound;
 }
 
-void Sounds::PlaySound(const std::string& key) {
+void SoundManage::PlaySound(const std::string& key)
+{
     sf::Sound& sound = m_sounds.at(key);
     sound.play();
 }
 
-bool Sounds::IsPlaying(const std::string& key) {
+bool SoundManage::IsPlaying(const std::string& key) 
+{
     const sf::Sound& sound = m_sounds.at(key);
     return (sound.getStatus() == sf::SoundSource::Status::Playing);
 }
 
-void Sounds::StopSound(const std::string& key) {
+void SoundManage::StopSound(const std::string& key) 
+{
     sf::Sound& sound = m_sounds.at(key);
     if (sound.getStatus() == sf::SoundSource::Status::Playing) {
         sound.stop();
     }
-}*/
+}

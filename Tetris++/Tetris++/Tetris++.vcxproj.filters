@@ -84,9 +84,6 @@
     <ClInclude Include="Intro.h">
       <Filter>Header Files\Intro</Filter>
     </ClInclude>
-    <ClInclude Include="Sounds.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp">
@@ -137,8 +134,17 @@
     <ClCompile Include="Intro.cpp">
       <Filter>Source Files\Intro</Filter>
     </ClCompile>
-    <ClCompile Include="Sounds.cpp">
+    <ClCompile Include="InitMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManage.cpp">
       <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="InitMenu.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManage.h">
+      <Filter>Header Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

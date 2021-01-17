@@ -1,5 +1,5 @@
-#ifndef SFMLNAKE_SOUNDMANAGER_HPP
-#define SFMLNAKE_SOUNDMANAGER_HPP
+#ifndef SOUNDMANAGE_H
+#define SOUNDMANAGE_H
 
 #include <SFML/Audio/Music.hpp>
 #include <SFML/Audio/Sound.hpp>
@@ -10,18 +10,18 @@
 
 #include "Audio.h"
 
-class Sounds {
+class SoundManage {
 public:
-    Sounds();
-    virtual ~Sounds();
+    SoundManage();
+    virtual ~SoundManage();
 
-    /*void AddSound(const std::string& key);
+    void AddSound(const std::string& key);
     bool IsPlaying(const std::string& key);
     void StopSound(const std::string& key);
     void PlaySound(const std::string& key);
 
     void PlayMusic();
-    void ChangeMusicState();*/
+    void ChangeMusicState();
 
 private:
     std::map< std::string, sf::SoundBuffer > m_soundBuffers;
@@ -30,6 +30,7 @@ private:
 
     void InitMusic();
     void StopMusic();
-
 };
+
+
 #endif

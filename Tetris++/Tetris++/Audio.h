@@ -1,5 +1,5 @@
-#ifndef SOUND_H
-#define SOUND_H
+#ifndef AUDIO_H
+#define AUDIO_H
 
 #include <string>
 
