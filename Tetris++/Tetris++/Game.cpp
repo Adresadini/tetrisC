@@ -272,8 +272,8 @@ void Game::MultiplayerVersusLogic(sf::RenderWindow& window)
 
 		if (playerOnePiece->IsSet())
 		{
-			m_hole.Disappear(m_board);
 			playerOnePiece->DeleteCompletLinesAndColumns(m_board, false);
+			m_hole.Disappear(m_board);
 			if (playerTwoPiece->IsSet())
 				CheckTopLine();
 			delete playerOnePiece;

@@ -143,3 +143,11 @@ void Board::DeletePlayerColumn(const uint16_t& column, const bool& isPlayerTwo)
 			m_board[line * m_width + column] < upLimit)
 			DeleteaAndReplaceElement(line, column);
 }
+
+bool Board::VerifyIfLineIsEmpty(const uint16_t& line)
+{
+	for (uint16_t column = 0; column < m_width; column++)
+		if (m_board[line * m_width + column] != std::nullopt)
+			return false;
+	return true;
+}
