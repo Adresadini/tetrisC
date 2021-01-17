@@ -158,7 +158,7 @@
     <ClInclude Include="BlackHole.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="ButtonState.h" />
-    <ClInclude Include="Engine.h" />
+    <ClCompile Include="Engine.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClCompile Include="InitMenu.h" />

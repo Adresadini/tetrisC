@@ -10,11 +10,11 @@
 #include "StateMainMenu.h"
 #include "Audio.h"
 #include "Texture.h"
-#include "Game.h"
+#include "InitMenu.h"
 
 class Intro : public GameState {
 public:
-    explicit Intro(Game& game);
+    explicit Intro(InitMenu& initMenu);
     ~Intro() override;
 
     std::unique_ptr< GameState > GetNextState() override;
@@ -23,7 +23,7 @@ public:
     void Update() override;
 
 private:
-    Game& game;
+    InitMenu& m_initMenu;
     sf::Clock m_animationTime;
     sf::Sprite m_logoSprite;
 

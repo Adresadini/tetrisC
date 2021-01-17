@@ -72,9 +72,6 @@
     <ClInclude Include="Audio.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -144,6 +141,9 @@
       <Filter>Header Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="SoundManage.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.h">
       <Filter>Header Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,8 +6,9 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include "Game.h"
+#include "InitMenu.h"
 #include "GameState.h"
+#include "Intro.h"
 
 class Engine {
 public:
@@ -17,6 +18,7 @@ public:
     void StartGame();
 
 private:
+    InitMenu m_initMenu;
     std::stack< std::unique_ptr< GameState > > m_states;
 
     void ChangeState(std::unique_ptr< GameState > state);
