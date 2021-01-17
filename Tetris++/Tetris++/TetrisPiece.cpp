@@ -322,17 +322,14 @@ void TetrisPiece::DeleteCompleteLines(Board& board)
 
 void TetrisPiece::DeleteCompletLinesAndColumns(Board& board, const bool& isPlyerTwo)
 {
+
 	for (int line = m_position.first; line < m_position.first + (signed)kHeight && line < board.GetHeight(); line++)
-		if (board.VerifyIfAnyPlayerHaveALineComplete(line, isPlyerTwo))
-			board.DeletePlayerLine(line, isPlyerTwo);
+		board.VerifyIfAnyPlayerHaveALineComplete(line, isPlyerTwo);
+			
 
 	for (int column = m_position.second; column < m_position.second + (signed)kWidth && column < board.GetWidth(); column++)
-		if (board.VerifyIfAnyPlayerHaveAColumnComplete(column, isPlyerTwo))
-			board.DeletePlayerColumn(column, isPlyerTwo);
-
-	for (int line = m_position.first;  line < board.GetHeight(); line++)
-		if (board.VerifyIfLineIsEmpty(line))
-			board.DeleteAndReplaceLine(line);
+		board.VerifyIfAnyPlayerHaveAColumnComplete(column, isPlyerTwo);
+			
 
 }
 

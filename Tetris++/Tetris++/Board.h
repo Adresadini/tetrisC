@@ -19,14 +19,17 @@ public:
 
 	size_t GetWidth() const;
 	size_t GetHeight() const;
+
 	bool VerifyIfLineIsComplete(const uint16_t& line) const;
+
 	void DeleteAndReplaceLine(const uint16_t& line);
-	void DeleteaAndReplaceElement(const uint16_t& line, const uint16_t& column);
-	bool VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool& isPlayerTwo) const;
-	bool VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, const bool& isPlayerTwo) const;
-	void DeletePlayerLine(const uint16_t& line, const bool& isPlayerTwo);
-	void DeletePlayerColumn(const uint16_t& line, const bool& isPlayerTwo);
-	bool VerifyIfLineIsEmpty(const uint16_t& line);
+	void DeleteAndReplaceElement(const uint16_t& line, const uint16_t& column);
+
+	void VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool& isPlayerTwo) ;
+	void VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, const bool& isPlayerTwo);
+
+	void DeletePlayerLine(const uint16_t& line, const uint16_t& column);
+	void DeletePlayerColumn(const uint16_t& line, const uint16_t& column);
 private:
 	size_t m_width;
 	size_t m_height;

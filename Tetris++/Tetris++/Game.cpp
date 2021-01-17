@@ -272,8 +272,8 @@ void Game::MultiplayerVersusLogic(sf::RenderWindow& window)
 
 		if (playerOnePiece->IsSet())
 		{
-			playerOnePiece->DeleteCompletLinesAndColumns(m_board, false);
 			m_hole.Disappear(m_board);
+			playerOnePiece->DeleteCompletLinesAndColumns(m_board, false);
 			if (playerTwoPiece->IsSet())
 				CheckTopLine();
 			delete playerOnePiece;
@@ -283,11 +283,13 @@ void Game::MultiplayerVersusLogic(sf::RenderWindow& window)
 		}
 		if (playerTwoPiece->IsSet())
 		{
+			m_hole.Disappear(m_board);
 			playerTwoPiece->DeleteCompletLinesAndColumns(m_board, true);
 			if (playerOnePiece->IsSet())
 				CheckTopLine();
 			delete playerTwoPiece;
 			playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types, true);
+			m_hole.Spawn(m_board);
 		}
 
 		playerOnePiece->MoveDown(m_board);
