@@ -30,5 +30,11 @@ namespace TetrisTests
 			player.SetScore(120);
 			Assert::AreEqual(player.GetScore(), (uint16_t)120);
 		}
+
+		TEST_METHOD(PlayerToString)
+		{
+			Player player("Player", 120);
+			Assert::AreEqual(player.PlayerToString(),(std::string)"Player 120");
+		}
 	};
 }
