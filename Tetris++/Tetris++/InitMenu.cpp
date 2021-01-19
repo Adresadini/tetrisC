@@ -4,12 +4,12 @@ InitMenu::InitMenu()
 {
     m_exitGame = false;
 
-    CreateWindow();
+    CreateWindows();
     LoadSounds();
     LoadTextures();
 }
 
-//InitMenu::~InitMenu() = default;
+InitMenu::~InitMenu() = default;
 
 sf::RenderWindow& InitMenu::GetWindow() 
 {
@@ -49,7 +49,7 @@ void InitMenu::LoadTextures()
     m_textureManager.AddTexture(Texture::VICTORY);
 }
 
-void InitMenu::CreateWindow() 
+void InitMenu::CreateWindows() 
 {
     m_window.create(sf::VideoMode(WIDTH, HEIGHT), "@SFMLTetris_VERSION1");
     m_window.setFramerateLimit(FPS);

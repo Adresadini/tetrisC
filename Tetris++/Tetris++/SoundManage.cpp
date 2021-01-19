@@ -5,11 +5,11 @@ SoundManage::SoundManage()
     InitMusic();
 }
 
-SoundManage::~SoundManage()
-{
-    m_sounds.clear();
-    m_soundBuffers.clear();
-}
+//SoundManage::~SoundManage()
+//{
+//    m_sounds.clear();
+//    m_soundBuffers.clear();
+//}
 
 void SoundManage::InitMusic()
 {

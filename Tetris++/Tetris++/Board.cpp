@@ -102,11 +102,18 @@ void Board::VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool&
 			m_board[line * m_width + column] > downLimit &&
 			m_board[line * m_width + column] < upLimit)
 			numberOfSameElements++;
-		else numberOfSameElements = 0;
+		else
+		{
+			if (numberOfSameElements >= m_width / 2)
+			{
+				DeletePlayerLine(line, column, numberOfSameElements);
+				return;
+			}
+			numberOfSameElements = 0;
+		}
 		if (numberOfSameElements >= m_width / 2)
 		{
-			DeletePlayerLine(line, column);
-			// transmitem mai departe coloana unde s-a incheiat sirul (matematic vorbind column-width/2 e unde a inceput)
+			DeletePlayerLine(line , column, numberOfSameElements);
 			return;
 		}
 	}
@@ -125,25 +132,32 @@ void Board::VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, const b
 			m_board[line * m_width + column] > downLimit &&
 			m_board[line * m_width + column] < upLimit)
 			numberOfSameElements++;
-		else numberOfSameElements = 0;
+		else
+		{
+			if (numberOfSameElements >= m_width / 2)
+			{
+				DeletePlayerColumn(line, column, numberOfSameElements);
+				return;
+			}
+			numberOfSameElements = 0;
+		}
 		if (numberOfSameElements >= m_width / 2)
 		{
-			DeletePlayerColumn(line, column);
-			// transmitem mai departe coloana unde s-a incheiat sirul (matematic vorbind column-width/2 e unde a inceput)
+			DeletePlayerColumn(line+1, column, numberOfSameElements);
 			return;
 		}
 	}
 
 }
 
-void Board::DeletePlayerLine(const uint16_t& line, const uint16_t& column)
+void Board::DeletePlayerLine(const uint16_t& line, const uint16_t& column, const uint8_t& numberOfSameElements)
 {
-	for (int index = column - m_width / 2 + 1; index <= column; index++)
+	for (int index = column - numberOfSameElements; index <= column; index++)
 		DeleteAndReplaceElement(line, index);
 }
 
-void Board::DeletePlayerColumn(const uint16_t& line, const uint16_t& column)
+void Board::DeletePlayerColumn(const uint16_t& line, const uint16_t& column, const uint8_t& numberOfSameElements)
 {
-	for (int index = line - m_width / 2 + 1; index <= line; index++)
-		DeleteAndReplaceElement(index, column);
+	for (int index = line - numberOfSameElements; index <= line; index++)
+		m_board[index * m_width + column] = std::nullopt;
 }

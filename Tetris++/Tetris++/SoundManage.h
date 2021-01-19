@@ -13,7 +13,7 @@
 class SoundManage {
 public:
     SoundManage();
-    virtual ~SoundManage();
+    virtual ~SoundManage() = default;
 
     void AddSound(const std::string& key);
     bool IsPlaying(const std::string& key);

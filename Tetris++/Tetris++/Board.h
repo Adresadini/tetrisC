@@ -28,8 +28,8 @@ public:
 	void VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool& isPlayerTwo) ;
 	void VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, const bool& isPlayerTwo);
 
-	void DeletePlayerLine(const uint16_t& line, const uint16_t& column);
-	void DeletePlayerColumn(const uint16_t& line, const uint16_t& column);
+	void DeletePlayerLine(const uint16_t& line, const uint16_t& column, const uint8_t& numberOfSameElements);
+	void DeletePlayerColumn(const uint16_t& line, const uint16_t& column, const uint8_t& numberOfSameElements);
 private:
 	size_t m_width;
 	size_t m_height;

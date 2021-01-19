@@ -204,8 +204,6 @@ void Game::MultiplayerTeamLogic(sf::RenderWindow& window)
 		window.clear(sf::Color::White);
 		DisplayBoard(window);
 
-		// TO DO: baga Logica pt RandomSquare
-
 		if (playerOnePiece->IsSet())
 		{
 			m_hole.Disappear(m_board);
@@ -267,8 +265,6 @@ void Game::MultiplayerVersusLogic(sf::RenderWindow& window)
 			}
 		window.clear(sf::Color::White);
 		DisplayBoard(window);
-
-		// TO DO: baga Logica pt RandomSquare
 
 		if (playerOnePiece->IsSet())
 		{

@@ -32,7 +32,7 @@ private:
 	Board::Position m_startPositionPlayer1;
 	Board::Position m_startPositionPlayer2;
 	bool m_multiplayer;
-private:
+
 private:
 	void CheckTopLine();
 };

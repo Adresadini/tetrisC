@@ -29,7 +29,7 @@ private:
     TextureManager m_textureManager;
     SoundManage m_sounds;
 
-    void CreateWindow();
+    void CreateWindows();
     void LoadSounds();
     void LoadTextures();
 };
