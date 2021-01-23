@@ -12,29 +12,28 @@
 class Game
 {
 public:
-	Game(const uint16_t& width, const uint16_t& height, const bool& multiPlayer, std::string filename);
+	Game(const uint16_t& width, const uint16_t& height, std::string filename);
 	void VisualInterface();
-	void DisplayBoard(sf::RenderWindow& window);
-	void SingleplayerLogic(sf::RenderWindow& window);
-	void MultiplayerTeamLogic(sf::RenderWindow& window);
-	void MultiplayerVersusLogic(sf::RenderWindow& window);
+	void DisplayBoard(sf::RenderWindow& window, Board& board);
+	void SingleplayerLogic();
+	void MultiplayerTeamLogic();
+	void MultiplayerVersusLogic();
 	void ShowMenu();
 public:
 	const float sizeOfBlockLine = 35.f;
 
 private:
-	RandomSquare* m_square; // o sa fie o variabila locala nu membru al clasei ! POO 
-	Board m_board;
 	PieceTypes m_types;
 	bool m_gameOver;
 	BlackHole m_hole;
 	Scores m_scores;
 	uint8_t m_speed = 250;
-	Board::Position m_startPositionPlayer1;
 	Board::Position m_startPositionPlayer2;
-	bool m_multiplayer;
+
+	uint16_t m_boardWidth;
+	uint16_t m_boardHeight;
 
 private:
-	void CheckTopLine();
+	void CheckTopLine(Board& board);
 };
 
