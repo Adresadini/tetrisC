@@ -18,11 +18,12 @@ public:
 	void SingleplayerLogic(sf::RenderWindow& window);
 	void MultiplayerTeamLogic(sf::RenderWindow& window);
 	void MultiplayerVersusLogic(sf::RenderWindow& window);
+	void ShowMenu();
 public:
 	const float sizeOfBlockLine = 35.f;
 
 private:
-	RandomSquare* m_square;
+	RandomSquare* m_square; // o sa fie o variabila locala nu membru al clasei ! POO 
 	Board m_board;
 	PieceTypes m_types;
 	bool m_gameOver;

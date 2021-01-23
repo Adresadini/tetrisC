@@ -31,6 +31,12 @@
     <Filter Include="Header Files\Intro">
       <UniqueIdentifier>{88535b57-36b4-41f6-9059-64da81efe313}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Edi">
+      <UniqueIdentifier>{f2f51871-a3c0-434a-bd35-4add71cbb286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Edi">
+      <UniqueIdentifier>{001cf73a-4ee4-4f1e-a52d-9b6b79b0ba90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -81,6 +87,9 @@
     <ClInclude Include="Intro.h">
       <Filter>Header Files\Intro</Filter>
     </ClInclude>
+    <ClInclude Include="SfmlButton.h">
+      <Filter>Header Files\Edi</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp">
@@ -105,9 +114,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RandomSquare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MenuButton.cpp">
@@ -146,6 +152,12 @@
     <ClCompile Include="Engine.h">
       <Filter>Header Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="RandomSquare.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SfmlButton.cpp">
+      <Filter>Source Files\Edi</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Scores.txt">
@@ -162,5 +174,13 @@
     <Image Include="test.gif">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="images\Font.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="images\Fun Games Demo\Fun Games.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>

@@ -168,7 +168,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandomSquare.h" />
     <ClInclude Include="Scores.h" />
+    <ClCompile Include="SfmlButton.cpp" />
     <ClCompile Include="SoundManage.h" />
+    <ClInclude Include="SfmlButton.h" />
     <ClInclude Include="StateMainMenu.h" />
     <ClInclude Include="TetrisPiece.h" />
     <ClInclude Include="Texture.h" />
@@ -211,6 +213,10 @@
     <ProjectReference Include="..\Logging\Logging.vcxproj">
       <Project>{cba477af-3246-4c1d-bd6b-f88a7e977440}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="images\Font.ttf" />
+    <Font Include="images\Fun Games Demo\Fun Games.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

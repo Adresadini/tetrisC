@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "SfmlButton.h"
+
 
 Game::Game(const uint16_t& width, const uint16_t& height, const bool& multiPlayer, std::string filename)
 	:m_board(width, height, multiPlayer), m_types(filename), m_multiplayer(multiPlayer)
@@ -11,17 +13,98 @@ Game::Game(const uint16_t& width, const uint16_t& height, const bool& multiPlaye
 	}
 }
 
+void Game::ShowMenu()
+{
+
+	::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
+
+	sf::RenderWindow window(sf::VideoMode(800, 900), "Tetris++",
+		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
+
+	sf::Font font;
+
+	if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
+		Sleep(10);
+
+	sf::Text text;
+	text.setFont(font);
+	text.setString("Selectati tipul de joc:");
+	text.setCharacterSize(40);
+	text.setFillColor(sf::Color::White);
+	text.setStyle(sf::Text::Bold);
+	text.setPosition(sf::Vector2f(window.getSize().x / 5, window.getSize().y / 5));
+
+	SfmlButton buttonSinglePlayer(window.getSize().x / 2 - 150,
+		window.getSize().y / 3
+		, 300, 50, font, "Single Player",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+
+	SfmlButton buttonMultiPlayerTeam(window.getSize().x / 2 - 150,
+		window.getSize().y / 3 + 150,
+		300, 50, font, "MultiPlayer Team",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+	SfmlButton buttonMultiplayerVersus(window.getSize().x / 2 - 150,
+		window.getSize().y / 3 + 300,
+		300, 50, font, "MultiPlayer Versus"
+		, sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+			switch (event.type)
+			{
+			case sf::Event::Closed:
+				window.close();
+				break;
+			case sf::Event::MouseButtonPressed:
+				buttonSinglePlayer.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				buttonMultiPlayerTeam.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				buttonMultiplayerVersus.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+
+				if (buttonSinglePlayer.isPressed())
+					SingleplayerLogic(window);
+
+				if (buttonMultiPlayerTeam.isPressed())
+					MultiplayerTeamLogic(window);
+
+				if (buttonMultiplayerVersus.isPressed())
+					MultiplayerVersusLogic(window);
+
+				break;
+			}
+
+		buttonSinglePlayer.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		buttonMultiPlayerTeam.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		buttonMultiplayerVersus.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+
+		window.clear();
+
+		buttonSinglePlayer.Render(window);
+		buttonMultiPlayerTeam.Render(window);
+		buttonMultiplayerVersus.Render(window);
+
+		window.draw(text);
+		window.display();
+	}
+
+}
+
 void Game::VisualInterface()
 {
+	ShowMenu();
+
 	::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
 
 	sf::RenderWindow window(sf::VideoMode(m_board.GetWidth() * (sizeOfBlockLine + 1), m_board.GetHeight() * (sizeOfBlockLine + 1)), "Tetris++",
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 
-	if (m_multiplayer)
+	/*if (m_multiplayer)
 		MultiplayerVersusLogic(window);
 	else
-		SingleplayerLogic(window);
+		SingleplayerLogic(window);*/
 }
 
 
@@ -89,7 +172,7 @@ void setBlock(std::optional<uint8_t> block, sf::RectangleShape& shape)
 			shape.setFillColor(sf::Color(153, 51, 51));
 			break;
 		}
-	
+
 }
 
 void Game::DisplayBoard(sf::RenderWindow& window)
@@ -233,7 +316,6 @@ void Game::MultiplayerTeamLogic(sf::RenderWindow& window)
 
 }
 
-
 void Game::MultiplayerVersusLogic(sf::RenderWindow& window)
 {
 	TetrisPiece* playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
@@ -295,3 +377,5 @@ void Game::MultiplayerVersusLogic(sf::RenderWindow& window)
 	}
 
 }
+
+
