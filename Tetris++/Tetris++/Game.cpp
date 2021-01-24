@@ -279,7 +279,7 @@ void Game::MultiplayerTeamLogic()
 	sf::RenderWindow window(sf::VideoMode(board.GetWidth() * (sizeOfBlockLine + 1), board.GetHeight() * (sizeOfBlockLine + 1)), "Tetris++",
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 
-	Board::Position m_startPositionPlayer1 = { -2, board.GetWidth() / 2 - 2 };
+	Board::Position m_startPositionPlayer1 = { -2, m_boardWidth / 2 - 2 };
 	Board::Position m_startPositionPlayer2 = { -2, board.GetWidth() / 4 * 3 };
 	auto startTime = std::chrono::high_resolution_clock::now();
 	std::unique_ptr<TetrisPiece> playerOnePiece(new TetrisPiece(m_startPositionPlayer1, m_types));
@@ -350,7 +350,7 @@ void Game::MultiplayerVersusLogic()
 	sf::RenderWindow window(sf::VideoMode(board.GetWidth() * (sizeOfBlockLine + 1), board.GetHeight() * (sizeOfBlockLine + 1)), "Tetris++",
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 
-	Board::Position m_startPositionPlayer1 = { -2, board.GetWidth() / 2 - 2 };
+	Board::Position m_startPositionPlayer1 = { -2, m_boardWidth / 2 - 2 };
 	Board::Position m_startPositionPlayer2 = { -2, board.GetWidth() / 4 * 3 };
 	auto startTime = std::chrono::high_resolution_clock::now();
 	std::unique_ptr<TetrisPiece> playerOnePiece(new TetrisPiece(m_startPositionPlayer1, m_types));
