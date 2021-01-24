@@ -26,13 +26,15 @@ void Game::ShowMenu()
 	music.loadFromFile("images/mainTheme.ogg");
 	m_sound.setBuffer(music);
 	m_sound.play();
+	m_sound.setLoop(true);
+	m_sound.setVolume(5);
 
 	sf::Texture texture;
 	texture.loadFromFile("images/background2.png");
 	sf::Sprite sprite;
 	sf::Vector2u size = texture.getSize();
 	sprite.setTexture(texture);
-	sprite.setOrigin(size.x / 100 -8, size.y / 100 -9);
+	sprite.setOrigin(size.x / 100 - 8, size.y / 100 - 9);
 	
 	sf::Text text;
 	text.setFont(font);
@@ -42,7 +44,6 @@ void Game::ShowMenu()
 	text.setStyle(sf::Text::Bold);
 	text.setPosition(sf::Vector2f(window.getSize().x / 5, window.getSize().y / 5));
 
-	
 
 	SfmlButton buttonSinglePlayer(window.getSize().x / 2 - 150,
 		window.getSize().y / 3
@@ -77,20 +78,23 @@ void Game::ShowMenu()
 				if (buttonSinglePlayer.isPressed())
 				{
 					window.close();
+					m_gameOver = false;
 					SingleplayerLogic();
 				}
 
 				if (buttonMultiPlayerTeam.isPressed())
 				{
 					window.close();
+					m_gameOver = false;
 					MultiplayerTeamLogic();
 				}
 				if (buttonMultiplayerVersus.isPressed())
 				{
 					window.close();
+					m_gameOver = false;
 					MultiplayerVersusLogic();
 				}
-
+				
 				break;
 			}
 
@@ -108,7 +112,6 @@ void Game::ShowMenu()
 		window.draw(text);
 		window.display();
 	}
-
 }
 
 
@@ -176,7 +179,6 @@ void setBlock(const std::optional<uint8_t> block, sf::RectangleShape& shape)
 			shape.setFillColor(sf::Color(153, 51, 51));
 			break;
 		}
-
 }
 
 void Game::DisplayBoard(sf::RenderWindow& window, const Board& board) const
@@ -197,6 +199,10 @@ void Game::DisplayBoard(sf::RenderWindow& window, const Board& board) const
 		}
 	}
 	window.display();
+
+
+	//add a window to display the current piece
+	//add a window to display the score
 }
 
 void Game::CheckTopLine(const Board& board)
@@ -204,14 +210,57 @@ void Game::CheckTopLine(const Board& board)
 	for (int8_t column = 0; column < board.GetWidth(); column++)
 		if (board[{0, column}])
 			m_gameOver = true;
+	
+	if (m_gameOver == true)
+	{
+		sf::RenderWindow window(sf::VideoMode(400, 500), "Game Over", sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
+		sf::Font font;
+
+		if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
+			Sleep(10);
+	
+		sf::Texture texture;
+		texture.loadFromFile("images/gameOver1.jpg");
+		sf::Sprite sprite;
+		sf::Vector2u size = texture.getSize();
+		sprite.setTexture(texture);
+		sprite.setOrigin(size.x / 50 - 8, size.y / 50 - 8);
+	
+		SfmlButton buttonGameOver(window.getSize().x / 2 - 150, window.getSize().y / 3, 300, 50, font, "Return to main menu", sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+		while (window.isOpen())
+		{
+			sf::Event event;
+			while (window.pollEvent(event))
+				switch (event.type)
+				{
+				case sf::Event::Closed:
+					window.close();
+					break;
+				case sf::Event::MouseButtonPressed:
+					buttonGameOver.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+					if (buttonGameOver.isPressed())
+					{
+					window.close();
+					ShowMenu();
+					}
+					break;
+				}
+
+			buttonGameOver.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+			window.clear();
+			window.draw(sprite);
+			buttonGameOver.Render(window);
+			window.display();
+		}
+	}
+	
+	//open a window to show game over + button to go back to menu / exit
 }
 
 
 void Game::SingleplayerLogic() 
-
 {
-
-
 	Board board(m_boardWidth, m_boardHeight, 0);
 
 	sf::RenderWindow window(sf::VideoMode(board.GetWidth() * (sizeOfBlockLine + 1), board.GetHeight() * (sizeOfBlockLine + 1)), "Tetris++",
@@ -422,5 +471,3 @@ void Game::MultiplayerVersusLogic()
 	m_sound.pause();
 	ShowMenu();
 }
-
-
