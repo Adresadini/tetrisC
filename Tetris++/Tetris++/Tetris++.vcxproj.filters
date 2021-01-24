@@ -13,82 +13,52 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Menu">
-      <UniqueIdentifier>{1471b06f-b5e5-44f6-806b-465b9dc28468}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Menu">
-      <UniqueIdentifier>{d8829ad3-c1ff-48b0-a028-920bbce5720f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Engine">
-      <UniqueIdentifier>{eac3667a-6a49-43b3-84a5-aa414d81962b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Engine">
-      <UniqueIdentifier>{4430abb4-d260-44d3-b402-ba0351d6acd4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Intro">
-      <UniqueIdentifier>{545fc994-9693-4f78-9aee-5e270720047f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Intro">
-      <UniqueIdentifier>{88535b57-36b4-41f6-9059-64da81efe313}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Edi">
       <UniqueIdentifier>{f2f51871-a3c0-434a-bd35-4add71cbb286}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Edi">
       <UniqueIdentifier>{001cf73a-4ee4-4f1e-a52d-9b6b79b0ba90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game Logic">
+      <UniqueIdentifier>{c1b3e3f7-216d-4382-a670-3c28ed59f958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tetris Pieces">
+      <UniqueIdentifier>{925c57b7-41d5-45ba-9451-c36b80d46ebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Logic">
+      <UniqueIdentifier>{d3ea4384-549e-4c59-9642-8dcbd308e701}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tetris Pieces">
+      <UniqueIdentifier>{97eee07a-6ba1-48ff-bc3c-7c369110b7d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlackHole.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TetrisPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Scores.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PieceTypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomSquare.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMainMenu.h">
-      <Filter>Header Files\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuButton.h">
-      <Filter>Header Files\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="ButtonState.h">
-      <Filter>Header Files\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Intro.h">
-      <Filter>Header Files\Intro</Filter>
-    </ClInclude>
     <ClInclude Include="SfmlButton.h">
       <Filter>Header Files\Edi</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackHole.h">
+      <Filter>Header Files\Game Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomSquare.h">
+      <Filter>Header Files\Game Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="PieceTypes.h">
+      <Filter>Header Files\Tetris Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisPiece.h">
+      <Filter>Header Files\Tetris Pieces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -98,65 +68,29 @@
     <ClCompile Include="Tetris++.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BlackHole.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TetrisPiece.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scores.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PieceTypes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuButton.cpp">
-      <Filter>Source Files\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="StateMainMenu.cpp">
-      <Filter>Source Files\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Intro.cpp">
-      <Filter>Source Files\Intro</Filter>
-    </ClCompile>
-    <ClCompile Include="InitMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundManage.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="InitMenu.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundManage.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="RandomSquare.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SfmlButton.cpp">
       <Filter>Source Files\Edi</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackHole.cpp">
+      <Filter>Source Files\Game Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomSquare.cpp">
+      <Filter>Source Files\Game Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="PieceTypes.cpp">
+      <Filter>Source Files\Tetris Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="TetrisPiece.cpp">
+      <Filter>Source Files\Tetris Pieces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
