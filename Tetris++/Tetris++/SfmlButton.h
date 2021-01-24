@@ -22,9 +22,8 @@ private:
 public:
 	SfmlButton(float x, float y, float width, float height,
 		sf::Font, std::string, sf::Color, sf::Color, sf::Color);
-	~SfmlButton();
-	void Update(sf::Vector2f);
-	void Render(sf::RenderWindow& target);
+	void Update(const sf::Vector2f&);
+	void Render(sf::RenderWindow& target) const;
 	const bool isPressed() const;
 };
 

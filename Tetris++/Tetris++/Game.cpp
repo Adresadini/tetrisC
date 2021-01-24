@@ -5,11 +5,10 @@
 Game::Game(const uint16_t& width, const uint16_t& height, std::string filename)
 	: m_types(filename), m_boardWidth(width), m_boardHeight(height)
 {
-
 	m_gameOver = false;
 }
 
-void Game::ShowMenu()
+void Game::ShowMenu() 
 {
 
 	::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
@@ -96,22 +95,9 @@ void Game::ShowMenu()
 
 }
 
-void Game::VisualInterface()
-{
-	ShowMenu();
-
-	//::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
 
 
-	/*if (m_multiplayer)
-		MultiplayerVersusLogic(window);
-	else
-		SingleplayerLogic(window);*/
-}
-
-
-
-void setBlock(std::optional<uint8_t> block, sf::RectangleShape& shape)
+void setBlock(const std::optional<uint8_t> block, sf::RectangleShape& shape)
 {
 	if (block == std::nullopt)
 	{
@@ -177,7 +163,7 @@ void setBlock(std::optional<uint8_t> block, sf::RectangleShape& shape)
 
 }
 
-void Game::DisplayBoard(sf::RenderWindow& window, Board& board)
+void Game::DisplayBoard(sf::RenderWindow& window, const Board& board) const
 {
 	sf::RectangleShape shape(sf::Vector2(sizeOfBlockLine, sizeOfBlockLine));
 
@@ -197,7 +183,7 @@ void Game::DisplayBoard(sf::RenderWindow& window, Board& board)
 	window.display();
 }
 
-void Game::CheckTopLine(Board& board)
+void Game::CheckTopLine(const Board& board)
 {
 	for (int8_t column = 0; column < board.GetWidth(); column++)
 		if (board[{0, column}])
@@ -205,8 +191,10 @@ void Game::CheckTopLine(Board& board)
 }
 
 
-void Game::SingleplayerLogic()
+void Game::SingleplayerLogic() 
+
 {
+
 
 	Board board(m_boardWidth, m_boardHeight, 0);
 
@@ -218,6 +206,7 @@ void Game::SingleplayerLogic()
 	std::unique_ptr<RandomSquare> randomSquare(new RandomSquare(board));
 	std::unique_ptr<TetrisPiece> currentPiece(new TetrisPiece(m_startPosition, m_types));
 	Player player1("Player1");  //For Testing purposes
+
 	m_hole.Spawn(board);
 
 	while (window.isOpen() && !m_gameOver)

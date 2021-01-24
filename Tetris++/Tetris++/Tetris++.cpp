@@ -7,6 +7,6 @@ in order to use the Logger
 int main()
 {
 	Game x(9, 27, "PieceTypes.txt");
-	x.VisualInterface();
+	x.ShowMenu();
 	return 0;
 }

@@ -23,12 +23,7 @@ SfmlButton::SfmlButton(float x, float y, float width, float height,
 	m_shape.setFillColor(m_idleColor);
 }
 
-SfmlButton::~SfmlButton()
-{
-
-}
-
-void SfmlButton::Update(sf::Vector2f mousePos)
+void SfmlButton::Update(const sf::Vector2f& mousePos)
 {
 	m_buttonState = SfmlButton::ButtonStates::BTN_IDLE;
 	if (m_shape.getGlobalBounds().contains(mousePos))
@@ -59,7 +54,7 @@ void SfmlButton::Update(sf::Vector2f mousePos)
 
 }
 
-void SfmlButton::Render(sf::RenderWindow& target)
+void SfmlButton::Render(sf::RenderWindow& target) const
 {
 	target.draw(m_shape);
 	target.draw(m_text);

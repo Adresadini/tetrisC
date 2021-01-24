@@ -13,11 +13,10 @@ class Game
 {
 public:
 	Game(const uint16_t& width, const uint16_t& height, std::string filename);
-	void VisualInterface();
-	void DisplayBoard(sf::RenderWindow& window, Board& board);
-	void SingleplayerLogic();
-	void MultiplayerTeamLogic();
-	void MultiplayerVersusLogic();
+	void DisplayBoard(sf::RenderWindow& window,const Board& board) const;
+	void SingleplayerLogic()  ;
+	void MultiplayerTeamLogic() ;
+	void MultiplayerVersusLogic() ;
 	void ShowMenu();
 public:
 	const float sizeOfBlockLine = 35.f;
@@ -34,6 +33,6 @@ private:
 	uint16_t m_boardHeight;
 
 private:
-	void CheckTopLine(Board& board);
+	void CheckTopLine(const Board& board);
 };
 
