@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Board.h"
 #include "BlackHole.h"
 #include "Player.h"
@@ -32,6 +33,7 @@ private:
 	uint16_t m_boardWidth;
 	uint16_t m_boardHeight;
 
+	sf::Sound m_sound;
 private:
 	void CheckTopLine(const Board& board);
 };

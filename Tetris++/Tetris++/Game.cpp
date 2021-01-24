@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "SfmlButton.h"
+#include "SFML/Audio.hpp"
 #include <chrono>
 
 Game::Game(const uint16_t& width, const uint16_t& height, std::string filename)
@@ -20,6 +21,11 @@ void Game::ShowMenu()
 
 	if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
 		Sleep(10);
+
+	sf::SoundBuffer music;
+	music.loadFromFile("images/mainTheme.ogg");
+	m_sound.setBuffer(music);
+	m_sound.play();
 
 	sf::Text text;
 	text.setFont(font);
@@ -257,6 +263,7 @@ void Game::SingleplayerLogic()
 	}
 	window.close();
 	m_level = 0;
+	m_sound.stop();
 	ShowMenu();
 }
 
@@ -328,6 +335,7 @@ void Game::MultiplayerTeamLogic()
 	}
 	window.close();
 	m_level = 0;
+	m_sound.stop();
 	ShowMenu();
 }
 
@@ -401,6 +409,7 @@ void Game::MultiplayerVersusLogic()
 	}
 	window.close();
 	m_level = 0;
+	m_sound.pause();
 	ShowMenu();
 }
 
