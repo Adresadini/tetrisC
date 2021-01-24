@@ -312,22 +312,27 @@ bool TetrisPiece::IsEmpty() const
 	return true;
 }
 
-void TetrisPiece::DeleteCompleteLines(Board& board)
+uint16_t TetrisPiece::DeleteCompleteLines(Board& board)
 {
+	uint16_t score = 0;
 	for (int line = m_position.first; line < m_position.first + (signed)kHeight && line < board.GetHeight(); line++)
 		if (board.VerifyIfLineIsComplete(line))
+		{
 			board.DeleteAndReplaceLine(line);
-
+			score += board.GetWidth();
+		}
+	return score;
 }
 
-void TetrisPiece::DeleteCompletLinesAndColumns(Board& board, const bool& isPlayerTwo)
+uint16_t TetrisPiece::DeleteCompleteLinesAndColumns(Board& board, const bool& isPlayerTwo)
 {
+	uint16_t value = 0;
 	for (int line = m_position.first; line < m_position.first + (signed)kHeight && line < board.GetHeight(); line++)
-		board.VerifyIfAnyPlayerHaveALineComplete(line, isPlayerTwo);
-		
+		value+=board.VerifyIfAnyPlayerHaveALineComplete(line, isPlayerTwo);
+
 	for (int column = m_position.second; column < m_position.second + (signed)kWidth && column < board.GetWidth(); column++)
-		board.VerifyIfAnyPlayerHaveAColumnComplete(column, isPlayerTwo);
-			
+		value+=board.VerifyIfAnyPlayerHaveAColumnComplete(column, isPlayerTwo);
+	return value;
 }
 
 

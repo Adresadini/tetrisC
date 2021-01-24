@@ -100,7 +100,7 @@ void Game::VisualInterface()
 {
 	ShowMenu();
 
-	::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
+	//::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
 
 
 	/*if (m_multiplayer)
@@ -214,9 +214,9 @@ void Game::SingleplayerLogic()
 
 	Board::Position m_startPosition = { -2, board.GetWidth() / 2 - 2 };
 
-	RandomSquare* randomSquare = new RandomSquare(board);;
-	TetrisPiece* currentPiece = new TetrisPiece(m_startPosition, m_types);
-	Player player1("Player1", 0);  //For Testing purposes
+	std::unique_ptr<RandomSquare> randomSquare(new RandomSquare(board));
+	std::unique_ptr<TetrisPiece> currentPiece(new TetrisPiece(m_startPosition, m_types));
+	Player player1("Player1");  //For Testing purposes
 	m_hole.Spawn(board);
 	while (window.isOpen() && !m_gameOver)
 	{
@@ -241,11 +241,9 @@ void Game::SingleplayerLogic()
 		if (currentPiece->IsSet())
 		{
 			m_hole.Disappear(board);
-			currentPiece->DeleteCompleteLines(board);
+			player1.AddScore(currentPiece->DeleteCompleteLines(board));
 			CheckTopLine(board);
-			delete currentPiece;
-			delete randomSquare;
-			randomSquare = new RandomSquare(board);
+			randomSquare.reset(new RandomSquare(board));
 			DisplayBoard(window, board);
 			while (!randomSquare->isSet())
 			{
@@ -253,11 +251,10 @@ void Game::SingleplayerLogic()
 				DisplayBoard(window, board);
 				randomSquare->MoveDown(board);
 				Sleep(5);
-
 				window.display();
 			}
-			randomSquare->DeleteColmpletLine(board);
-			currentPiece = new TetrisPiece(m_startPosition, m_types);
+			player1.AddScore(randomSquare->DeleteColmpleteLine(board));
+			currentPiece.reset(new TetrisPiece(m_startPosition, m_types));
 			m_hole.Spawn(board);
 		}
 		currentPiece->MoveDown(board);
@@ -279,11 +276,11 @@ void Game::MultiplayerTeamLogic()
 	Board::Position m_startPositionPlayer1 = { -2, board.GetWidth() / 2 - 2 };
 	Board::Position m_startPositionPlayer2 = { -2, board.GetWidth() / 4 * 3 };
 
-	TetrisPiece* playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
-	TetrisPiece* playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types, true);
+	std::unique_ptr<TetrisPiece> playerOnePiece(new TetrisPiece(m_startPositionPlayer1, m_types));
+	std::unique_ptr<TetrisPiece> playerTwoPiece(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 
-	Player player1("Player1", 0);
-	Player player2("Player2", 0, true);
+	Player player1("Player1");
+	Player player2("Player2", true);
 
 	m_hole.Spawn(board);
 	while (window.isOpen() && !m_gameOver)
@@ -311,21 +308,19 @@ void Game::MultiplayerTeamLogic()
 		if (playerOnePiece->IsSet())
 		{
 			m_hole.Disappear(board);
-			playerOnePiece->DeleteCompleteLines(board);
+			player1.AddScore(playerOnePiece->DeleteCompleteLines(board));
 			if (playerTwoPiece->IsSet())
 				CheckTopLine(board);
-			delete playerOnePiece;
 
-			playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
+			playerOnePiece.reset(new TetrisPiece(m_startPositionPlayer1, m_types));
 			m_hole.Spawn(board);
 		}
 		if (playerTwoPiece->IsSet())
 		{
-			playerTwoPiece->DeleteCompleteLines(board);
+			player1.AddScore(playerTwoPiece->DeleteCompleteLines(board));
 			if (playerOnePiece->IsSet())
 				CheckTopLine(board);
-			delete playerTwoPiece;
-			playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types, true);
+			playerTwoPiece.reset(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 		}
 
 		playerOnePiece->MoveDown(board);
@@ -348,11 +343,11 @@ void Game::MultiplayerVersusLogic()
 	Board::Position m_startPositionPlayer1 = { -2, board.GetWidth() / 2 - 2 };
 	Board::Position m_startPositionPlayer2 = { -2, board.GetWidth() / 4 * 3 };
 
-	TetrisPiece* playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
-	TetrisPiece* playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types, true);
+	std::unique_ptr<TetrisPiece> playerOnePiece(new TetrisPiece(m_startPositionPlayer1, m_types));
+	std::unique_ptr<TetrisPiece> playerTwoPiece(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 
-	Player player1("Player1", 0);
-	Player player2("Player2", 0, true);
+	Player player1("Player1");
+	Player player2("Player2", true);
 
 
 	m_hole.Spawn(board);
@@ -381,25 +376,22 @@ void Game::MultiplayerVersusLogic()
 		if (playerOnePiece->IsSet())
 		{
 			m_hole.Disappear(board);
-			playerOnePiece->DeleteCompletLinesAndColumns(board, false);
+			player1.AddScore(playerOnePiece->DeleteCompleteLinesAndColumns(board, false));
 			if (playerTwoPiece->IsSet())
 				CheckTopLine(board);
-			delete playerOnePiece;
 
-			playerOnePiece = new TetrisPiece(m_startPositionPlayer1, m_types);
+			playerOnePiece.reset(new TetrisPiece(m_startPositionPlayer1, m_types));
 			m_hole.Spawn(board);
 		}
 		if (playerTwoPiece->IsSet())
 		{
 			m_hole.Disappear(board);
-			playerTwoPiece->DeleteCompletLinesAndColumns(board, true);
+			player2.AddScore(playerTwoPiece->DeleteCompleteLinesAndColumns(board, true));
 			if (playerOnePiece->IsSet())
 				CheckTopLine(board);
-			delete playerTwoPiece;
-			playerTwoPiece = new TetrisPiece(m_startPositionPlayer2, m_types, true);
+			playerTwoPiece.reset(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 			m_hole.Spawn(board);
 		}
-
 		playerOnePiece->MoveDown(board);
 		playerTwoPiece->MoveDown(board);
 		Sleep(m_speed);

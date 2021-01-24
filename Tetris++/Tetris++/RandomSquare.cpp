@@ -47,10 +47,14 @@ void RandomSquare::Delete(Board& board) const
 	board[m_position] = m_previosBoardValue;
 }
 
-void RandomSquare::DeleteColmpletLine(Board& board) const
+uint16_t RandomSquare::DeleteColmpleteLine(Board& board) const
 {
 	if (board.VerifyIfLineIsComplete(m_lowestEmptyPosition))
+	{
 		board.DeleteAndReplaceLine(m_lowestEmptyPosition);
+		return board.GetWidth();
+	}
+
 }
 
 int16_t RandomSquare::FindTheLowestEmptyPosition(const Board& board)

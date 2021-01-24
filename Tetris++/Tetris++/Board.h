@@ -25,8 +25,8 @@ public:
 	void DeleteAndReplaceLine(const uint16_t& line);
 	void DeleteAndReplaceElement(const uint16_t& line, const uint16_t& column);
 
-	void VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool& isPlayerTwo) ;
-	void VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, const bool& isPlayerTwo);
+	uint8_t VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool& isPlayerTwo) ;
+	uint8_t VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, const bool& isPlayerTwo);
 
 	void DeletePlayerLine(const uint16_t& line, const uint16_t& column, const uint8_t& numberOfSameElements);
 	void DeletePlayerColumn(const uint16_t& line, const uint16_t& column, const uint8_t& numberOfSameElements);

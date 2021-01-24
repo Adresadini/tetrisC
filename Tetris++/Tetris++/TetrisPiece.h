@@ -29,9 +29,9 @@ public:
 
 	bool IsSet() const;
 	bool IsEmpty() const;
-	void DeleteCompleteLines(Board& board);
+	uint16_t DeleteCompleteLines(Board& board);
 
-	void DeleteCompletLinesAndColumns(Board& board, const bool& isPlyerTwo);
+	uint16_t DeleteCompleteLinesAndColumns(Board& board, const bool& isPlyerTwo);
 private:
 	Board::Position m_position;
 	PieceTypes::scaleType m_scaleType;

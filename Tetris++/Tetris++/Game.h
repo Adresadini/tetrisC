@@ -27,7 +27,7 @@ private:
 	bool m_gameOver;
 	BlackHole m_hole;
 	Scores m_scores;
-	uint8_t m_speed = 250;
+	uint16_t m_speed = 500;
 	Board::Position m_startPositionPlayer2;
 
 	uint16_t m_boardWidth;

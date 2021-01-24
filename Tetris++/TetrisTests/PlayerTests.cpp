@@ -35,7 +35,7 @@ namespace TetrisTests
 		TEST_METHOD(PlayerSetScore)
 		{
 			Player player;
-			player.SetScore(120);
+			player.AddScore(120);
 			Assert::IsTrue(player.GetScore() == 120);
 		}
 

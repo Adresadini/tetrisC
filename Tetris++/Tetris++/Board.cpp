@@ -89,7 +89,7 @@ void Board::DeleteAndReplaceElement(const uint16_t& line, const uint16_t& column
 	m_board[column] = std::nullopt;
 }
 
-void Board::VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool& isPlayerTwo)
+uint8_t Board::VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool& isPlayerTwo)
 {
 	uint8_t downLimit = isPlayerTwo * 20;
 	uint8_t upLimit = isPlayerTwo * 20 + 20;
@@ -107,19 +107,20 @@ void Board::VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool&
 			if (numberOfSameElements >= m_width / 2)
 			{
 				DeletePlayerLine(line, column, numberOfSameElements);
-				return;
+				return numberOfSameElements;
 			}
 			numberOfSameElements = 0;
 		}
 		if (numberOfSameElements >= m_width / 2)
 		{
 			DeletePlayerLine(line , column, numberOfSameElements);
-			return;
+			return numberOfSameElements;
 		}
 	}
+	return 0;
 }
 
-void Board::VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, const bool& isPlayerTwo)
+uint8_t Board::VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, const bool& isPlayerTwo)
 {
 	uint8_t downLimit = isPlayerTwo * 20;
 	uint8_t upLimit = isPlayerTwo * 20 + 20;
@@ -137,17 +138,17 @@ void Board::VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, const b
 			if (numberOfSameElements >= m_width / 2)
 			{
 				DeletePlayerColumn(line, column, numberOfSameElements);
-				return;
+				return numberOfSameElements;
 			}
 			numberOfSameElements = 0;
 		}
 		if (numberOfSameElements >= m_width / 2)
 		{
 			DeletePlayerColumn(line+1, column, numberOfSameElements);
-			return;
+			return numberOfSameElements;
 		}
 	}
-
+	return 0;
 }
 
 void Board::DeletePlayerLine(const uint16_t& line, const uint16_t& column, const uint8_t& numberOfSameElements)

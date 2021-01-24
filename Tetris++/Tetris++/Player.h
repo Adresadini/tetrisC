@@ -1,13 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
 #include "TetrisPiece.h"
 
 class Player
 {
 public:
-	Player(const std::string& name = NULL, const uint16_t& score = 0, const bool isPlayerTwo = false);
+	Player(const std::string& name = NULL, const bool isPlayerTwo = false);
 
 	std::string PlayerToString() const;
 
@@ -16,7 +15,7 @@ public:
 	uint16_t GetAverageScore() const;
 	uint8_t GetScoreCount() const;
 	uint16_t GetScore() const;
-	void SetScore(const uint16_t& score);
+	void AddScore(const uint16_t& score);
 	std::string GetName() const;
 	void SetName(const std::string& name);
 
@@ -29,7 +28,7 @@ public:
 
 private:
 	std::string m_name;
-	uint16_t m_score;
+	uint16_t m_score = 0;
 	uint16_t m_highScore;
 	uint16_t m_averageScore;
 	uint8_t m_scoreCount;

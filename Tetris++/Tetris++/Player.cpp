@@ -1,8 +1,8 @@
 #include "Player.h"
 #include <string>
 
-Player::Player(const std::string& name, const uint16_t& score, const bool isPlayerTwo)
-	:m_name(name), m_score(score)
+Player::Player(const std::string& name, const bool isPlayerTwo)
+	:m_name(name)
 {
 	m_highScore = 0;
 	m_averageScore = 0;
@@ -42,9 +42,9 @@ uint8_t Player::GetScoreCount() const
 	return m_scoreCount;
 }
 
-void Player::SetScore(const uint16_t& score)
+void Player::AddScore(const uint16_t& score)
 {
-	m_score = score;
+	m_score += score;
 }
 
 std::string Player::GetName() const
