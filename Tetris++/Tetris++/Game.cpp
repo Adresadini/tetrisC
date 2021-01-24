@@ -1,6 +1,6 @@
 #include "Game.h"
 #include "SfmlButton.h"
-
+#include <chrono>
 
 Game::Game(const uint16_t& width, const uint16_t& height, std::string filename)
 	: m_types(filename), m_boardWidth(width), m_boardHeight(height)
@@ -196,6 +196,7 @@ void Game::DisplayBoard(sf::RenderWindow& window, Board& board)
 	}
 	window.display();
 }
+
 void Game::CheckTopLine(Board& board)
 {
 	for (int8_t column = 0; column < board.GetWidth(); column++)
@@ -213,11 +214,12 @@ void Game::SingleplayerLogic()
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 
 	Board::Position m_startPosition = { -2, board.GetWidth() / 2 - 2 };
-
+	auto startTime = std::chrono::high_resolution_clock::now();
 	std::unique_ptr<RandomSquare> randomSquare(new RandomSquare(board));
 	std::unique_ptr<TetrisPiece> currentPiece(new TetrisPiece(m_startPosition, m_types));
 	Player player1("Player1");  //For Testing purposes
 	m_hole.Spawn(board);
+
 	while (window.isOpen() && !m_gameOver)
 	{
 		sf::Event evnt;
@@ -258,10 +260,14 @@ void Game::SingleplayerLogic()
 			m_hole.Spawn(board);
 		}
 		currentPiece->MoveDown(board);
-		Sleep(m_speed);
+		if (m_level < 10)
+			if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - startTime).count() > 30 * (m_level + 1))
+				m_level++;
+		Sleep(500 - m_level * 50);
 		window.display();
 	}
 	window.close();
+	m_level = 0;
 	ShowMenu();
 }
 
@@ -275,7 +281,7 @@ void Game::MultiplayerTeamLogic()
 
 	Board::Position m_startPositionPlayer1 = { -2, board.GetWidth() / 2 - 2 };
 	Board::Position m_startPositionPlayer2 = { -2, board.GetWidth() / 4 * 3 };
-
+	auto startTime = std::chrono::high_resolution_clock::now();
 	std::unique_ptr<TetrisPiece> playerOnePiece(new TetrisPiece(m_startPositionPlayer1, m_types));
 	std::unique_ptr<TetrisPiece> playerTwoPiece(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 
@@ -325,10 +331,14 @@ void Game::MultiplayerTeamLogic()
 
 		playerOnePiece->MoveDown(board);
 		playerTwoPiece->MoveDown(board);
-		Sleep(m_speed);
+		if (m_level < 10)
+			if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - startTime).count() > 30 * (m_level + 1))
+				m_level++;
+		Sleep(500 - m_level * 50);
 		window.display();
 	}
 	window.close();
+	m_level = 0;
 	ShowMenu();
 }
 
@@ -342,7 +352,7 @@ void Game::MultiplayerVersusLogic()
 
 	Board::Position m_startPositionPlayer1 = { -2, board.GetWidth() / 2 - 2 };
 	Board::Position m_startPositionPlayer2 = { -2, board.GetWidth() / 4 * 3 };
-
+	auto startTime = std::chrono::high_resolution_clock::now();
 	std::unique_ptr<TetrisPiece> playerOnePiece(new TetrisPiece(m_startPositionPlayer1, m_types));
 	std::unique_ptr<TetrisPiece> playerTwoPiece(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 
@@ -394,10 +404,14 @@ void Game::MultiplayerVersusLogic()
 		}
 		playerOnePiece->MoveDown(board);
 		playerTwoPiece->MoveDown(board);
-		Sleep(m_speed);
+		if (m_level < 10)
+			if (std::chrono::duration_cast<std::chrono::seconds>(std::chrono::high_resolution_clock::now() - startTime).count() > 30 * (m_level + 1))
+				m_level++;
+		Sleep(500 - m_level * 50);
 		window.display();
 	}
 	window.close();
+	m_level = 0;
 	ShowMenu();
 }
 
