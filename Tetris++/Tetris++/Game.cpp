@@ -27,6 +27,13 @@ void Game::ShowMenu()
 	m_sound.setBuffer(music);
 	m_sound.play();
 
+	sf::Texture texture;
+	texture.loadFromFile("images/background2.png");
+	sf::Sprite sprite;
+	sf::Vector2u size = texture.getSize();
+	sprite.setTexture(texture);
+	sprite.setOrigin(size.x / 100 -8, size.y / 100 -9);
+	
 	sf::Text text;
 	text.setFont(font);
 	text.setString("Selectati tipul de joc:");
@@ -34,6 +41,8 @@ void Game::ShowMenu()
 	text.setFillColor(sf::Color::White);
 	text.setStyle(sf::Text::Bold);
 	text.setPosition(sf::Vector2f(window.getSize().x / 5, window.getSize().y / 5));
+
+	
 
 	SfmlButton buttonSinglePlayer(window.getSize().x / 2 - 150,
 		window.getSize().y / 3
@@ -90,11 +99,12 @@ void Game::ShowMenu()
 		buttonMultiplayerVersus.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 
 		window.clear();
-
+		window.draw(sprite);
 		buttonSinglePlayer.Render(window);
 		buttonMultiPlayerTeam.Render(window);
 		buttonMultiplayerVersus.Render(window);
 
+		
 		window.draw(text);
 		window.display();
 	}
