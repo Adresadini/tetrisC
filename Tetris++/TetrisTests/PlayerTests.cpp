@@ -13,16 +13,9 @@ namespace TetrisTests
 
 		TEST_METHOD(PlayerConstructor)
 		{
-			Player player("Player", 120);
+			Player player("Player");
 			Assert::IsTrue(player.GetName() == "Player");
-			Assert::IsTrue(player.GetScore() == 120);
-		}
-
-		TEST_METHOD(PlayerOneAndTwoDifferent)
-		{
-			Player player1("Player", 120);
-			Player player2("Player", 120, true);
-			Assert::AreNotEqual(player1, player2);
+			Assert::IsTrue(player.GetScore() == 0);
 		}
 
 		TEST_METHOD(PlayerSetName)
@@ -41,8 +34,8 @@ namespace TetrisTests
 
 		TEST_METHOD(PlayerToString)
 		{
-			Player player("Player", 120);
-			Assert::IsTrue(player.PlayerToString() == "Player 120");
+			Player player("Player");
+			Assert::IsTrue(player.PlayerToString() == "Player 0");
 		}
 	};
 }
