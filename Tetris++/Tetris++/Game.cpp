@@ -52,7 +52,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 	heightText.setString("Select tabel height:");
 
 
-	TextBox hightTextBox(window.getSize().x / 2 - 150,
+	TextBox heightTextBox(window.getSize().x / 2 - 150,
 		600,
 		300, 50, font, "21"
 		, sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
@@ -75,22 +75,22 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 			case sf::Event::MouseButtonPressed:
 				nameTexBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 				widthTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-				hightTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				heightTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 				playButton.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 
 				if (nameTexBox.IsPressed())
 				{
 					widthTextBox.SetIsSelected(false);
-					hightTextBox.SetIsSelected(false);
+					heightTextBox.SetIsSelected(false);
 				}
 
 				if (widthTextBox.IsPressed())
 				{
 					nameTexBox.SetIsSelected(false);
-					hightTextBox.SetIsSelected(false);
+					heightTextBox.SetIsSelected(false);
 				}
 
-				if (hightTextBox.IsPressed())
+				if (heightTextBox.IsPressed())
 				{
 					widthTextBox.SetIsSelected(false);
 					nameTexBox.SetIsSelected(false);
@@ -99,19 +99,19 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 				if (playButton.IsPressed())
 				{
 					window.close();
-					SingleplayerLogic();
+					SingleplayerLogic(nameTexBox.GetText(), std::stoi(widthTextBox.GetText()), std::stoi(heightTextBox.GetText()));
 				}
 
 				break;
 			case sf::Event::KeyPressed:
-				if(nameTexBox.GetIsSelected())
-					nameTexBox.UpdateText(event);
+				if (nameTexBox.GetIsSelected())
+					nameTexBox.UpdateText(event, false);
 
-				if(widthTextBox.GetIsSelected())
-					widthTextBox.UpdateText(event);
+				if (widthTextBox.GetIsSelected())
+					widthTextBox.UpdateText(event, true);
 
-				if(hightTextBox.GetIsSelected())
-					hightTextBox.UpdateText(event);
+				if (heightTextBox.GetIsSelected())
+					heightTextBox.UpdateText(event, true);
 
 				break;
 			}
@@ -119,7 +119,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 		playButton.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 		nameTexBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 		widthTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-		hightTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		heightTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 
 		window.clear();
 
@@ -132,7 +132,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 
 		window.draw(heightText);
-		hightTextBox.Render(window);
+		heightTextBox.Render(window);
 
 		playButton.Render(window);
 
@@ -395,9 +395,9 @@ void Game::CheckTopLine(const Board& board)
 }
 
 
-void Game::SingleplayerLogic()
+void Game::SingleplayerLogic(const std::string& playerName,const int& boardWidth, const int& boardHeight)
 {
-	Board board(m_boardWidth, m_boardHeight, 0);
+	Board board(static_cast<uint16_t>(boardWidth), static_cast<uint16_t>(boardHeight), false);
 
 	sf::RenderWindow window(sf::VideoMode(board.GetWidth() * (sizeOfBlockLine + 1), board.GetHeight() * (sizeOfBlockLine + 1)), "Tetris++",
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
@@ -406,7 +406,7 @@ void Game::SingleplayerLogic()
 	auto startTime = std::chrono::high_resolution_clock::now();
 	std::unique_ptr<RandomSquare> randomSquare(new RandomSquare(board));
 	std::unique_ptr<TetrisPiece> currentPiece(new TetrisPiece(m_startPosition, m_types));
-	Player player1("Player1");  //For Testing purposes
+	Player player1(playerName);  //For Testing purposes
 
 	m_hole.Spawn(board);
 

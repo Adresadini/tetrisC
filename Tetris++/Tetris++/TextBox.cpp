@@ -61,7 +61,7 @@ const bool TextBox::IsPressed() const
 	return false;
 }
 
-void TextBox::UpdateText(const sf::Event& event)
+void TextBox::UpdateText(const sf::Event& event, const bool& onlyNumeric)
 {
 	if (event.key.code == sf::Keyboard::BackSpace)
 	{
@@ -73,6 +73,7 @@ void TextBox::UpdateText(const sf::Event& event)
 
 	if (static_cast<char>(event.text.unicode + 65) >= 65
 		&& static_cast<char>(event.text.unicode + 65) <= 90
+		&& !onlyNumeric
 		&& m_text.getString().getSize() < 17)  //TO DO:: Modifica sa nu mai fie 17, sa fie mai modular
 		m_text.setString(m_text.getString() + static_cast<char>(static_cast<char>(event.text.unicode + 65)));
 
@@ -96,5 +97,10 @@ void TextBox::SetIsSelected(bool isSelected)
 bool TextBox::GetIsSelected()
 {
 	return m_isSelected;
+}
+
+std::string TextBox::GetText()
+{
+	return m_text.getString().toAnsiString();
 }
 

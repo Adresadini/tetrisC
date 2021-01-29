@@ -15,7 +15,7 @@ class Game
 public:
 	Game(const uint16_t& width, const uint16_t& height, std::string filename);
 	void DisplayBoard(sf::RenderWindow& window,const Board& board) const;
-	void SingleplayerLogic()  ;
+	void SingleplayerLogic(const std::string& playerName, const int& m_width, const int& m_height);
 	void MultiplayerTeamLogic() ;
 	void MultiplayerVersusLogic() ;
 	void ShowMenu();

@@ -26,8 +26,9 @@ public:
 	void Update(const sf::Vector2f&);
 	void Render(sf::RenderWindow& target) const;
 	const bool IsPressed() const;
-	void UpdateText(const sf::Event& event);
+	void UpdateText(const sf::Event& event, const bool& onlyNumeric);
 	void SetIsSelected(bool isSelected);
 	bool GetIsSelected();
+	std::string GetText();
 };
 
