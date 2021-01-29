@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="TextBox.cpp" />
     <ClInclude Include="BlackHole.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Game.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="SfmlButton.cpp" />
     <ClInclude Include="SfmlButton.h" />
     <ClInclude Include="TetrisPiece.h" />
+    <ClInclude Include="TextBox.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlackHole.cpp" />

@@ -19,6 +19,7 @@ public:
 	void MultiplayerTeamLogic() ;
 	void MultiplayerVersusLogic() ;
 	void ShowMenu();
+	void ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& font);
 public:
 	const float sizeOfBlockLine = 35.f;
 

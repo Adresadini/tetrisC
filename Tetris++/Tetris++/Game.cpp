@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "SfmlButton.h"
+#include "TextBox.h"
 #include "SFML/Audio.hpp"
 #include <chrono>
 
@@ -9,7 +10,140 @@ Game::Game(const uint16_t& width, const uint16_t& height, std::string filename)
 	m_gameOver = false;
 }
 
-void Game::ShowMenu() 
+void configureText(sf::Text& text, const sf::Font& font)
+{
+	text.setFont(font);
+	text.setCharacterSize(40);
+	text.setFillColor(sf::Color::White);
+	text.setStyle(sf::Text::Bold);
+}
+
+
+
+
+void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& font)
+{
+	sf::Text nameText;
+	configureText(nameText, font);
+	nameText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
+	nameText.setString("Player Name:");
+
+	TextBox nameTexBox(window.getSize().x / 2 - 150,
+		100,
+		300, 50, font, "Player",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+
+	sf::Text widthText;
+	configureText(widthText, font);
+	widthText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 300));
+	widthText.setString("Select tabel width:");
+
+	TextBox widthTextBox(window.getSize().x / 2 - 150,
+		350,
+		300, 50, font, "9",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+
+
+	sf::Text heightText;
+	configureText(heightText, font);
+	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 550));
+	heightText.setString("Select tabel height:");
+
+
+	TextBox hightTextBox(window.getSize().x / 2 - 150,
+		600,
+		300, 50, font, "21"
+		, sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+
+	SfmlButton playButton(window.getSize().x / 2 - 150,
+		750
+		, 300, 50, font, "Play",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+			switch (event.type)
+			{
+			case sf::Event::Closed:
+				window.close();
+				break;
+			case sf::Event::MouseButtonPressed:
+				nameTexBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				widthTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				hightTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				playButton.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+
+				if (nameTexBox.IsPressed())
+				{
+					widthTextBox.SetIsSelected(false);
+					hightTextBox.SetIsSelected(false);
+				}
+
+				if (widthTextBox.IsPressed())
+				{
+					nameTexBox.SetIsSelected(false);
+					hightTextBox.SetIsSelected(false);
+				}
+
+				if (hightTextBox.IsPressed())
+				{
+					widthTextBox.SetIsSelected(false);
+					nameTexBox.SetIsSelected(false);
+				}
+
+				if (playButton.IsPressed())
+				{
+					window.close();
+					SingleplayerLogic();
+				}
+
+				break;
+			case sf::Event::KeyPressed:
+				if(nameTexBox.GetIsSelected())
+					nameTexBox.UpdateText(event);
+
+				if(widthTextBox.GetIsSelected())
+					widthTextBox.UpdateText(event);
+
+				if(hightTextBox.GetIsSelected())
+					hightTextBox.UpdateText(event);
+
+				break;
+			}
+
+		playButton.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		nameTexBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		widthTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		hightTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+
+		window.clear();
+
+		window.draw(nameText);
+		nameTexBox.Render(window);
+
+
+		window.draw(widthText);
+		widthTextBox.Render(window);
+
+
+		window.draw(heightText);
+		hightTextBox.Render(window);
+
+		playButton.Render(window);
+
+
+		window.display();
+	}
+
+
+}
+
+void Game::ShowMenu()
 {
 
 	::ShowWindow(::GetConsoleWindow(), SW_HIDE); //Hides console
@@ -35,7 +169,7 @@ void Game::ShowMenu()
 	sf::Vector2u size = texture.getSize();
 	sprite.setTexture(texture);
 	sprite.setOrigin(size.x / 100 - 8, size.y / 100 - 9);
-	
+
 	sf::Text text;
 	text.setFont(font);
 	text.setString("Selectati tipul de joc:");
@@ -75,26 +209,27 @@ void Game::ShowMenu()
 				buttonMultiPlayerTeam.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 				buttonMultiplayerVersus.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 
-				if (buttonSinglePlayer.isPressed())
+				if (buttonSinglePlayer.IsPressed())
 				{
-					window.close();
+					/*window.close();
 					m_gameOver = false;
-					SingleplayerLogic();
+					SingleplayerLogic();*/
+					ShowSinglePlayerSettings(window, font);
 				}
 
-				if (buttonMultiPlayerTeam.isPressed())
+				if (buttonMultiPlayerTeam.IsPressed())
 				{
 					window.close();
 					m_gameOver = false;
 					MultiplayerTeamLogic();
 				}
-				if (buttonMultiplayerVersus.isPressed())
+				if (buttonMultiplayerVersus.IsPressed())
 				{
 					window.close();
 					m_gameOver = false;
 					MultiplayerVersusLogic();
 				}
-				
+
 				break;
 			}
 
@@ -108,11 +243,12 @@ void Game::ShowMenu()
 		buttonMultiPlayerTeam.Render(window);
 		buttonMultiplayerVersus.Render(window);
 
-		
+
 		window.draw(text);
 		window.display();
 	}
 }
+
 
 
 
@@ -210,7 +346,7 @@ void Game::CheckTopLine(const Board& board)
 	for (int8_t column = 0; column < board.GetWidth(); column++)
 		if (board[{0, column}])
 			m_gameOver = true;
-	
+
 	if (m_gameOver == true)
 	{
 		sf::RenderWindow window(sf::VideoMode(400, 500), "Game Over", sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
@@ -218,14 +354,14 @@ void Game::CheckTopLine(const Board& board)
 
 		if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
 			Sleep(10);
-	
+
 		sf::Texture texture;
 		texture.loadFromFile("images/gameOver1.jpg");
 		sf::Sprite sprite;
 		sf::Vector2u size = texture.getSize();
 		sprite.setTexture(texture);
 		sprite.setOrigin(size.x / 50 - 8, size.y / 50 - 8);
-	
+
 		SfmlButton buttonGameOver(window.getSize().x / 2 - 150, window.getSize().y / 3, 300, 50, font, "Return to main menu", sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 		while (window.isOpen())
@@ -239,10 +375,10 @@ void Game::CheckTopLine(const Board& board)
 					break;
 				case sf::Event::MouseButtonPressed:
 					buttonGameOver.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-					if (buttonGameOver.isPressed())
+					if (buttonGameOver.IsPressed())
 					{
-					window.close();
-					ShowMenu();
+						window.close();
+						ShowMenu();
 					}
 					break;
 				}
@@ -254,12 +390,12 @@ void Game::CheckTopLine(const Board& board)
 			window.display();
 		}
 	}
-	
+
 	//open a window to show game over + button to go back to menu / exit
 }
 
 
-void Game::SingleplayerLogic() 
+void Game::SingleplayerLogic()
 {
 	Board board(m_boardWidth, m_boardHeight, 0);
 

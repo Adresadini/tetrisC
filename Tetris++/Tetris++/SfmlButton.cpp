@@ -60,7 +60,7 @@ void SfmlButton::Render(sf::RenderWindow& target) const
 	target.draw(m_text);
 }
 
-const bool SfmlButton::isPressed() const
+const bool SfmlButton::IsPressed() const
 {
 	if (m_buttonState == SfmlButton::ButtonStates::BTN_ACTIVE)
 		return true;
