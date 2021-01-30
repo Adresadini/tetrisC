@@ -13,13 +13,14 @@
 class Game
 {
 public:
-	Game(const uint16_t& width, const uint16_t& height, std::string filename);
+	Game(std::string filename);
 	void DisplayBoard(sf::RenderWindow& window,const Board& board) const;
 	void SingleplayerLogic(const std::string& playerName, const int& m_width, const int& m_height);
-	void MultiplayerTeamLogic() ;
-	void MultiplayerVersusLogic() ;
+	void MultiplayerTeamLogic(const std::string& player1Name, const std::string& player2Name, const int& boardWidth, const int& boardHeight);
+	void MultiplayerVersusLogic(const std::string& player1Name, const std::string& player2Name, const int& boardWidth, const int& boardHeight);
 	void ShowMenu();
 	void ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& font);
+	void ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& font);
 public:
 	const float sizeOfBlockLine = 35.f;
 
@@ -31,8 +32,6 @@ private:
 	uint16_t m_level = 0;
 	Board::Position m_startPositionPlayer2;
 
-	uint16_t m_boardWidth;
-	uint16_t m_boardHeight;
 
 	sf::Sound m_sound;
 private:

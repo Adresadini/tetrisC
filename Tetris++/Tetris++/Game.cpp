@@ -4,8 +4,8 @@
 #include "SFML/Audio.hpp"
 #include <chrono>
 
-Game::Game(const uint16_t& width, const uint16_t& height, std::string filename)
-	: m_types(filename), m_boardWidth(width), m_boardHeight(height)
+Game::Game(std::string filename)
+	: m_types(filename)
 {
 	m_gameOver = false;
 }
@@ -54,7 +54,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 	TextBox heightTextBox(window.getSize().x / 2 - 150,
 		600,
-		300, 50, font, "21"
+		300, 50, font, "27"
 		, sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 
@@ -143,6 +143,174 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 }
 
+void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& font)
+{
+	sf::Text nameTextPlayer1;
+	configureText(nameTextPlayer1, font);
+	nameTextPlayer1.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
+	nameTextPlayer1.setString("Player1 Name:");
+
+	TextBox nameTexBoxPlayer1(window.getSize().x / 2 - 150,
+		100,
+		300, 50, font, "Player1",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+
+	sf::Text nameTextPlayer2;
+	configureText(nameTextPlayer2, font);
+	nameTextPlayer2.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 200));
+	nameTextPlayer2.setString("Player2 Name:");
+
+	TextBox nameTexBoxPlayer2(window.getSize().x / 2 - 150,
+		250,
+		300, 50, font, "Player2",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+
+	sf::Text widthText;
+	configureText(widthText, font);
+	widthText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 350));
+	widthText.setString("Select tabel width:");
+
+	TextBox widthTextBox(window.getSize().x / 2 - 150,
+		400,
+		300, 50, font, "9",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+
+
+	sf::Text heightText;
+	configureText(heightText, font);
+	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 500));
+	heightText.setString("Select tabel height:");
+
+
+	TextBox heightTextBox(window.getSize().x / 2 - 150,
+		550,
+		300, 50, font, "27"
+		, sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+
+	SfmlButton playButtonTeam(window.getSize().x / 2 - 150,
+		675
+		, 300, 50, font, "Play as Team",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+	SfmlButton playButtonVersus(window.getSize().x / 2 - 150,
+		775
+		, 300, 50, font, "Play Versus",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+			switch (event.type)
+			{
+			case sf::Event::Closed:
+				window.close();
+				break;
+			case sf::Event::MouseButtonPressed:
+				nameTexBoxPlayer1.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				nameTexBoxPlayer2.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				widthTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				heightTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				playButtonTeam.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				playButtonVersus.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+
+				if (nameTexBoxPlayer1.IsPressed())
+				{
+					nameTexBoxPlayer2.SetIsSelected(false);
+					widthTextBox.SetIsSelected(false);
+					heightTextBox.SetIsSelected(false);
+				}
+
+				if (nameTexBoxPlayer2.IsPressed())
+				{
+					nameTexBoxPlayer1.SetIsSelected(false);
+					widthTextBox.SetIsSelected(false);
+					heightTextBox.SetIsSelected(false);
+				}
+
+				if (widthTextBox.IsPressed())
+				{
+					nameTexBoxPlayer1.SetIsSelected(false);
+					nameTexBoxPlayer2.SetIsSelected(false);
+					heightTextBox.SetIsSelected(false);
+				}
+
+				if (heightTextBox.IsPressed())
+				{
+					nameTexBoxPlayer1.SetIsSelected(false);
+					nameTexBoxPlayer2.SetIsSelected(false);
+					widthTextBox.SetIsSelected(false);
+				}
+
+				if (playButtonTeam.IsPressed())
+				{
+					window.close();
+					MultiplayerTeamLogic(nameTexBoxPlayer1.GetText(), nameTexBoxPlayer1.GetText(), std::stoi(widthTextBox.GetText()), std::stoi(heightTextBox.GetText()));
+				}
+
+				if (playButtonVersus.IsPressed())
+				{
+					window.close();
+					MultiplayerVersusLogic(nameTexBoxPlayer1.GetText(), nameTexBoxPlayer1.GetText(), std::stoi(widthTextBox.GetText()), std::stoi(heightTextBox.GetText()));
+				}
+
+				break;
+			case sf::Event::KeyPressed:
+				if (nameTexBoxPlayer1.GetIsSelected())
+					nameTexBoxPlayer1.UpdateText(event, false);
+
+				if (nameTexBoxPlayer2.GetIsSelected())
+					nameTexBoxPlayer2.UpdateText(event, false);
+
+				if (widthTextBox.GetIsSelected())
+					widthTextBox.UpdateText(event, true);
+
+				if (heightTextBox.GetIsSelected())
+					heightTextBox.UpdateText(event, true);
+
+				break;
+			}
+
+		playButtonTeam.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		playButtonVersus.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		nameTexBoxPlayer1.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		nameTexBoxPlayer2.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		widthTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		heightTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+
+		window.clear();
+
+		window.draw(nameTextPlayer1);
+		nameTexBoxPlayer1.Render(window);
+
+		window.draw(nameTextPlayer2);
+		nameTexBoxPlayer2.Render(window);
+
+
+		window.draw(widthText);
+		widthTextBox.Render(window);
+
+
+		window.draw(heightText);
+		heightTextBox.Render(window);
+
+		playButtonTeam.Render(window);
+
+		playButtonVersus.Render(window);
+
+
+		window.display();
+	}
+
+
+}
+
 void Game::ShowMenu()
 {
 
@@ -185,15 +353,11 @@ void Game::ShowMenu()
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 
-	SfmlButton buttonMultiPlayerTeam(window.getSize().x / 2 - 150,
+	SfmlButton buttonMultiPlayer(window.getSize().x / 2 - 150,
 		window.getSize().y / 3 + 150,
-		300, 50, font, "MultiPlayer Team",
+		300, 50, font, "MultiPlayer",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
-	SfmlButton buttonMultiplayerVersus(window.getSize().x / 2 - 150,
-		window.getSize().y / 3 + 300,
-		300, 50, font, "MultiPlayer Versus"
-		, sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 	while (window.isOpen())
 	{
@@ -206,42 +370,29 @@ void Game::ShowMenu()
 				break;
 			case sf::Event::MouseButtonPressed:
 				buttonSinglePlayer.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-				buttonMultiPlayerTeam.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-				buttonMultiplayerVersus.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				buttonMultiPlayer.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 
 				if (buttonSinglePlayer.IsPressed())
 				{
-					/*window.close();
-					m_gameOver = false;
-					SingleplayerLogic();*/
 					ShowSinglePlayerSettings(window, font);
 				}
 
-				if (buttonMultiPlayerTeam.IsPressed())
+				if (buttonMultiPlayer.IsPressed())
 				{
-					window.close();
-					m_gameOver = false;
-					MultiplayerTeamLogic();
+					ShowMultiPlayerSettings(window, font);
 				}
-				if (buttonMultiplayerVersus.IsPressed())
-				{
-					window.close();
-					m_gameOver = false;
-					MultiplayerVersusLogic();
-				}
+
 
 				break;
 			}
 
 		buttonSinglePlayer.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-		buttonMultiPlayerTeam.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-		buttonMultiplayerVersus.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		buttonMultiPlayer.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 
 		window.clear();
 		window.draw(sprite);
 		buttonSinglePlayer.Render(window);
-		buttonMultiPlayerTeam.Render(window);
-		buttonMultiplayerVersus.Render(window);
+		buttonMultiPlayer.Render(window);
 
 
 		window.draw(text);
@@ -395,7 +546,7 @@ void Game::CheckTopLine(const Board& board)
 }
 
 
-void Game::SingleplayerLogic(const std::string& playerName,const int& boardWidth, const int& boardHeight)
+void Game::SingleplayerLogic(const std::string& playerName, const int& boardWidth, const int& boardHeight)
 {
 	Board board(static_cast<uint16_t>(boardWidth), static_cast<uint16_t>(boardHeight), false);
 
@@ -406,7 +557,7 @@ void Game::SingleplayerLogic(const std::string& playerName,const int& boardWidth
 	auto startTime = std::chrono::high_resolution_clock::now();
 	std::unique_ptr<RandomSquare> randomSquare(new RandomSquare(board));
 	std::unique_ptr<TetrisPiece> currentPiece(new TetrisPiece(m_startPosition, m_types));
-	Player player1(playerName);  //For Testing purposes
+	Player player(playerName);  //For Testing purposes
 
 	m_hole.Spawn(board);
 
@@ -425,7 +576,7 @@ void Game::SingleplayerLogic(const std::string& playerName,const int& boardWidth
 					m_gameOver = true;
 					break;
 				}
-				player1.MovePiece(evnt, *currentPiece, board);
+				player.MovePiece(evnt, *currentPiece, board);
 				break;
 			}
 		window.clear(sf::Color::White);
@@ -433,7 +584,7 @@ void Game::SingleplayerLogic(const std::string& playerName,const int& boardWidth
 		if (currentPiece->IsSet())
 		{
 			m_hole.Disappear(board);
-			player1.AddScore(currentPiece->DeleteCompleteLines(board));
+			player.AddScore(currentPiece->DeleteCompleteLines(board));
 			CheckTopLine(board);
 			randomSquare.reset(new RandomSquare(board));
 			DisplayBoard(window, board);
@@ -445,7 +596,7 @@ void Game::SingleplayerLogic(const std::string& playerName,const int& boardWidth
 				Sleep(5);
 				window.display();
 			}
-			player1.AddScore(randomSquare->DeleteColmpleteLine(board));
+			player.AddScore(randomSquare->DeleteColmpleteLine(board));
 			currentPiece.reset(new TetrisPiece(m_startPosition, m_types));
 			m_hole.Spawn(board);
 		}
@@ -462,22 +613,22 @@ void Game::SingleplayerLogic(const std::string& playerName,const int& boardWidth
 	ShowMenu();
 }
 
-void Game::MultiplayerTeamLogic()
+void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::string& player2Name, const int& boardWidth, const int& boardHeight)
 {
 
-	Board board(m_boardWidth, m_boardHeight, 1);
+	Board board(boardWidth, boardHeight, 1);
 
 	sf::RenderWindow window(sf::VideoMode(board.GetWidth() * (sizeOfBlockLine + 1), board.GetHeight() * (sizeOfBlockLine + 1)), "Tetris++",
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 
-	Board::Position m_startPositionPlayer1 = { -2, m_boardWidth / 2 - 2 };
+	Board::Position m_startPositionPlayer1 = { -2, boardWidth / 2 - 2 };
 	Board::Position m_startPositionPlayer2 = { -2, board.GetWidth() / 4 * 3 };
 	auto startTime = std::chrono::high_resolution_clock::now();
 	std::unique_ptr<TetrisPiece> playerOnePiece(new TetrisPiece(m_startPositionPlayer1, m_types));
 	std::unique_ptr<TetrisPiece> playerTwoPiece(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 
-	Player player1("Player1");
-	Player player2("Player2", true);
+	Player player1(player1Name);
+	Player player2(player2Name, true);
 
 	m_hole.Spawn(board);
 	while (window.isOpen() && !m_gameOver)
@@ -534,22 +685,22 @@ void Game::MultiplayerTeamLogic()
 	ShowMenu();
 }
 
-void Game::MultiplayerVersusLogic()
+void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::string& player2Name, const int& boardWidth, const int& boardHeight)
 {
 
-	Board board(m_boardWidth, m_boardHeight, 1);
+	Board board(boardWidth, boardHeight, 1);
 
 	sf::RenderWindow window(sf::VideoMode(board.GetWidth() * (sizeOfBlockLine + 1), board.GetHeight() * (sizeOfBlockLine + 1)), "Tetris++",
 		sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 
-	Board::Position m_startPositionPlayer1 = { -2, m_boardWidth / 2 - 2 };
+	Board::Position m_startPositionPlayer1 = { -2, boardWidth / 2 - 2 };
 	Board::Position m_startPositionPlayer2 = { -2, board.GetWidth() / 4 * 3 };
 	auto startTime = std::chrono::high_resolution_clock::now();
 	std::unique_ptr<TetrisPiece> playerOnePiece(new TetrisPiece(m_startPositionPlayer1, m_types));
 	std::unique_ptr<TetrisPiece> playerTwoPiece(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 
-	Player player1("Player1");
-	Player player2("Player2", true);
+	Player player1(player1Name);
+	Player player2(player2Name, true);
 
 
 	m_hole.Spawn(board);
