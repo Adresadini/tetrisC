@@ -21,6 +21,8 @@ public:
 	void ShowMenu();
 	void ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& font);
 	void ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& font);
+	void ShowGameOver(const Player& player1);
+	void ShowGameOverMulTiplayerVersus(const Player& player1, const Player& player2, const bool& isPlayerTwo);
 public:
 	const float sizeOfBlockLine = 35.f; // Era 35
 
@@ -34,6 +36,6 @@ private:
 
 	sf::Sound m_sound;
 private:
-	void CheckTopLine(const Board& board,const bool& isPlayer1, sf::RenderWindow& gameWindow);
+	void CheckTopLine(const Board& board,const bool& isPlayer1);
 };
 

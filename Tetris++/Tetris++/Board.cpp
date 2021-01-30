@@ -118,9 +118,9 @@ uint8_t Board::VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, cons
 			}
 			numberOfSameElements = 0;
 		}
-		if (numberOfSameElements >= m_width / 2)
+		if (numberOfSameElements >= m_width / 2 && line == m_height - 1)
 		{
-			DeletePlayerColumn(line + 1, column, numberOfSameElements);
+			DeletePlayerColumn(line, column, numberOfSameElements);
 			return numberOfSameElements;
 		}
 	}
