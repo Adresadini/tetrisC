@@ -3,39 +3,39 @@
 void Scores::ReadPlayers(const std::string& fileName)
 {
 	std::ifstream file(fileName);
-	
+
 	while (!file.eof())
 	{
-		Player player("Player1",false);
+		Player player("", false);
 		file >> player;
-		m_set.insert(player);
+		m_scores.push_back(player);
 	}
 }
 
 void Scores::PrintPlayers(const std::string& fileName)
 {
 	std::ofstream file;
-	file.open("Scores.txt", std::ios_base::app);
-	std::set<Player, std::greater<Player>>::iterator index;
-	for (index = m_set.begin(); index != m_set.end(); index++)
+	file.open("Scores.txt", std::ofstream::out | std::ofstream::trunc);
+	for (auto& player : m_scores)
 	{
-		file << *index;
+		file << player;
 		file << std::endl;
 	}
 }
 
 void Scores::GetPlayer(Player& newPlayer)
 {
-	std::set<Player>::iterator player;
-	player = m_set.find(newPlayer);
-	if (player == m_set.end())
-		m_set.insert(newPlayer);
+	auto player = std::find(m_scores.begin(), m_scores.end(), newPlayer);
+	if (player == m_scores.end())
+		m_scores.push_back(newPlayer);
 	else
-		newPlayer = *player;
+		newPlayer.SetInfo(player->GetHighScore(),player->GetAverageScore(),player->GetScoreCount());
 }
 
 void Scores::UpdatePlayer(const Player& player)
 {
-	m_set.erase(m_set.find(player));
-	m_set.insert(player);
+	auto foundPlayer = std::find(m_scores.begin(), m_scores.end(), player);
+	m_scores.erase(foundPlayer);
+	m_scores.push_back(player);
+	std::sort(m_scores.begin(), m_scores.end());
 }

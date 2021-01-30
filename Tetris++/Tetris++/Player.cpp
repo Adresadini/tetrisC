@@ -34,7 +34,7 @@ uint16_t Player::GetScore() const
 	return m_score;
 }
 
-uint8_t Player::GetScoreCount() const
+uint16_t Player::GetScoreCount() const
 {
 	return m_scoreCount;
 }
@@ -49,9 +49,11 @@ std::string Player::GetName() const
 	return m_name;
 }
 
-void Player::SetName(const std::string& name)
+void Player::SetInfo(const uint16_t& highScore, const uint16_t& averageScore, const uint16_t& scoreCount)
 {
-	m_name = name;
+	m_highScore = highScore;
+	m_averageScore = averageScore;
+	m_scoreCount = scoreCount;
 }
 
 void Player::InitKeyBindings(bool isPlayerTwo)
@@ -107,7 +109,7 @@ bool Player::operator==(Player player)
 	return (this->GetName() == player.GetName());
 }
 
-bool Player::operator>(const Player& player) const
+bool Player::operator<(const Player& player) const
 {
 	return player.GetHighScore() > this->GetHighScore();
 }

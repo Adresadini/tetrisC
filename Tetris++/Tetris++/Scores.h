@@ -2,9 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <set>
-#include <algorithm>
-
+#include <vector>
 #include "Player.h"
 
 class Scores
@@ -21,5 +19,5 @@ public:
 
 private:
 	
-	std::set<Player, std::greater<Player>> m_set;
+	std::vector<Player> m_scores;
 };

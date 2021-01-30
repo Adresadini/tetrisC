@@ -21,7 +21,7 @@ namespace TetrisTests
 		TEST_METHOD(PlayerSetName)
 		{
 			Player player;
-			player.SetName("Player");
+			player.SetInfo("Player");
 			Assert::IsTrue(player.GetName() == "Player");
 		}
 

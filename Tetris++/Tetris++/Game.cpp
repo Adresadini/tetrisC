@@ -620,6 +620,9 @@ void Game::SingleplayerLogic(const std::string& playerName, const int& boardWidt
 			if (m_gameOver)
 			{
 				window.close();
+				player.ModifyScoreInfo();
+				m_scores.UpdatePlayer(player);
+				m_scores.PrintPlayers("scores.txt");
 				ShowGameOver(player);
 				return;
 			}
@@ -700,6 +703,11 @@ void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::strin
 			if (m_gameOver)
 			{
 				window.close();
+				player1.ModifyScoreInfo();
+				m_scores.UpdatePlayer(player1);
+				player2.ModifyScoreInfo();
+				m_scores.UpdatePlayer(player2);
+				m_scores.PrintPlayers("scores.txt");
 				ShowGameOver(player1);
 				return;
 			}
@@ -713,7 +721,11 @@ void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::strin
 			if (m_gameOver)
 			{
 				window.close();
-				ShowGameOver(player1);
+				player1.ModifyScoreInfo();
+				m_scores.UpdatePlayer(player1);
+				player2.ModifyScoreInfo();
+				m_scores.UpdatePlayer(player2);
+				m_scores.PrintPlayers("scores.txt");
 				return;
 			}
 			playerTwoPiece.reset(new TetrisPiece(m_startPositionPlayer2, m_types, true));
@@ -783,6 +795,11 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 			if (!m_gameOver) //vezi
 			{
 				window.close();
+				player1.ModifyScoreInfo();
+				m_scores.UpdatePlayer(player1);
+				player2.ModifyScoreInfo();
+				m_scores.UpdatePlayer(player2);
+				m_scores.PrintPlayers("scores.txt");
 				ShowGameOverMulTiplayerVersus(player1, player2, false);
 				return;
 			}
@@ -797,6 +814,11 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 			if (!m_gameOver)  // vezi
 			{ 
 				window.close();
+				player1.ModifyScoreInfo();
+				m_scores.UpdatePlayer(player1);
+				player2.ModifyScoreInfo();
+				m_scores.UpdatePlayer(player2);
+				m_scores.PrintPlayers("scores.txt");
 				ShowGameOverMulTiplayerVersus(player1, player2, true);
 				return;
 			}
