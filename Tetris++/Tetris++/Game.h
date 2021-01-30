@@ -23,6 +23,7 @@ public:
 	void ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& font);
 	void ShowGameOver(const Player& player1);
 	void ShowGameOverMulTiplayerVersus(const Player& player1, const Player& player2, const bool& isPlayerTwo);
+	void ShowTopScores();
 public:
 	const float sizeOfBlockLine = 35.f; // Era 35
 

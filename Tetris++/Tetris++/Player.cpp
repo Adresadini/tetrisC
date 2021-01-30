@@ -112,7 +112,7 @@ bool Player::operator==(Player player)
 
 bool Player::operator<(const Player& player) const
 {
-	return player.GetHighScore() > this->GetHighScore();
+	return player.GetHighScore() < this->GetHighScore();
 }
 
 std::ostream& operator<<(std::ostream& out, const Player& player)

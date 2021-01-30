@@ -40,3 +40,8 @@ void Scores::UpdatePlayer(const Player& player)
 	m_scores.push_back(player);
 	std::sort(m_scores.begin(), m_scores.end());
 }
+
+std::vector<Player> Scores::GetScores()
+{
+	return m_scores;
+}

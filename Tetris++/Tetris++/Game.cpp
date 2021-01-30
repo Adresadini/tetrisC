@@ -3,6 +3,7 @@
 #include "TextBox.h"
 #include "SFML/Audio.hpp"
 #include <chrono>
+#include<vector>
 
 Game::Game(std::string filename)
 	: m_types(filename)
@@ -792,7 +793,7 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 			m_hole.Disappear(board);
 			player1.AddScore(playerOnePiece->DeleteCompleteLinesAndColumns(board, false));
 			CheckTopLine(board, true);
-			if (!m_gameOver) //vezi
+			if (m_gameOver)
 			{
 				window.close();
 				player1.ModifyScoreInfo();
@@ -811,8 +812,8 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 			m_hole.Disappear(board);
 			player2.AddScore(playerTwoPiece->DeleteCompleteLinesAndColumns(board, true));
 			CheckTopLine(board, false);
-			if (!m_gameOver)  // vezi
-			{ 
+			if (m_gameOver)
+			{
 				window.close();
 				player1.ModifyScoreInfo();
 				m_scores.UpdatePlayer(player1);
@@ -837,6 +838,20 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 	m_level = 0;
 	m_sound.pause();
 	ShowMenu();
+}
+
+void Game::CheckTopLine(const Board& board, const bool& isPlayer1)
+{
+	for (int8_t column = 0; column < board.GetWidth(); column++)
+		if (board[{0, column}])
+			if (board[{0, column}].value() < 20 && isPlayer1)
+			{
+				m_gameOver = true;
+			}
+			else if (board[{0, column}].value() > 20 && !isPlayer1)
+			{
+				m_gameOver = true;
+			}
 }
 
 
@@ -885,11 +900,11 @@ void Game::ShowGameOver(const Player& player1)
 					window.close();
 					ShowMenu();
 				}
-				
+
 				if (buttonTop.IsPressed())
 				{
 					window.close();
-					//
+					ShowTopScores();
 				}
 				break;
 			}
@@ -908,7 +923,6 @@ void Game::ShowGameOver(const Player& player1)
 		window.display();
 	}
 }
-
 
 void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& player2, const bool& isPlayerTwo)
 {
@@ -942,8 +956,8 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 		window.getSize().y - 70,
 		100, 40, font, "menu",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
-	
-	SfmlButton buttonTop(window.getSize().x-120,
+
+	SfmlButton buttonTop(window.getSize().x - 120,
 		window.getSize().y - 70,
 		100, 40, font, "Top",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
@@ -967,11 +981,11 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 					window.close();
 					ShowMenu();
 				}
-				
+
 				if (buttonTop.IsPressed())
 				{
 					window.close();
-					// -> new window with top scores
+					ShowTopScores();
 				}
 				break;
 			}
@@ -995,16 +1009,93 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 	}
 }
 
-void Game::CheckTopLine(const Board& board, const bool& isPlayer1)
+std::pair<sf::Text, sf::Text> TurnPlayerIntoText(const Player& player)
 {
-	for (int8_t column = 0; column < board.GetWidth(); column++)
-		if (board[{0, column}])
-			if (board[{0, column}].value() < 20 && isPlayer1)
+	sf::Text name;
+	sf::Text score;
+
+	name.setString(player.GetName());
+	score.setString(std::to_string(player.GetScore()));
+
+	return std::make_pair(name, score);
+}
+
+void Game::ShowTopScores()
+{
+	sf::RenderWindow window(sf::VideoMode(600, 600), "Game Over", sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
+	sf::Font font;
+
+	if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
+		Sleep(10);
+
+	sf::Text top5Text;
+	configureText(top5Text, font);
+	top5Text.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
+	top5Text.setString("Top 5 Scores:");
+
+	sf::Text nameText;
+	configureText(nameText, font);
+	nameText.setPosition(sf::Vector2f(50, 150));
+	nameText.setString("name");
+
+	sf::Text scoreText;
+	configureText(scoreText, font);
+	scoreText.setPosition(sf::Vector2f(400, 150));
+	scoreText.setString("score");
+
+	SfmlButton buttonMenu(20,
+		window.getSize().y - 70,
+		100, 40, font, "menu",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+	std::vector<std::pair< sf::Text, sf::Text>> playerText;
+
+	for (uint8_t index = 0; index < 5 && index < m_scores.GetScores().size(); index++)
+	{
+		playerText.push_back(TurnPlayerIntoText(m_scores.GetScores()[index]));
+		configureText(playerText[index].first, font);
+		configureText(playerText[index].second, font);
+
+		playerText[index].first.setPosition(sf::Vector2f(nameText.getPosition().x, nameText.getPosition().y + (index + 1) * 50));
+		playerText[index].second.setPosition(sf::Vector2f(scoreText.getPosition().x, scoreText.getPosition().y + (index + 1) * 50));
+	}
+
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+			switch (event.type)
 			{
-				m_gameOver = true;
+			case sf::Event::Closed:
+				window.close();
+				break;
+			case sf::Event::MouseButtonPressed:
+				buttonMenu.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				if (buttonMenu.IsPressed())
+				{
+					window.close();
+					ShowMenu();
+				}
+				break;
 			}
-			else if (board[{0, column}].value() > 20 && !isPlayer1)
-			{
-				m_gameOver = true;
-			}
+
+		buttonMenu.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+
+		window.clear();
+
+		window.draw(top5Text);
+		window.draw(nameText);
+		window.draw(scoreText);
+
+		for (uint8_t index = 0; index < 5 && index < m_scores.GetScores().size(); index++)
+		{
+			window.draw(playerText[index].first);
+			window.draw(playerText[index].second);
+		}
+
+		buttonMenu.Render(window);
+
+		window.display();
+	}
 }

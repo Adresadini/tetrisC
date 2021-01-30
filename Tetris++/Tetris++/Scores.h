@@ -16,7 +16,7 @@ public:
 
 	void GetPlayer(Player&);
 	void UpdatePlayer(const Player&);
-
+	std::vector<Player> GetScores();
 private:
 	
 	std::vector<Player> m_scores;
