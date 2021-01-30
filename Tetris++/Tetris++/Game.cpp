@@ -621,6 +621,7 @@ void Game::SingleplayerLogic(const std::string& playerName, const int& boardWidt
 			{
 				window.close();
 				ShowGameOver(player);
+				return;
 			}
 			randomSquare.reset(new RandomSquare(board));
 			DisplayBoard(window, board);
@@ -700,6 +701,7 @@ void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::strin
 			{
 				window.close();
 				ShowGameOver(player1);
+				return;
 			}
 			playerOnePiece.reset(new TetrisPiece(m_startPositionPlayer1, m_types));
 			m_hole.Spawn(board);
@@ -712,6 +714,7 @@ void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::strin
 			{
 				window.close();
 				ShowGameOver(player1);
+				return;
 			}
 			playerTwoPiece.reset(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 		}
@@ -781,6 +784,7 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 			{
 				window.close();
 				ShowGameOverMulTiplayerVersus(player1, player2, false);
+				return;
 			}
 			playerOnePiece.reset(new TetrisPiece(m_startPositionPlayer1, m_types));
 			m_hole.Spawn(board);
@@ -794,6 +798,7 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 			{ 
 				window.close();
 				ShowGameOverMulTiplayerVersus(player1, player2, true);
+				return;
 			}
 			playerTwoPiece.reset(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 			m_hole.Spawn(board);
@@ -836,7 +841,10 @@ void Game::ShowGameOver(const Player& player1)
 		100, 40, font, "menu",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
-
+	SfmlButton buttonTop(window.getSize().x - 120,
+		window.getSize().y - 70,
+		100, 40, font, "Top",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 	while (window.isOpen())
 	{
@@ -849,19 +857,32 @@ void Game::ShowGameOver(const Player& player1)
 				break;
 			case sf::Event::MouseButtonPressed:
 				buttonGameOver.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+				buttonTop.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 				if (buttonGameOver.IsPressed())
 				{
 					window.close();
 					ShowMenu();
 				}
+				
+				if (buttonTop.IsPressed())
+				{
+					window.close();
+					//
+				}
 				break;
 			}
 
 		buttonGameOver.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+		buttonTop.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+
 		window.clear();
+
 		window.draw(gameOverText);
 		window.draw(scoreText);
+
 		buttonGameOver.Render(window);
+		buttonTop.Render(window);
+
 		window.display();
 	}
 }
@@ -900,7 +921,7 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 		100, 40, font, "menu",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 	
-	SfmlButton buttonTop(window.getSize().x-20,
+	SfmlButton buttonTop(window.getSize().x-120,
 		window.getSize().y - 70,
 		100, 40, font, "Top",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
