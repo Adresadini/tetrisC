@@ -13,10 +13,11 @@ public:
 	
 	Scores()=default;
 	
-	void ReadPlayers(const std::string& fileName, Player);
+	void ReadPlayers(const std::string& fileName);
 	void PrintPlayers(const std::string &fileName);
 
-	bool IsNewPlayer(const Player& player);
+	void GetPlayer(Player&);
+	void UpdatePlayer(const Player&);
 
 private:
 	

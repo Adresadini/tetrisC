@@ -4,9 +4,6 @@
 Player::Player(const std::string& name, const bool isPlayerTwo)
 	:m_name(name)
 {
-	m_highScore = 0;
-	m_averageScore = 0;
-	m_scoreCount = 0;
 	InitKeyBindings(isPlayerTwo);
 }
 

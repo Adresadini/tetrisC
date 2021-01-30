@@ -3,10 +3,12 @@
 #include "TextBox.h"
 #include "SFML/Audio.hpp"
 #include <chrono>
+#include "Scores.cpp"
 
 Game::Game(std::string filename)
 	: m_types(filename)
 {
+	m_scores.ReadPlayers("scores.txt");
 }
 
 void configureText(sf::Text& text, const sf::Font& font)
@@ -560,10 +562,6 @@ void Game::DisplayBoard(sf::RenderWindow& window, const Board& board) const
 		}
 	}
 	window.display();
-
-
-	//add a window to display the current piece
-	//add a window to display the score
 }
 
 void Game::CheckTopLine(const Board& board, const bool& isPlayer1, sf::RenderWindow& gameWindow)
@@ -641,7 +639,8 @@ void Game::SingleplayerLogic(const std::string& playerName, const int& boardWidt
 	auto startTime = std::chrono::high_resolution_clock::now();
 	std::unique_ptr<RandomSquare> randomSquare(new RandomSquare(board));
 	std::unique_ptr<TetrisPiece> currentPiece(new TetrisPiece(m_startPosition, m_types));
-	Player player(playerName);  //For Testing purposes
+	Player player(playerName);
+	m_scores.GetPlayer(player);
 
 	m_hole.Spawn(board);
 
@@ -713,6 +712,7 @@ void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::strin
 
 	Player player1(player1Name + "+" + player2Name);
 	Player player2(player2Name, true);
+	m_scores.GetPlayer(player1);
 
 	m_hole.Spawn(board);
 	while (window.isOpen() && !m_gameOver)
@@ -782,8 +782,8 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 
 	Player player1(player1Name);
 	Player player2(player2Name, true);
-
-
+	m_scores.GetPlayer(player1);
+	m_scores.GetPlayer(player2);
 	m_hole.Spawn(board);
 	while (window.isOpen() && !m_gameOver)
 	{

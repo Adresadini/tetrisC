@@ -1,10 +1,11 @@
 #include "Scores.h"
 
-void Scores::ReadPlayers(const std::string& fileName, Player player)
+void Scores::ReadPlayers(const std::string& fileName)
 {
 	std::ifstream file(fileName);
 	while (!file.eof())
 	{
+		Player player;
 		file >> player;
 		m_set.insert(player);
 	}
@@ -22,12 +23,18 @@ void Scores::PrintPlayers(const std::string& fileName)
 	}
 }
 
-bool Scores::IsNewPlayer(const Player& newPlayer)
+void Scores::GetPlayer(Player& newPlayer)
 {
-	if (m_set.find(newPlayer.GetName()) == m_set.end())
-	{
+	std::set<Player>::iterator player;
+	player = m_set.find(newPlayer);
+	if (player == m_set.end())
 		m_set.insert(newPlayer);
-		return true;
-	}
-	return false;
+	else
+		newPlayer = *player;
+}
+
+void Scores::UpdatePlayer(const Player& player)
+{
+	m_set.erase(m_set.find(player));
+	m_set.insert(player);
 }
