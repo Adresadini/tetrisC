@@ -1015,14 +1015,14 @@ std::pair<sf::Text, sf::Text> TurnPlayerIntoText(const Player& player)
 	sf::Text score;
 
 	name.setString(player.GetName());
-	score.setString(std::to_string(player.GetScore()));
+	score.setString(std::to_string(player.GetHighScore()));
 
 	return std::make_pair(name, score);
 }
 
 void Game::ShowTopScores()
 {
-	sf::RenderWindow window(sf::VideoMode(600, 600), "Game Over", sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
+	sf::RenderWindow window(sf::VideoMode(800, 800), "Game Over", sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 	sf::Font font;
 
 	if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
@@ -1040,7 +1040,7 @@ void Game::ShowTopScores()
 
 	sf::Text scoreText;
 	configureText(scoreText, font);
-	scoreText.setPosition(sf::Vector2f(400, 150));
+	scoreText.setPosition(sf::Vector2f(600, 150));
 	scoreText.setString("score");
 
 	SfmlButton buttonMenu(20,
