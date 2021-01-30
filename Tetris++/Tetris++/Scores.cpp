@@ -3,9 +3,10 @@
 void Scores::ReadPlayers(const std::string& fileName)
 {
 	std::ifstream file(fileName);
+	
 	while (!file.eof())
 	{
-		Player player;
+		Player player("Player1",false);
 		file >> player;
 		m_set.insert(player);
 	}

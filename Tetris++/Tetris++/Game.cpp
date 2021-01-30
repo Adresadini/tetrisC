@@ -3,12 +3,11 @@
 #include "TextBox.h"
 #include "SFML/Audio.hpp"
 #include <chrono>
-#include "Scores.cpp"
 
 Game::Game(std::string filename)
 	: m_types(filename)
 {
-	m_scores.ReadPlayers("scores.txt");
+	//m_scores.ReadPlayers("scores.txt");
 }
 
 void configureText(sf::Text& text, const sf::Font& font)
@@ -709,7 +708,7 @@ void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::strin
 	auto startTime = std::chrono::high_resolution_clock::now();
 	std::unique_ptr<TetrisPiece> playerOnePiece(new TetrisPiece(m_startPositionPlayer1, m_types));
 	std::unique_ptr<TetrisPiece> playerTwoPiece(new TetrisPiece(m_startPositionPlayer2, m_types, true));
-
+	
 	Player player1(player1Name + "+" + player2Name);
 	Player player2(player2Name, true);
 	m_scores.GetPlayer(player1);

@@ -31,7 +31,6 @@ private:
 	Scores m_scores;
 	uint16_t m_level = 0;
 	Board::Position m_startPositionPlayer2;
-	Scores m_scores;
 
 	sf::Sound m_sound;
 private:
