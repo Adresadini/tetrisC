@@ -43,12 +43,12 @@ bool DataValidation(sf::Text& errorMessage, const std::string& name1, const std:
 	}
 	if (width.size() > 4)
 	{
-		errorMessage.setString("Width to Big!");
+		errorMessage.setString("Width too Big!");
 		return false;
 	}
 	if (height.size() > 4)
 	{
-		errorMessage.setString("Height to Big!");
+		errorMessage.setString("Height too Big!");
 		return false;
 	}
 	if (std::stoi(width) <= 4)
@@ -58,12 +58,12 @@ bool DataValidation(sf::Text& errorMessage, const std::string& name1, const std:
 	}
 	if (std::stoi(width) > 9)
 	{
-		errorMessage.setString("Width to Big!");
+		errorMessage.setString("Width too Big!");
 		return false;
 	}
 	if (std::stoi(height) > 27)
 	{
-		errorMessage.setString("Height to Big!");
+		errorMessage.setString("Height too Big!");
 		return false;
 	}
 	if (std::stoi(height) < std::stoi(width) * 3)
@@ -95,6 +95,12 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 		300, 50, font, "Player",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
+	sf::Texture texture;
+	texture.loadFromFile("images/background2.png");
+	sf::Sprite sprite;
+	sf::Vector2u size = texture.getSize();
+	sprite.setTexture(texture);
+	sprite.setOrigin(size.x / 100 - 8, size.y / 100 - 9);
 
 	sf::Text widthText;
 	ConfigureText(widthText, font);
@@ -198,6 +204,8 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 		window.clear();
 
+		window.draw(sprite);
+
 		window.draw(nameText);
 		nameTexBox.Render(window);
 
@@ -241,6 +249,12 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 		300, 50, font, "Player2",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
+	sf::Texture texture;
+	texture.loadFromFile("images/background2.png");
+	sf::Sprite sprite;
+	sf::Vector2u size = texture.getSize();
+	sprite.setTexture(texture);
+	sprite.setOrigin(size.x / 100 - 8, size.y / 100 - 9);
 
 	sf::Text widthText;
 	ConfigureText(widthText, font);
@@ -376,6 +390,8 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 		heightTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 
 		window.clear();
+
+		window.draw(sprite);
 
 		window.draw(nameTextPlayer1);
 		nameTexBoxPlayer1.Render(window);
@@ -854,6 +870,13 @@ void Game::ShowGameOver(const Player& player1)
 	if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
 		Sleep(10);
 
+	sf::Texture texture;
+	texture.loadFromFile("images/gameOver1.jpg");
+	sf::Sprite sprite;
+	sf::Vector2u size = texture.getSize();
+	sprite.setTexture(texture);
+	sprite.setOrigin(size.x / 50 - 8, size.y / 55 - 9);
+
 	sf::Text gameOverText;
 	ConfigureText(gameOverText, font);
 	gameOverText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
@@ -905,6 +928,8 @@ void Game::ShowGameOver(const Player& player1)
 
 		window.clear();
 
+		window.draw(sprite);
+
 		window.draw(gameOverText);
 		window.draw(scoreText);
 
@@ -922,6 +947,13 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 
 	if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
 		Sleep(10);
+
+	sf::Texture texture;
+	texture.loadFromFile("images/gameOver1.jpg");
+	sf::Sprite sprite;
+	sf::Vector2u size = texture.getSize();
+	sprite.setTexture(texture);
+	sprite.setOrigin(size.x / 75 - 8, size.y / 75 - 9);
 
 	sf::Text winnerText;
 	ConfigureText(winnerText, font);
@@ -987,6 +1019,8 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 
 		window.clear();
 
+		window.draw(sprite);
+
 		window.draw(winnerText);
 
 		window.draw(scorePlayer1Text);
@@ -1028,6 +1062,13 @@ void Game::ShowTopScores()
 	ConfigureText(nameText, font);
 	nameText.setPosition(sf::Vector2f(50, 150));
 	nameText.setString("name");
+
+	sf::Texture texture;
+	texture.loadFromFile("images/background2.png");
+	sf::Sprite sprite;
+	sf::Vector2u size = texture.getSize();
+	sprite.setTexture(texture);
+	sprite.setOrigin(size.x / 100 - 8, size.y / 100 - 9);
 
 	sf::Text scoreText;
 	ConfigureText(scoreText, font);
@@ -1074,6 +1115,8 @@ void Game::ShowTopScores()
 		buttonMenu.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 
 		window.clear();
+
+		window.draw(sprite);
 
 		window.draw(top5Text);
 		window.draw(nameText);
