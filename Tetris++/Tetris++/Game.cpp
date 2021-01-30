@@ -19,7 +19,52 @@ void configureText(sf::Text& text, const sf::Font& font)
 }
 
 
-
+bool dataValidation(sf::Text& errorMessage, const std::string& name1, const std::string& name2,
+	const std::string& width, const std::string& height, const bool& multiplayer)
+{
+	if (name1.size() < 4)
+	{
+		errorMessage.setString("Player name too small!");
+		return false;
+	}
+	if (name2.size() < 4 && multiplayer)
+	{
+		errorMessage.setString("Player2 name too small!");
+		return false;
+	}
+	if (width.empty())
+	{
+		errorMessage.setString("Width  Text Box is Empty!");
+		return false;
+	}
+	if (height.empty())
+	{
+		errorMessage.setString("Height  Text Box is Empty!");
+		return false;
+	}
+	if (std::stoi(width) <= 4)
+	{
+		errorMessage.setString("Width too small!");
+		return false;
+	}
+	if (std::stoi(width) > 9)
+	{
+		errorMessage.setString("Width to Big!");
+		return false;
+	}
+	if (std::stoi(height) > 27)
+	{
+		errorMessage.setString("Height to Big!");
+		return false;
+	}
+	if (std::stoi(height) < std::stoi(width) * 3)
+	{
+		errorMessage.setString("Height Must be bigger than Width * 3!\n We suggest you to put " +
+			std::to_string(std::stoi(width) * 3));
+		return false;
+	}
+	return true;
+}
 
 void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& font)
 {
@@ -63,6 +108,15 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 		, 300, 50, font, "Play",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
+
+
+	sf::Font errorFont;
+	if (!errorFont.loadFromFile("images/Font.ttf"))
+		Sleep(10);
+	sf::Text errorText("", errorFont, 35);
+	errorText.setFillColor(sf::Color::Red);
+	errorText.setPosition(sf::Vector2f(20, window.getSize().y - 100));
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -98,8 +152,12 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 				if (playButton.IsPressed())
 				{
-					window.close();
-					SingleplayerLogic(nameTexBox.GetText(), std::stoi(widthTextBox.GetText()), std::stoi(heightTextBox.GetText()));
+					if (dataValidation(errorText, nameTexBox.GetText(), "",
+						widthTextBox.GetText(), heightTextBox.GetText(), false))
+					{
+						window.close();
+						SingleplayerLogic(nameTexBox.GetText(), std::stoi(widthTextBox.GetText()), std::stoi(heightTextBox.GetText()));
+					}
 				}
 
 				break;
@@ -136,6 +194,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 		playButton.Render(window);
 
+		window.draw(errorText);
 
 		window.display();
 	}
@@ -202,6 +261,12 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 
+	sf::Font errorFont;
+	if (!errorFont.loadFromFile("images/Font.ttf"))
+		Sleep(10);
+	sf::Text errorText("", errorFont, 35);
+	errorText.setFillColor(sf::Color::Red);
+	errorText.setPosition(sf::Vector2f(20, window.getSize().y - 100));
 
 	while (window.isOpen())
 	{
@@ -250,14 +315,24 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 
 				if (playButtonTeam.IsPressed())
 				{
-					window.close();
-					MultiplayerTeamLogic(nameTexBoxPlayer1.GetText(), nameTexBoxPlayer1.GetText(), std::stoi(widthTextBox.GetText()), std::stoi(heightTextBox.GetText()));
+					if (dataValidation(errorText, nameTexBoxPlayer1.GetText(), nameTexBoxPlayer2.GetText(),
+						widthTextBox.GetText(), heightTextBox.GetText(), true))
+					{
+						window.close();
+						MultiplayerTeamLogic(nameTexBoxPlayer1.GetText(), nameTexBoxPlayer1.GetText(),
+							std::stoi(widthTextBox.GetText()), std::stoi(heightTextBox.GetText()));
+					}
 				}
 
 				if (playButtonVersus.IsPressed())
 				{
-					window.close();
-					MultiplayerVersusLogic(nameTexBoxPlayer1.GetText(), nameTexBoxPlayer1.GetText(), std::stoi(widthTextBox.GetText()), std::stoi(heightTextBox.GetText()));
+					if (dataValidation(errorText, nameTexBoxPlayer1.GetText(), nameTexBoxPlayer2.GetText(),
+						widthTextBox.GetText(), heightTextBox.GetText(), true))
+					{
+						window.close();
+						MultiplayerVersusLogic(nameTexBoxPlayer1.GetText(), nameTexBoxPlayer1.GetText(),
+							std::stoi(widthTextBox.GetText()), std::stoi(heightTextBox.GetText()));
+					}
 				}
 
 				break;
@@ -304,6 +379,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 
 		playButtonVersus.Render(window);
 
+		window.draw(errorText);
 
 		window.display();
 	}

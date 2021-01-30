@@ -22,7 +22,7 @@ public:
 	void ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& font);
 	void ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& font);
 public:
-	const float sizeOfBlockLine = 35.f;
+	const float sizeOfBlockLine = 35.f; // Era 35
 
 private:
 	PieceTypes m_types;
