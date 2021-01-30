@@ -8,6 +8,7 @@ void Scores::ReadPlayers(const std::string& fileName)
 	{
 		Player player("", false);
 		file >> player;
+		if(player.GetName()!="")
 		m_scores.push_back(player);
 	}
 }

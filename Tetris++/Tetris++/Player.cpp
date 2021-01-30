@@ -14,7 +14,8 @@ std::string Player::PlayerToString() const
 
 void Player::ModifyScoreInfo()
 {
-	m_averageScore = (m_averageScore * (m_scoreCount)+m_score) / (++m_scoreCount);
+	m_scoreCount++;
+	m_averageScore = (m_averageScore * (m_scoreCount-1)+m_score) / (m_scoreCount);
 	if (m_score > m_highScore)
 		m_highScore = m_score;
 }

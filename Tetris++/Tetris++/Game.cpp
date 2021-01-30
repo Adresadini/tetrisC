@@ -7,7 +7,7 @@
 Game::Game(std::string filename)
 	: m_types(filename)
 {
-	//m_scores.ReadPlayers("scores.txt");
+	m_scores.ReadPlayers("scores.txt");
 }
 
 void configureText(sf::Text& text, const sf::Font& font)
