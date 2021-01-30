@@ -18,9 +18,9 @@ PieceTypes::PieceTypes(const std::string& filename)
 		in >> scale;
 		if (scale == "Line")
 			m_scaleType.push_back(scaleType::Line);
-		else if(scale=="Normal")
+		else if (scale == "Normal")
 			m_scaleType.push_back(scaleType::Normal);
-		else if(scale=="Special")
+		else if (scale == "Special")
 			m_scaleType.push_back(scaleType::Special);
 	}
 }

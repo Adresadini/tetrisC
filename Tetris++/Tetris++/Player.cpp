@@ -15,7 +15,7 @@ std::string Player::PlayerToString() const
 void Player::ModifyScoreInfo()
 {
 	m_scoreCount++;
-	m_averageScore = (m_averageScore * (m_scoreCount-1)+m_score) / (m_scoreCount);
+	m_averageScore = (m_averageScore * (m_scoreCount - 1) + m_score) / (m_scoreCount);
 	if (m_score > m_highScore)
 		m_highScore = m_score;
 }
@@ -59,7 +59,7 @@ void Player::SetInfo(const uint16_t& highScore, const uint16_t& averageScore, co
 
 void Player::InitKeyBindings(bool isPlayerTwo)
 {
-	//Initializing player keybinds in the following order: left, right, down, rotate left, rotate right, scale,Drop down
+	//Initializing player keybinds in the following order: Left, Right, Down, Rotate Right, Rotate Left, Scale, Drop Down
 	if (!isPlayerTwo)
 		m_input = { sf::Keyboard::Key::A, sf::Keyboard::Key::D, sf::Keyboard::Key::S, sf::Keyboard::Key::Q, sf::Keyboard::Key::E, sf::Keyboard::Key::W ,sf::Keyboard::Key::Space };
 	else

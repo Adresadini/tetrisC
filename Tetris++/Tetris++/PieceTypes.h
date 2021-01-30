@@ -7,6 +7,7 @@ class PieceTypes
 {
 public:
 	enum class scaleType { Normal, Special, Line };
+
 public:
 	static const size_t PiecesSize = 4;
 

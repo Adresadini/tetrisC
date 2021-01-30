@@ -8,7 +8,4 @@ public:
 	void Disappear(Board& board) const;
 private:
 	Board::Position m_spawnPosition;
-
-private:
-	//bool FoundAPiece(const  Board& board, TetrisPiece& piece) const;
 };

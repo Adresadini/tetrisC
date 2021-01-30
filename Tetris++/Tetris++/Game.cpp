@@ -2,7 +2,6 @@
 #include "SfmlButton.h"
 #include "TextBox.h"
 #include "SFML/Audio.hpp"
-#include <chrono>
 #include<vector>
 
 Game::Game(std::string filename)
@@ -11,7 +10,7 @@ Game::Game(std::string filename)
 	m_scores.ReadPlayers("scores.txt");
 }
 
-void configureText(sf::Text& text, const sf::Font& font)
+void ConfigureText(sf::Text& text, const sf::Font& font)
 {
 	text.setFont(font);
 	text.setCharacterSize(40);
@@ -19,8 +18,7 @@ void configureText(sf::Text& text, const sf::Font& font)
 	text.setStyle(sf::Text::Bold);
 }
 
-
-bool dataValidation(sf::Text& errorMessage, const std::string& name1, const std::string& name2,
+bool DataValidation(sf::Text& errorMessage, const std::string& name1, const std::string& name2,
 	const std::string& width, const std::string& height, const bool& multiplayer)
 {
 	if (name1.size() < 4)
@@ -77,11 +75,18 @@ bool dataValidation(sf::Text& errorMessage, const std::string& name1, const std:
 	return true;
 }
 
+void Game::UpdatePlayerInfo(Player& player)
+{
+	player.ModifyScoreInfo();
+	m_scores.UpdatePlayer(player);
+	m_scores.PrintPlayers("scores.txt");
+}
+
 void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& font)
 {
 	m_gameOver = false;
 	sf::Text nameText;
-	configureText(nameText, font);
+	ConfigureText(nameText, font);
 	nameText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
 	nameText.setString("Player Name:");
 
@@ -92,7 +97,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 
 	sf::Text widthText;
-	configureText(widthText, font);
+	ConfigureText(widthText, font);
 	widthText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 300));
 	widthText.setString("Select tabel width:");
 
@@ -104,7 +109,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 
 	sf::Text heightText;
-	configureText(heightText, font);
+	ConfigureText(heightText, font);
 	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 550));
 	heightText.setString("Select tabel height:");
 
@@ -164,7 +169,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 				if (playButton.IsPressed())
 				{
-					if (dataValidation(errorText, nameTexBox.GetText(), "",
+					if (DataValidation(errorText, nameTexBox.GetText(), "",
 						widthTextBox.GetText(), heightTextBox.GetText(), false))
 					{
 						window.close();
@@ -210,15 +215,13 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 		window.display();
 	}
-
-
 }
 
 void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& font)
 {
 	m_gameOver = false;
 	sf::Text nameTextPlayer1;
-	configureText(nameTextPlayer1, font);
+	ConfigureText(nameTextPlayer1, font);
 	nameTextPlayer1.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
 	nameTextPlayer1.setString("Player1 Name:");
 
@@ -229,7 +232,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 
 
 	sf::Text nameTextPlayer2;
-	configureText(nameTextPlayer2, font);
+	ConfigureText(nameTextPlayer2, font);
 	nameTextPlayer2.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 200));
 	nameTextPlayer2.setString("Player2 Name:");
 
@@ -240,7 +243,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 
 
 	sf::Text widthText;
-	configureText(widthText, font);
+	ConfigureText(widthText, font);
 	widthText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 350));
 	widthText.setString("Select tabel width:");
 
@@ -252,7 +255,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 
 
 	sf::Text heightText;
-	configureText(heightText, font);
+	ConfigureText(heightText, font);
 	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 500));
 	heightText.setString("Select tabel height:");
 
@@ -328,7 +331,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 
 				if (playButtonTeam.IsPressed())
 				{
-					if (dataValidation(errorText, nameTexBoxPlayer1.GetText(), nameTexBoxPlayer2.GetText(),
+					if (DataValidation(errorText, nameTexBoxPlayer1.GetText(), nameTexBoxPlayer2.GetText(),
 						widthTextBox.GetText(), heightTextBox.GetText(), true))
 					{
 						window.close();
@@ -339,7 +342,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 
 				if (playButtonVersus.IsPressed())
 				{
-					if (dataValidation(errorText, nameTexBoxPlayer1.GetText(), nameTexBoxPlayer2.GetText(),
+					if (DataValidation(errorText, nameTexBoxPlayer1.GetText(), nameTexBoxPlayer2.GetText(),
 						widthTextBox.GetText(), heightTextBox.GetText(), true))
 					{
 						window.close();
@@ -489,7 +492,7 @@ void Game::ShowMenu()
 	}
 }
 
-void setBlock(const std::optional<uint8_t> block, sf::RectangleShape& shape)
+void SetBlock(const std::optional<uint8_t> block, sf::RectangleShape& shape)
 {
 	if (block == std::nullopt)
 	{
@@ -567,14 +570,12 @@ void Game::DisplayBoard(sf::RenderWindow& window, const Board& board) const
 		{
 			columnPosition += sizeOfBlockLine + 1;
 			shape.setPosition(columnPosition, linePosition);
-			setBlock(board[{line, column}], shape);
+			SetBlock(board[{line, column}], shape);
 			window.draw(shape);
 		}
 	}
 	window.display();
 }
-
-
 
 void Game::SingleplayerLogic(const std::string& playerName, const int& boardWidth, const int& boardHeight)
 {
@@ -621,9 +622,7 @@ void Game::SingleplayerLogic(const std::string& playerName, const int& boardWidt
 			if (m_gameOver)
 			{
 				window.close();
-				player.ModifyScoreInfo();
-				m_scores.UpdatePlayer(player);
-				m_scores.PrintPlayers("scores.txt");
+				UpdatePlayerInfo(player);
 				ShowGameOver(player);
 				return;
 			}
@@ -704,11 +703,7 @@ void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::strin
 			if (m_gameOver)
 			{
 				window.close();
-				player1.ModifyScoreInfo();
-				m_scores.UpdatePlayer(player1);
-				player2.ModifyScoreInfo();
-				m_scores.UpdatePlayer(player2);
-				m_scores.PrintPlayers("scores.txt");
+				UpdatePlayerInfo(player1);
 				ShowGameOver(player1);
 				return;
 			}
@@ -796,11 +791,8 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 			if (m_gameOver)
 			{
 				window.close();
-				player1.ModifyScoreInfo();
-				m_scores.UpdatePlayer(player1);
-				player2.ModifyScoreInfo();
-				m_scores.UpdatePlayer(player2);
-				m_scores.PrintPlayers("scores.txt");
+				UpdatePlayerInfo(player1);
+				UpdatePlayerInfo(player2);
 				ShowGameOverMulTiplayerVersus(player1, player2, false);
 				return;
 			}
@@ -854,7 +846,6 @@ void Game::CheckTopLine(const Board& board, const bool& isPlayer1)
 			}
 }
 
-
 void Game::ShowGameOver(const Player& player1)
 {
 	sf::RenderWindow window(sf::VideoMode(400, 500), "Game Over", sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
@@ -864,12 +855,12 @@ void Game::ShowGameOver(const Player& player1)
 		Sleep(10);
 
 	sf::Text gameOverText;
-	configureText(gameOverText, font);
+	ConfigureText(gameOverText, font);
 	gameOverText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
 	gameOverText.setString("Game Over!");
 
 	sf::Text scoreText;
-	configureText(scoreText, font);
+	ConfigureText(scoreText, font);
 	scoreText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 150));
 	scoreText.setString("Total Score: " + std::to_string(player1.GetScore()));
 
@@ -933,7 +924,7 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 		Sleep(10);
 
 	sf::Text winnerText;
-	configureText(winnerText, font);
+	ConfigureText(winnerText, font);
 	winnerText.setPosition(sf::Vector2f(10, 50));
 
 
@@ -943,12 +934,12 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 		winnerText.setString(player2.GetName() + " A castigat!");
 
 	sf::Text scorePlayer1Text;
-	configureText(scorePlayer1Text, font);
+	ConfigureText(scorePlayer1Text, font);
 	scorePlayer1Text.setPosition(sf::Vector2f(10, 150));
 	scorePlayer1Text.setString(player1.GetName() + " Score: " + std::to_string(player1.GetScore()));
 
 	sf::Text scorePlayer2Text;
-	configureText(scorePlayer2Text, font);
+	ConfigureText(scorePlayer2Text, font);
 	scorePlayer2Text.setPosition(sf::Vector2f(10, 200));
 	scorePlayer2Text.setString(player2.GetName() + " Score: " + std::to_string(player2.GetScore()));
 
@@ -1029,17 +1020,17 @@ void Game::ShowTopScores()
 		Sleep(10);
 
 	sf::Text top5Text;
-	configureText(top5Text, font);
+	ConfigureText(top5Text, font);
 	top5Text.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
 	top5Text.setString("Top 5 Scores:");
 
 	sf::Text nameText;
-	configureText(nameText, font);
+	ConfigureText(nameText, font);
 	nameText.setPosition(sf::Vector2f(50, 150));
 	nameText.setString("name");
 
 	sf::Text scoreText;
-	configureText(scoreText, font);
+	ConfigureText(scoreText, font);
 	scoreText.setPosition(sf::Vector2f(600, 150));
 	scoreText.setString("score");
 
@@ -1053,8 +1044,8 @@ void Game::ShowTopScores()
 	for (uint8_t index = 0; index < 5 && index < m_scores.GetScores().size(); index++)
 	{
 		playerText.push_back(TurnPlayerIntoText(m_scores.GetScores()[index]));
-		configureText(playerText[index].first, font);
-		configureText(playerText[index].second, font);
+		ConfigureText(playerText[index].first, font);
+		ConfigureText(playerText[index].second, font);
 
 		playerText[index].first.setPosition(sf::Vector2f(nameText.getPosition().x, nameText.getPosition().y + (index + 1) * 50));
 		playerText[index].second.setPosition(sf::Vector2f(scoreText.getPosition().x, scoreText.getPosition().y + (index + 1) * 50));

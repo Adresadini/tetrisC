@@ -8,8 +8,8 @@ void Scores::ReadPlayers(const std::string& fileName)
 	{
 		Player player("", false);
 		file >> player;
-		if(player.GetName()!="")
-		m_scores.push_back(player);
+		if (player.GetName() != "")
+			m_scores.push_back(player);
 	}
 }
 
@@ -30,7 +30,7 @@ void Scores::GetPlayer(Player& newPlayer)
 	if (player == m_scores.end())
 		m_scores.push_back(newPlayer);
 	else
-		newPlayer.SetInfo(player->GetHighScore(),player->GetAverageScore(),player->GetScoreCount());
+		newPlayer.SetInfo(player->GetHighScore(), player->GetAverageScore(), player->GetScoreCount());
 }
 
 void Scores::UpdatePlayer(const Player& player)

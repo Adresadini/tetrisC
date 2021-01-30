@@ -16,7 +16,7 @@ SfmlButton::SfmlButton(float x, float y, float width, float height,
 	m_text.setFillColor(sf::Color::White);
 	m_text.setCharacterSize(28);
 	m_text.setPosition(
-		m_shape.getPosition().x +(m_shape.getGlobalBounds().width / 2.f)- m_text.getGlobalBounds().width / 2.f,
+		m_shape.getPosition().x + (m_shape.getGlobalBounds().width / 2.f) - m_text.getGlobalBounds().width / 2.f,
 		m_shape.getPosition().y + (m_shape.getGlobalBounds().height / 2.f) - m_text.getGlobalBounds().height / 2.f
 	);
 

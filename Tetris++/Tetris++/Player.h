@@ -29,9 +29,9 @@ public:
 private:
 	std::string m_name;
 	uint16_t m_score = 0;
-	uint16_t m_highScore=0;
-	uint16_t m_averageScore=0;
-	uint16_t m_scoreCount=0;
+	uint16_t m_highScore = 0;
+	uint16_t m_averageScore = 0;
+	uint16_t m_scoreCount = 0;
 private:
 	static const size_t NumberOfInputs = 7;
 	std::array<sf::Keyboard::Key, NumberOfInputs>m_input;

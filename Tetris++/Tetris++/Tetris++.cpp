@@ -1,8 +1,5 @@
 #include "Game.h"
-
-/*Use #include "../Logging/Logger.h"
-in order to use the Logger
-*/
+#include "../Logging/Logger.h"
 
 int main()
 {

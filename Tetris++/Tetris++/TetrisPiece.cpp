@@ -328,10 +328,10 @@ uint16_t TetrisPiece::DeleteCompleteLinesAndColumns(Board& board, const bool& is
 {
 	uint16_t value = 0;
 	for (int line = m_position.first; line < m_position.first + (signed)kHeight && line < board.GetHeight(); line++)
-		value+=board.VerifyIfAnyPlayerHaveALineComplete(line, isPlayerTwo);
+		value += board.VerifyIfAnyPlayerHaveALineComplete(line, isPlayerTwo);
 
 	for (int column = m_position.second; column < m_position.second + (signed)kWidth && column < board.GetWidth(); column++)
-		value+=board.VerifyIfAnyPlayerHaveAColumnComplete(column, isPlayerTwo);
+		value += board.VerifyIfAnyPlayerHaveAColumnComplete(column, isPlayerTwo);
 	return value;
 }
 

@@ -10,7 +10,7 @@ public:
 	using Position = std::pair<int16_t, int16_t>;
 
 public:
-	Board(const uint16_t& width,const uint16_t& height,const bool& multiPlayer);
+	Board(const uint16_t& width, const uint16_t& height, const bool& multiPlayer);
 
 	const std::optional<uint8_t>& operator[] (const Position& pos) const;
 	std::optional<uint8_t>& operator[] (const Position& pos);
@@ -23,7 +23,7 @@ public:
 	void DeleteAndReplaceLine(const uint16_t& line);
 	void DeleteAndReplaceElement(const uint16_t& line, const uint16_t& column);
 
-	uint8_t VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool& isPlayerTwo) ;
+	uint8_t VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bool& isPlayerTwo);
 	uint8_t VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, const bool& isPlayerTwo);
 
 	void DeletePlayerLine(const uint16_t& line, const uint16_t& column, const uint8_t& numberOfSameElements);

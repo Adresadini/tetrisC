@@ -64,7 +64,6 @@ int16_t RandomSquare::FindTheLowestEmptyPosition(const Board& board)
 	for (int16_t line = board.GetHeight() - 1; line >= 0; line--)
 		if (!board[{line, m_position.second}])
 			return line;
-	// TO DO :: vezi cum faci un throw aici sa se intample ceva daca gaseste o coloana full
 }
 
 Board::Position RandomSquare::getPosition() const
