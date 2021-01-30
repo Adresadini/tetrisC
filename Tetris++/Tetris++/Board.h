@@ -15,8 +15,6 @@ public:
 	const std::optional<uint8_t>& operator[] (const Position& pos) const;
 	std::optional<uint8_t>& operator[] (const Position& pos);
 
-	friend std::ostream& operator << (std::ostream&, const Board&);
-
 	size_t GetWidth() const;
 	size_t GetHeight() const;
 

@@ -26,7 +26,7 @@ public:
 
 private:
 	PieceTypes m_types;
-	bool m_gameOver;
+	bool m_gameOver = false;
 	BlackHole m_hole;
 	Scores m_scores;
 	uint16_t m_level = 0;
@@ -35,6 +35,6 @@ private:
 
 	sf::Sound m_sound;
 private:
-	void CheckTopLine(const Board& board);
+	void CheckTopLine(const Board& board,const bool& isPlayer1, sf::RenderWindow& gameWindow);
 };
 

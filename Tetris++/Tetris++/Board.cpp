@@ -12,9 +12,7 @@ Board::Board(const uint16_t& width, const uint16_t& height, const bool& multiPla
 		m_width *= 2;
 
 	}
-
 	m_size = m_width * m_height;
-
 	for (auto i = 0; i < m_size; i++)
 		m_board.push_back(std::nullopt);
 }
@@ -43,28 +41,6 @@ size_t Board::GetWidth() const
 size_t Board::GetHeight() const
 {
 	return m_height;
-}
-
-
-
-std::ostream& operator<<(std::ostream& out, const Board& board)
-{
-	Board::Position position;
-	auto& [line, column] = position;
-	for (line = 0; line < board.m_height; line++)
-	{
-		for (column = 0; column < board.m_width; column++)
-		{
-			if (board[position])
-				out << unsigned(*board[position]);
-			else
-				out << EmptyBoardSpace;
-			out << " ";
-		}
-
-		out << std::endl;
-	}
-	return out;
 }
 
 bool  Board::VerifyIfLineIsComplete(const uint16_t& line) const
@@ -113,7 +89,7 @@ uint8_t Board::VerifyIfAnyPlayerHaveALineComplete(const uint16_t& line, const bo
 		}
 		if (numberOfSameElements >= m_width / 2)
 		{
-			DeletePlayerLine(line , column, numberOfSameElements);
+			DeletePlayerLine(line, column, numberOfSameElements);
 			return numberOfSameElements;
 		}
 	}
@@ -144,7 +120,7 @@ uint8_t Board::VerifyIfAnyPlayerHaveAColumnComplete(const uint16_t& column, cons
 		}
 		if (numberOfSameElements >= m_width / 2)
 		{
-			DeletePlayerColumn(line+1, column, numberOfSameElements);
+			DeletePlayerColumn(line + 1, column, numberOfSameElements);
 			return numberOfSameElements;
 		}
 	}

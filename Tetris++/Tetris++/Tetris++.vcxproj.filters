@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Edi">
-      <UniqueIdentifier>{f2f51871-a3c0-434a-bd35-4add71cbb286}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Edi">
-      <UniqueIdentifier>{001cf73a-4ee4-4f1e-a52d-9b6b79b0ba90}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Game Logic">
       <UniqueIdentifier>{c1b3e3f7-216d-4382-a670-3c28ed59f958}</UniqueIdentifier>
     </Filter>
@@ -30,6 +24,12 @@
     </Filter>
     <Filter Include="Source Files\Tetris Pieces">
       <UniqueIdentifier>{97eee07a-6ba1-48ff-bc3c-7c369110b7d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visual Components">
+      <UniqueIdentifier>{f2f51871-a3c0-434a-bd35-4add71cbb286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Visual Components">
+      <UniqueIdentifier>{001cf73a-4ee4-4f1e-a52d-9b6b79b0ba90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -43,7 +43,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SfmlButton.h">
-      <Filter>Header Files\Edi</Filter>
+      <Filter>Header Files\Visual Components</Filter>
     </ClInclude>
     <ClInclude Include="BlackHole.h">
       <Filter>Header Files\Game Logic</Filter>
@@ -61,7 +61,7 @@
       <Filter>Header Files\Tetris Pieces</Filter>
     </ClInclude>
     <ClInclude Include="TextBox.h">
-      <Filter>Header Files\Edi</Filter>
+      <Filter>Header Files\Visual Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -78,7 +78,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SfmlButton.cpp">
-      <Filter>Source Files\Edi</Filter>
+      <Filter>Source Files\Visual Components</Filter>
     </ClCompile>
     <ClCompile Include="BlackHole.cpp">
       <Filter>Source Files\Game Logic</Filter>
@@ -96,7 +96,7 @@
       <Filter>Source Files\Tetris Pieces</Filter>
     </ClCompile>
     <ClCompile Include="TextBox.cpp">
-      <Filter>Source Files\Edi</Filter>
+      <Filter>Source Files\Visual Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

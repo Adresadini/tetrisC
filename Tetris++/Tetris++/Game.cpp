@@ -7,7 +7,6 @@
 Game::Game(std::string filename)
 	: m_types(filename)
 {
-	m_gameOver = false;
 }
 
 void configureText(sf::Text& text, const sf::Font& font)
@@ -68,6 +67,7 @@ bool dataValidation(sf::Text& errorMessage, const std::string& name1, const std:
 
 void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& font)
 {
+	m_gameOver = false;
 	sf::Text nameText;
 	configureText(nameText, font);
 	nameText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
@@ -204,6 +204,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& font)
 {
+	m_gameOver = false;
 	sf::Text nameTextPlayer1;
 	configureText(nameTextPlayer1, font);
 	nameTextPlayer1.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
@@ -476,9 +477,6 @@ void Game::ShowMenu()
 	}
 }
 
-
-
-
 void setBlock(const std::optional<uint8_t> block, sf::RectangleShape& shape)
 {
 	if (block == std::nullopt)
@@ -568,11 +566,21 @@ void Game::DisplayBoard(sf::RenderWindow& window, const Board& board) const
 	//add a window to display the score
 }
 
-void Game::CheckTopLine(const Board& board)
+void Game::CheckTopLine(const Board& board, const bool& isPlayer1, sf::RenderWindow& gameWindow)
 {
 	for (int8_t column = 0; column < board.GetWidth(); column++)
 		if (board[{0, column}])
-			m_gameOver = true;
+			if (board[{0, column}].value() < 20 && isPlayer1)
+			{
+				gameWindow.close();
+				m_gameOver = true;
+			}
+			else if (board[{0, column}].value() > 20 && !isPlayer1)
+			{
+				gameWindow.close();
+				m_gameOver = true;
+			}
+
 
 	if (m_gameOver == true)
 	{
@@ -661,7 +669,7 @@ void Game::SingleplayerLogic(const std::string& playerName, const int& boardWidt
 		{
 			m_hole.Disappear(board);
 			player.AddScore(currentPiece->DeleteCompleteLines(board));
-			CheckTopLine(board);
+			CheckTopLine(board, true, window);
 			randomSquare.reset(new RandomSquare(board));
 			DisplayBoard(window, board);
 			while (!randomSquare->isSet())
@@ -703,7 +711,7 @@ void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::strin
 	std::unique_ptr<TetrisPiece> playerOnePiece(new TetrisPiece(m_startPositionPlayer1, m_types));
 	std::unique_ptr<TetrisPiece> playerTwoPiece(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 
-	Player player1(player1Name);
+	Player player1(player1Name + "+" + player2Name);
 	Player player2(player2Name, true);
 
 	m_hole.Spawn(board);
@@ -733,17 +741,14 @@ void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::strin
 		{
 			m_hole.Disappear(board);
 			player1.AddScore(playerOnePiece->DeleteCompleteLines(board));
-			if (playerTwoPiece->IsSet())
-				CheckTopLine(board);
-
+			CheckTopLine(board, true, window);
 			playerOnePiece.reset(new TetrisPiece(m_startPositionPlayer1, m_types));
 			m_hole.Spawn(board);
 		}
 		if (playerTwoPiece->IsSet())
 		{
 			player1.AddScore(playerTwoPiece->DeleteCompleteLines(board));
-			if (playerOnePiece->IsSet())
-				CheckTopLine(board);
+			CheckTopLine(board, false, window);
 			playerTwoPiece.reset(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 		}
 
@@ -806,9 +811,7 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 		{
 			m_hole.Disappear(board);
 			player1.AddScore(playerOnePiece->DeleteCompleteLinesAndColumns(board, false));
-			if (playerTwoPiece->IsSet())
-				CheckTopLine(board);
-
+			CheckTopLine(board, true, window);
 			playerOnePiece.reset(new TetrisPiece(m_startPositionPlayer1, m_types));
 			m_hole.Spawn(board);
 		}
@@ -816,8 +819,7 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 		{
 			m_hole.Disappear(board);
 			player2.AddScore(playerTwoPiece->DeleteCompleteLinesAndColumns(board, true));
-			if (playerOnePiece->IsSet())
-				CheckTopLine(board);
+			CheckTopLine(board, false, window);
 			playerTwoPiece.reset(new TetrisPiece(m_startPositionPlayer2, m_types, true));
 			m_hole.Spawn(board);
 		}
