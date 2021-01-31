@@ -723,7 +723,9 @@ void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::strin
 		if (playerOnePiece->IsSet())
 		{
 			m_hole.Disappear(board);
+			playerTwoPiece->Delete(board);
 			player1.AddScore(playerOnePiece->DeleteCompleteLines(board));
+			playerTwoPiece->Draw(board);
 			CheckTopLine(board, true);
 			if (m_gameOver)
 			{
@@ -737,19 +739,20 @@ void Game::MultiplayerTeamLogic(const std::string& player1Name, const std::strin
 		}
 		if (playerTwoPiece->IsSet())
 		{
+			m_hole.Disappear(board);
+			playerOnePiece->Delete(board);
 			player1.AddScore(playerTwoPiece->DeleteCompleteLines(board));
+			playerOnePiece->Draw(board);
 			CheckTopLine(board, false);
 			if (m_gameOver)
 			{
 				window.close();
-				player1.ModifyScoreInfo();
-				m_scores.UpdatePlayer(player1);
-				player2.ModifyScoreInfo();
-				m_scores.UpdatePlayer(player2);
-				m_scores.PrintPlayers("scores.txt");
+				UpdatePlayerInfo(player1);
+				ShowGameOver(player1);
 				return;
 			}
 			playerTwoPiece.reset(new TetrisPiece(m_startPositionPlayer2, m_types, true));
+			m_hole.Spawn(board);
 		}
 
 		playerOnePiece->MoveDown(board);
@@ -811,7 +814,9 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 		if (playerOnePiece->IsSet())
 		{
 			m_hole.Disappear(board);
+			playerTwoPiece->Delete(board);
 			player1.AddScore(playerOnePiece->DeleteCompleteLinesAndColumns(board, false));
+			playerTwoPiece->Draw(board);
 			CheckTopLine(board, true);
 			if (m_gameOver)
 			{
@@ -827,16 +832,15 @@ void Game::MultiplayerVersusLogic(const std::string& player1Name, const std::str
 		if (playerTwoPiece->IsSet())
 		{
 			m_hole.Disappear(board);
+			playerOnePiece->Delete(board);
 			player2.AddScore(playerTwoPiece->DeleteCompleteLinesAndColumns(board, true));
+			playerOnePiece->Draw(board);
 			CheckTopLine(board, false);
 			if (m_gameOver)
 			{
 				window.close();
-				player1.ModifyScoreInfo();
-				m_scores.UpdatePlayer(player1);
-				player2.ModifyScoreInfo();
-				m_scores.UpdatePlayer(player2);
-				m_scores.PrintPlayers("scores.txt");
+				UpdatePlayerInfo(player1);
+				UpdatePlayerInfo(player2);
 				ShowGameOverMulTiplayerVersus(player1, player2, true);
 				return;
 			}
