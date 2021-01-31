@@ -85,6 +85,7 @@ void Game::UpdatePlayerInfo(Player& player)
 void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& font)
 {
 	m_gameOver = false;
+	m_level = 0;
 	sf::Text nameText;
 	ConfigureText(nameText, font);
 	nameText.setPosition(sf::Vector2f(window.getSize().x / 2 - 140, 250));
@@ -234,6 +235,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& font)
 {
 	m_gameOver = false;
+	m_level = 0;
 	sf::Text nameTextPlayer1;
 	ConfigureText(nameTextPlayer1, font);
 	nameTextPlayer1.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 150));
