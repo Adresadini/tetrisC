@@ -2,6 +2,9 @@
 #include "CppUnitTest.h"
 
 #include "Player.h"
+#include "Player.cpp"
+#include "TetrisPiece.cpp"
+#include "PieceTypes.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

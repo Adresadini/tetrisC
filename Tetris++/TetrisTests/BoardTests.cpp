@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 
 #include "Board.h"
+#include "Board.cpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
