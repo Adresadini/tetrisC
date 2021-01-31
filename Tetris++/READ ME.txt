@@ -1,0 +1,7 @@
+In order to work, this project need to add a few .dll files in:
+proiect-modern-c\Tetris++\Debug
+
+So, take the "bin" arhive from:
+proiect-modern-c\Tetris++\SFML-2.5.1
+and extract the files in:
+proiect-modern-c\Tetris++\Debug
