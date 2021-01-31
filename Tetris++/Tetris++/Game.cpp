@@ -93,7 +93,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 	TextBox nameTexBox(window.getSize().x / 2 - 150,
 		300,
 		300, 50, font, "Player",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	sf::Texture texture;
 	texture.loadFromFile("images/background2.png");
@@ -110,30 +110,27 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 	TextBox widthTextBox(window.getSize().x / 2 - 150,
 		400,
 		300, 50, font, "9",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
-
+		sf::Color::Blue, sf::Color::Red, sf::Color::Green);
 
 	sf::Text heightText;
 	ConfigureText(heightText, font);
 	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 210, 450));
 	heightText.setString("Select tabel height:");
 
-
 	TextBox heightTextBox(window.getSize().x / 2 - 150,
 		500,
 		300, 50, font, "27"
-		, sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
-
+		, sf::Color::Blue, sf::Color::Red, sf::Color::Green);
 
 	SfmlButton playButton(window.getSize().x / 2 - 150,
 		600
 		, 300, 50, font, "Play",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	SfmlButton backButton(window.getSize().x / 2 - 150,
 		660
 		, 300, 50, font, "Menu",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	sf::Font errorFont;
 	if (!errorFont.loadFromFile("images/Font.ttf"))
@@ -218,10 +215,8 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 		window.draw(nameText);
 		nameTexBox.Render(window);
 
-
 		window.draw(widthText);
 		widthTextBox.Render(window);
-
 
 		window.draw(heightText);
 		heightTextBox.Render(window);
@@ -247,8 +242,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 	TextBox nameTexBoxPlayer1(window.getSize().x / 2 - 150,
 		200,
 		300, 50, font, "Player1",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
-
+		sf::Color::Blue, sf::Color::Red, sf::Color::Green);
 
 	sf::Text nameTextPlayer2;
 	ConfigureText(nameTextPlayer2, font);
@@ -258,7 +252,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 	TextBox nameTexBoxPlayer2(window.getSize().x / 2 - 150,
 		300,
 		300, 50, font, "Player2",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Green);
 
 	sf::Texture texture;
 	texture.loadFromFile("images/background2.png");
@@ -275,37 +269,32 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 	TextBox widthTextBox(window.getSize().x / 2 - 150,
 		400,
 		300, 50, font, "9",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
-
-
+		sf::Color::Blue, sf::Color::Red, sf::Color::Green);
 
 	sf::Text heightText;
 	ConfigureText(heightText, font);
 	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 210, 450));
 	heightText.setString("Select tabel height:");
 
-
 	TextBox heightTextBox(window.getSize().x / 2 - 150,
 		500,
 		300, 50, font, "27"
-		, sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
-
+		, sf::Color::Blue, sf::Color::Red, sf::Color::Green);
 
 	SfmlButton playButtonTeam(window.getSize().x / 2 - 150,
 		610
 		, 300, 50, font, "Play as Team",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	SfmlButton playButtonVersus(window.getSize().x / 2 - 150,
 		670
 		, 300, 50, font, "Play Versus",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	SfmlButton backButton(window.getSize().x / 2 - 150,
 		730
 		, 300, 50, font, "Menu",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
-
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	sf::Font errorFont;
 	if (!errorFont.loadFromFile("images/Font.ttf"))
@@ -441,7 +430,6 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 		window.display();
 	}
 
-
 }
 
 void Game::ShowMenu()
@@ -479,18 +467,15 @@ void Game::ShowMenu()
 	text.setStyle(sf::Text::Bold);
 	text.setPosition(sf::Vector2f(window.getSize().x / 4, window.getSize().y / 3.5));
 
-
 	SfmlButton buttonSinglePlayer(window.getSize().x / 2 - 150,
 		window.getSize().y / 3 + 50
 		, 300, 50, font, "Single Player",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
-
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	SfmlButton buttonMultiPlayer(window.getSize().x / 2 - 150,
 		window.getSize().y / 3 + 150,
 		300, 50, font, "MultiPlayer",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
-
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	while (window.isOpen())
 	{
@@ -526,7 +511,6 @@ void Game::ShowMenu()
 		window.draw(sprite);
 		buttonSinglePlayer.Render(window);
 		buttonMultiPlayer.Render(window);
-
 
 		window.draw(text);
 		window.display();
@@ -910,12 +894,12 @@ void Game::ShowGameOver(const Player& player1)
 	SfmlButton buttonGameOver(20,
 		window.getSize().y - 70,
 		100, 40, font, "Menu",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	SfmlButton buttonTop(window.getSize().x - 120,
 		window.getSize().y - 70,
 		100, 40, font, "Top",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	while (window.isOpen())
 	{
@@ -978,7 +962,6 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 	ConfigureText(winnerText, font);
 	winnerText.setPosition(sf::Vector2f(170, 50));
 
-
 	if (!isPlayerTwo)
 		winnerText.setString(player1.GetName() + " Won!");
 	else
@@ -997,14 +980,12 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 	SfmlButton buttonMenu(20,
 		window.getSize().y - 70,
 		100, 40, font, "Menu",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	SfmlButton buttonTop(window.getSize().x - 120,
 		window.getSize().y - 70,
 		100, 40, font, "Top",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
-
-
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	while (window.isOpen())
 	{
@@ -1034,7 +1015,6 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 
 		buttonMenu.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 		buttonTop.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-
 
 		window.clear();
 
@@ -1074,7 +1054,7 @@ void Game::ShowTopScores()
 
 	sf::Text top5Text;
 	ConfigureText(top5Text, font);
-	top5Text.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
+	top5Text.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 100));
 	top5Text.setString("Top 5 Scores:");
 
 	sf::Text nameText;
@@ -1097,7 +1077,7 @@ void Game::ShowTopScores()
 	SfmlButton buttonMenu(20,
 		window.getSize().y - 70,
 		100, 40, font, "menu",
-		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
 
 	std::vector<std::pair< sf::Text, sf::Text>> playerText;
 
@@ -1110,7 +1090,6 @@ void Game::ShowTopScores()
 		playerText[index].first.setPosition(sf::Vector2f(nameText.getPosition().x, nameText.getPosition().y + (index + 1) * 50));
 		playerText[index].second.setPosition(sf::Vector2f(scoreText.getPosition().x, scoreText.getPosition().y + (index + 1) * 50));
 	}
-
 
 	while (window.isOpen())
 	{
