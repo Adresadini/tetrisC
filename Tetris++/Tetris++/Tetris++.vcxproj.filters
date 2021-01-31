@@ -119,7 +119,7 @@
     <Font Include="images\Font.ttf">
       <Filter>Resource Files</Filter>
     </Font>
-    <Font Include="images\Fun Games Demo\Fun Games.ttf">
+    <Font Include="images\MainFont.otf">
       <Filter>Resource Files</Filter>
     </Font>
   </ItemGroup>

@@ -93,7 +93,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 	TextBox nameTexBox(window.getSize().x / 2 - 150,
 		300,
 		300, 50, font, "Player",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	sf::Texture texture;
 	texture.loadFromFile("images/background2.png");
@@ -105,32 +105,32 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 	sf::Text widthText;
 	ConfigureText(widthText, font);
 	widthText.setPosition(sf::Vector2f(window.getSize().x / 2 - 200, 350));
-	widthText.setString("Select tabel width:");
+	widthText.setString("Select table width:");
 
 	TextBox widthTextBox(window.getSize().x / 2 - 150,
 		400,
 		300, 50, font, "9",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Green);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	sf::Text heightText;
 	ConfigureText(heightText, font);
 	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 210, 450));
-	heightText.setString("Select tabel height:");
+	heightText.setString("Select table height:");
 
 	TextBox heightTextBox(window.getSize().x / 2 - 150,
 		500,
 		300, 50, font, "27"
-		, sf::Color::Blue, sf::Color::Red, sf::Color::Green);
+		, sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	SfmlButton playButton(window.getSize().x / 2 - 150,
 		600
 		, 300, 50, font, "Play",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	SfmlButton backButton(window.getSize().x / 2 - 150,
 		660
 		, 300, 50, font, "Menu",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	sf::Font errorFont;
 	if (!errorFont.loadFromFile("images/Font.ttf"))
@@ -242,7 +242,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 	TextBox nameTexBoxPlayer1(window.getSize().x / 2 - 150,
 		200,
 		300, 50, font, "Player1",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Green);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	sf::Text nameTextPlayer2;
 	ConfigureText(nameTextPlayer2, font);
@@ -252,7 +252,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 	TextBox nameTexBoxPlayer2(window.getSize().x / 2 - 150,
 		300,
 		300, 50, font, "Player2",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Green);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	sf::Texture texture;
 	texture.loadFromFile("images/background2.png");
@@ -264,37 +264,37 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 	sf::Text widthText;
 	ConfigureText(widthText, font);
 	widthText.setPosition(sf::Vector2f(window.getSize().x / 2 - 200, 350));
-	widthText.setString("Select tabel width:");
+	widthText.setString("Select table width:");
 
 	TextBox widthTextBox(window.getSize().x / 2 - 150,
 		400,
 		300, 50, font, "9",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Green);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	sf::Text heightText;
 	ConfigureText(heightText, font);
 	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 210, 450));
-	heightText.setString("Select tabel height:");
+	heightText.setString("Select table height:");
 
 	TextBox heightTextBox(window.getSize().x / 2 - 150,
 		500,
 		300, 50, font, "27"
-		, sf::Color::Blue, sf::Color::Red, sf::Color::Green);
+		, sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	SfmlButton playButtonTeam(window.getSize().x / 2 - 150,
 		610
 		, 300, 50, font, "Play as Team",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	SfmlButton playButtonVersus(window.getSize().x / 2 - 150,
 		670
 		, 300, 50, font, "Play Versus",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	SfmlButton backButton(window.getSize().x / 2 - 150,
 		730
 		, 300, 50, font, "Menu",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
+		sf::Color::Blue, sf::Color::Red, sf::Color::Red);
 
 	sf::Font errorFont;
 	if (!errorFont.loadFromFile("images/Font.ttf"))
@@ -442,7 +442,7 @@ void Game::ShowMenu()
 
 	sf::Font font;
 
-	if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
+	if (!font.loadFromFile("images/MainFont.otf"))
 		Sleep(10);
 
 	sf::SoundBuffer music;
@@ -465,7 +465,7 @@ void Game::ShowMenu()
 	text.setCharacterSize(40);
 	text.setFillColor(sf::Color::White);
 	text.setStyle(sf::Text::Bold);
-	text.setPosition(sf::Vector2f(window.getSize().x / 4, window.getSize().y / 3.5));
+	text.setPosition(sf::Vector2f(window.getSize().x / 3.7, window.getSize().y / 3.5));
 
 	SfmlButton buttonSinglePlayer(window.getSize().x / 2 - 150,
 		window.getSize().y / 3 + 50
@@ -876,7 +876,7 @@ void Game::ShowGameOver(const Player& player1)
 	sf::RenderWindow window(sf::VideoMode(400, 500), "Game Over", sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 	sf::Font font;
 
-	if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
+	if (!font.loadFromFile("images/MainFont.otf"))
 		Sleep(10);
 
 	sf::Texture texture;
@@ -948,7 +948,7 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 	sf::RenderWindow window(sf::VideoMode(600, 600), "Game Over", sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 	sf::Font font;
 
-	if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
+	if (!font.loadFromFile("images/MainFont.otf"))
 		Sleep(10);
 
 	sf::Texture texture;
@@ -1049,35 +1049,35 @@ void Game::ShowTopScores()
 	sf::RenderWindow window(sf::VideoMode(800, 800), "Game Over", sf::Style::Close | sf::Style::Titlebar | sf::Style::Resize);
 	sf::Font font;
 
-	if (!font.loadFromFile("images/Fun Games Demo/Fun Games.ttf"))
+	if (!font.loadFromFile("images/MainFont.otf"))
 		Sleep(10);
 
 	sf::Text top5Text;
 	ConfigureText(top5Text, font);
-	top5Text.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 100));
+	top5Text.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 150));
 	top5Text.setString("Top 5 Scores:");
 
 	sf::Text nameText;
 	ConfigureText(nameText, font);
-	nameText.setPosition(sf::Vector2f(50, 150));
-	nameText.setString("name");
+	nameText.setPosition(sf::Vector2f(50, 250));
+	nameText.setString("Name");
 
 	sf::Texture texture;
-	texture.loadFromFile("images/background2.png");
+	texture.loadFromFile("images/Scores1.jpg");
 	sf::Sprite sprite;
 	sf::Vector2u size = texture.getSize();
 	sprite.setTexture(texture);
-	sprite.setOrigin(size.x / 100 - 8, size.y / 100 - 9);
+	sprite.setOrigin(size.x / 60 - 11 , size.y / 60 - 12);
 
 	sf::Text scoreText;
 	ConfigureText(scoreText, font);
-	scoreText.setPosition(sf::Vector2f(600, 150));
-	scoreText.setString("score");
+	scoreText.setPosition(sf::Vector2f(600, 250));
+	scoreText.setString("Score");
 
-	SfmlButton buttonMenu(20,
-		window.getSize().y - 70,
+	SfmlButton buttonMenu(350,
+		window.getSize().y - 100,
 		100, 40, font, "menu",
-		sf::Color::Blue, sf::Color::Red, sf::Color::Magenta);
+		sf::Color::Transparent, sf::Color::Transparent, sf::Color::Transparent);
 
 	std::vector<std::pair< sf::Text, sf::Text>> playerText;
 
