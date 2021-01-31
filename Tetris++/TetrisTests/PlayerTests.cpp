@@ -23,9 +23,9 @@ namespace TetrisTests
 
 		TEST_METHOD(PlayerSetInfo)
 		{
-			Player player;
+			Player player("Player");
 			player.SetInfo(250, 160, 4);
-			Assert::IsTrue(player.GetScore() == 250);
+			Assert::IsTrue(player.GetHighScore() == 250);
 			Assert::IsTrue(player.GetAverageScore() == 160);
 			Assert::IsTrue(player.GetScoreCount() == 4);
 		}
@@ -38,9 +38,9 @@ namespace TetrisTests
 
 		TEST_METHOD(PlayerAddScore)
 		{
-			Player player("Player", 120);
-			player.AddScore(100);
-			Assert::IsTrue(player.GetScore() == 220);
+			Player player("Player");
+			player.AddScore(10);
+			Assert::IsTrue(player.GetScore() == 10);
 		}
 	};
 }

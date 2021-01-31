@@ -10,7 +10,6 @@ Board::Board(const uint16_t& width, const uint16_t& height, const bool& multiPla
 	if (multiPlayer)
 	{
 		m_width *= 2;
-
 	}
 	m_size = m_width * m_height;
 	for (auto i = 0; i < m_size; i++)
