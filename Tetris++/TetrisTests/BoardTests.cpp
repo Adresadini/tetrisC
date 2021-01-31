@@ -14,21 +14,21 @@ namespace TetrisTests
 
 		TEST_METHOD(BoardConstructor)
 		{
-			Board board(10, 20, false);
+			Board board(10, 30, false);
 			Assert::IsTrue(board.GetWidth() == 10);
-			Assert::IsTrue(board.GetHeight() == 20);
+			Assert::IsTrue(board.GetHeight() == 30);
 		}
 
 		TEST_METHOD(GetAtOneOne)
 		{
-			Board board(10, 20, false);
+			Board board(10, 30, false);
 			Board::Position position{ 1,1 };
 			Assert::IsFalse(board[position].has_value());
 		}
 
 		TEST_METHOD(GetAtMinusOneOne)
 		{
-			Board board(10, 20, false);
+			Board board(10, 30, false);
 			Board::Position position{ -1,1 };
 			Assert::ExpectException<const char*>([&]() {
 				board[position];
@@ -37,7 +37,7 @@ namespace TetrisTests
 
 		TEST_METHOD(GetAtMinusOneOneConst)
 		{
-			const Board board(10, 20, false);
+			const Board board(10, 30, false);
 			Board::Position position{ -1,1 };
 			Assert::ExpectException<std::out_of_range>([&]() {
 				board[position];
@@ -46,7 +46,7 @@ namespace TetrisTests
 
 		TEST_METHOD(GetAtOneMinusOne)
 		{
-			Board board(10, 20, false);
+			Board board(10, 30, false);
 			Board::Position position{ 1,-1 };
 			Assert::ExpectException<const char*>([&]() {
 				board[position];
@@ -55,7 +55,7 @@ namespace TetrisTests
 
 		TEST_METHOD(GetAtOneMinusOneConst)
 		{
-			const Board board(10, 20, false);
+			const Board board(10, 30, false);
 			Board::Position position{ 1,-1 };
 			Assert::ExpectException<std::out_of_range>([&]() {
 				board[position];
