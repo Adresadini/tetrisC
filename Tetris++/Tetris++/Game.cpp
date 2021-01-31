@@ -87,11 +87,11 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 	m_gameOver = false;
 	sf::Text nameText;
 	ConfigureText(nameText, font);
-	nameText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
+	nameText.setPosition(sf::Vector2f(window.getSize().x / 2 - 140, 250));
 	nameText.setString("Player Name:");
 
 	TextBox nameTexBox(window.getSize().x / 2 - 150,
-		100,
+		300,
 		300, 50, font, "Player",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
@@ -104,33 +104,31 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 	sf::Text widthText;
 	ConfigureText(widthText, font);
-	widthText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 300));
+	widthText.setPosition(sf::Vector2f(window.getSize().x / 2 - 200, 350));
 	widthText.setString("Select tabel width:");
 
 	TextBox widthTextBox(window.getSize().x / 2 - 150,
-		350,
+		400,
 		300, 50, font, "9",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 
-
 	sf::Text heightText;
 	ConfigureText(heightText, font);
-	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 550));
+	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 210, 450));
 	heightText.setString("Select tabel height:");
 
 
 	TextBox heightTextBox(window.getSize().x / 2 - 150,
-		600,
+		500,
 		300, 50, font, "27"
 		, sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 
 	SfmlButton playButton(window.getSize().x / 2 - 150,
-		750
+		600
 		, 300, 50, font, "Play",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
-
 
 
 	sf::Font errorFont;
@@ -448,15 +446,15 @@ void Game::ShowMenu()
 
 	sf::Text text;
 	text.setFont(font);
-	text.setString("Selectati tipul de joc:");
+	text.setString("Select game type:");
 	text.setCharacterSize(40);
 	text.setFillColor(sf::Color::White);
 	text.setStyle(sf::Text::Bold);
-	text.setPosition(sf::Vector2f(window.getSize().x / 5, window.getSize().y / 5));
+	text.setPosition(sf::Vector2f(window.getSize().x / 4, window.getSize().y / 3.5));
 
 
 	SfmlButton buttonSinglePlayer(window.getSize().x / 2 - 150,
-		window.getSize().y / 3
+		window.getSize().y / 3 + 50
 		, 300, 50, font, "Single Player",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
@@ -877,19 +875,14 @@ void Game::ShowGameOver(const Player& player1)
 	sprite.setTexture(texture);
 	sprite.setOrigin(size.x / 50 - 8, size.y / 55 - 9);
 
-	sf::Text gameOverText;
-	ConfigureText(gameOverText, font);
-	gameOverText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
-	gameOverText.setString("Game Over!");
-
 	sf::Text scoreText;
 	ConfigureText(scoreText, font);
-	scoreText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 150));
+	scoreText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 40));
 	scoreText.setString("Total Score: " + std::to_string(player1.GetScore()));
 
 	SfmlButton buttonGameOver(20,
 		window.getSize().y - 70,
-		100, 40, font, "menu",
+		100, 40, font, "Menu",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 	SfmlButton buttonTop(window.getSize().x - 120,
@@ -930,7 +923,6 @@ void Game::ShowGameOver(const Player& player1)
 
 		window.draw(sprite);
 
-		window.draw(gameOverText);
 		window.draw(scoreText);
 
 		buttonGameOver.Render(window);
@@ -949,35 +941,35 @@ void Game::ShowGameOverMulTiplayerVersus(const Player& player1, const Player& pl
 		Sleep(10);
 
 	sf::Texture texture;
-	texture.loadFromFile("images/gameOver1.jpg");
+	texture.loadFromFile("images/gameOver2.jpg");
 	sf::Sprite sprite;
 	sf::Vector2u size = texture.getSize();
 	sprite.setTexture(texture);
-	sprite.setOrigin(size.x / 75 - 8, size.y / 75 - 9);
+	sprite.setOrigin(size.x / 52 - 8, size.y / 52 - 9);
 
 	sf::Text winnerText;
 	ConfigureText(winnerText, font);
-	winnerText.setPosition(sf::Vector2f(10, 50));
+	winnerText.setPosition(sf::Vector2f(170, 50));
 
 
 	if (!isPlayerTwo)
-		winnerText.setString(player1.GetName() + " A castigat!");
+		winnerText.setString(player1.GetName() + " Won!");
 	else
-		winnerText.setString(player2.GetName() + " A castigat!");
+		winnerText.setString(player2.GetName() + " Won!");
 
 	sf::Text scorePlayer1Text;
 	ConfigureText(scorePlayer1Text, font);
-	scorePlayer1Text.setPosition(sf::Vector2f(10, 150));
+	scorePlayer1Text.setPosition(sf::Vector2f(120, 150));
 	scorePlayer1Text.setString(player1.GetName() + " Score: " + std::to_string(player1.GetScore()));
 
 	sf::Text scorePlayer2Text;
 	ConfigureText(scorePlayer2Text, font);
-	scorePlayer2Text.setPosition(sf::Vector2f(10, 200));
+	scorePlayer2Text.setPosition(sf::Vector2f(120, 200));
 	scorePlayer2Text.setString(player2.GetName() + " Score: " + std::to_string(player2.GetScore()));
 
 	SfmlButton buttonMenu(20,
 		window.getSize().y - 70,
-		100, 40, font, "menu",
+		100, 40, font, "Menu",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 	SfmlButton buttonTop(window.getSize().x - 120,
