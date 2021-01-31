@@ -130,6 +130,10 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 		, 300, 50, font, "Play",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
+	SfmlButton backButton(window.getSize().x / 2 - 150,
+		660
+		, 300, 50, font, "Menu",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 	sf::Font errorFont;
 	if (!errorFont.loadFromFile("images/Font.ttf"))
@@ -181,6 +185,12 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 					}
 				}
 
+				if (backButton.IsPressed())
+				{
+					window.close();
+					ShowMenu();
+				}
+
 				break;
 			case sf::Event::KeyPressed:
 				if (nameTexBox.GetIsSelected())
@@ -195,6 +205,7 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 				break;
 			}
 
+		backButton.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 		playButton.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 		nameTexBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 		widthTextBox.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
@@ -217,6 +228,8 @@ void Game::ShowSinglePlayerSettings(sf::RenderWindow& window, const sf::Font& fo
 
 		playButton.Render(window);
 
+		backButton.Render(window);
+
 		window.draw(errorText);
 
 		window.display();
@@ -228,22 +241,22 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 	m_gameOver = false;
 	sf::Text nameTextPlayer1;
 	ConfigureText(nameTextPlayer1, font);
-	nameTextPlayer1.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 50));
+	nameTextPlayer1.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 150));
 	nameTextPlayer1.setString("Player1 Name:");
 
 	TextBox nameTexBoxPlayer1(window.getSize().x / 2 - 150,
-		100,
+		200,
 		300, 50, font, "Player1",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 
 	sf::Text nameTextPlayer2;
 	ConfigureText(nameTextPlayer2, font);
-	nameTextPlayer2.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 200));
+	nameTextPlayer2.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 250));
 	nameTextPlayer2.setString("Player2 Name:");
 
 	TextBox nameTexBoxPlayer2(window.getSize().x / 2 - 150,
-		250,
+		300,
 		300, 50, font, "Player2",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
@@ -256,7 +269,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 
 	sf::Text widthText;
 	ConfigureText(widthText, font);
-	widthText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 350));
+	widthText.setPosition(sf::Vector2f(window.getSize().x / 2 - 200, 350));
 	widthText.setString("Select tabel width:");
 
 	TextBox widthTextBox(window.getSize().x / 2 - 150,
@@ -268,24 +281,29 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 
 	sf::Text heightText;
 	ConfigureText(heightText, font);
-	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 150, 500));
+	heightText.setPosition(sf::Vector2f(window.getSize().x / 2 - 210, 450));
 	heightText.setString("Select tabel height:");
 
 
 	TextBox heightTextBox(window.getSize().x / 2 - 150,
-		550,
+		500,
 		300, 50, font, "27"
 		, sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 
 	SfmlButton playButtonTeam(window.getSize().x / 2 - 150,
-		675
+		610
 		, 300, 50, font, "Play as Team",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 	SfmlButton playButtonVersus(window.getSize().x / 2 - 150,
-		775
+		670
 		, 300, 50, font, "Play Versus",
+		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
+
+	SfmlButton backButton(window.getSize().x / 2 - 150,
+		730
+		, 300, 50, font, "Menu",
 		sf::Color::Blue, sf::Color::Yellow, sf::Color::Magenta);
 
 
@@ -363,6 +381,12 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 					}
 				}
 
+				if (backButton.IsPressed())
+				{
+					window.close();
+					ShowMenu();
+				}
+
 				break;
 			case sf::Event::KeyPressed:
 				if (nameTexBoxPlayer1.GetIsSelected())
@@ -380,6 +404,7 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 				break;
 			}
 
+		backButton.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 		playButtonTeam.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 		playButtonVersus.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 		nameTexBoxPlayer1.Update(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
@@ -408,6 +433,8 @@ void Game::ShowMultiPlayerSettings(sf::RenderWindow& window, const sf::Font& fon
 		playButtonTeam.Render(window);
 
 		playButtonVersus.Render(window);
+
+		backButton.Render(window);
 
 		window.draw(errorText);
 
