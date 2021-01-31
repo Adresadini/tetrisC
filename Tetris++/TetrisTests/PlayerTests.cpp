@@ -18,24 +18,26 @@ namespace TetrisTests
 			Assert::IsTrue(player.GetScore() == 0);
 		}
 
-		TEST_METHOD(PlayerSetName)
+		TEST_METHOD(PlayerSetInfo)
 		{
 			Player player;
-			player.SetInfo("Player");
-			Assert::IsTrue(player.GetName() == "Player");
-		}
-
-		TEST_METHOD(PlayerSetScore)
-		{
-			Player player;
-			player.AddScore(120);
-			Assert::IsTrue(player.GetScore() == 120);
+			player.SetInfo(250, 160, 4);
+			Assert::IsTrue(player.GetScore() == 250);
+			Assert::IsTrue(player.GetAverageScore() == 160);
+			Assert::IsTrue(player.GetScoreCount() == 4);
 		}
 
 		TEST_METHOD(PlayerToString)
 		{
 			Player player("Player");
 			Assert::IsTrue(player.PlayerToString() == "Player 0");
+		}
+
+		TEST_METHOD(PlayerAddScore)
+		{
+			Player player("Player", 120);
+			player.AddScore(100);
+			Assert::IsTrue(player.GetScore() == 220);
 		}
 	};
 }
