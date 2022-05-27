@@ -13,13 +13,55 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Game Logic">
+      <UniqueIdentifier>{c1b3e3f7-216d-4382-a670-3c28ed59f958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tetris Pieces">
+      <UniqueIdentifier>{925c57b7-41d5-45ba-9451-c36b80d46ebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Logic">
+      <UniqueIdentifier>{d3ea4384-549e-4c59-9642-8dcbd308e701}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tetris Pieces">
+      <UniqueIdentifier>{97eee07a-6ba1-48ff-bc3c-7c369110b7d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visual Components">
+      <UniqueIdentifier>{f2f51871-a3c0-434a-bd35-4add71cbb286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Visual Components">
+      <UniqueIdentifier>{001cf73a-4ee4-4f1e-a52d-9b6b79b0ba90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlackHole.h">
+    <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scores.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SfmlButton.h">
+      <Filter>Header Files\Visual Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackHole.h">
+      <Filter>Header Files\Game Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomSquare.h">
+      <Filter>Header Files\Game Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="PieceTypes.h">
+      <Filter>Header Files\Tetris Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisPiece.h">
+      <Filter>Header Files\Tetris Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="TextBox.h">
+      <Filter>Header Files\Visual Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -29,8 +71,56 @@
     <ClCompile Include="Tetris++.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BlackHole.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Scores.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SfmlButton.cpp">
+      <Filter>Source Files\Visual Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackHole.cpp">
+      <Filter>Source Files\Game Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomSquare.cpp">
+      <Filter>Source Files\Game Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Game Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="PieceTypes.cpp">
+      <Filter>Source Files\Tetris Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="TetrisPiece.cpp">
+      <Filter>Source Files\Tetris Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="TextBox.cpp">
+      <Filter>Source Files\Visual Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Scores.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="PieceTypes.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="tiles.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="test.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="images\Font.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+    <Font Include="images\MainFont.otf">
+      <Filter>Resource Files</Filter>
+    </Font>
   </ItemGroup>
 </Project>

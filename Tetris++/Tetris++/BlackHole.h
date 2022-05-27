@@ -1,15 +1,11 @@
 #pragma once
 #include "Board.h"
-
 class BlackHole
 {
 public:
 	BlackHole() = default;
-	void eat(Board& board);
-	void disappear(Board& board);
+	void Spawn(Board& board);
+	void Disappear(Board& board) const;
 private:
-	int m_positionX;
-	int m_positionY;
+	Board::Position m_spawnPosition;
 };
-
-

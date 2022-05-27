@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tetris++", "Tetris++\Tetris++.vcxproj", "{C350E7AD-4F32-4856-B90D-DFCF775E7CC8}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TetrisTests", "TetrisTests\TetrisTests.vcxproj", "{3EBE8406-DCCB-4549-A486-002692DE5B70}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Logging", "Logging\Logging.vcxproj", "{CBA477AF-3246-4C1D-BD6B-F88A7E977440}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +25,22 @@ Global
 		{C350E7AD-4F32-4856-B90D-DFCF775E7CC8}.Release|x64.Build.0 = Release|x64
 		{C350E7AD-4F32-4856-B90D-DFCF775E7CC8}.Release|x86.ActiveCfg = Release|Win32
 		{C350E7AD-4F32-4856-B90D-DFCF775E7CC8}.Release|x86.Build.0 = Release|Win32
+		{3EBE8406-DCCB-4549-A486-002692DE5B70}.Debug|x64.ActiveCfg = Debug|x64
+		{3EBE8406-DCCB-4549-A486-002692DE5B70}.Debug|x64.Build.0 = Debug|x64
+		{3EBE8406-DCCB-4549-A486-002692DE5B70}.Debug|x86.ActiveCfg = Debug|Win32
+		{3EBE8406-DCCB-4549-A486-002692DE5B70}.Debug|x86.Build.0 = Debug|Win32
+		{3EBE8406-DCCB-4549-A486-002692DE5B70}.Release|x64.ActiveCfg = Release|x64
+		{3EBE8406-DCCB-4549-A486-002692DE5B70}.Release|x64.Build.0 = Release|x64
+		{3EBE8406-DCCB-4549-A486-002692DE5B70}.Release|x86.ActiveCfg = Release|Win32
+		{3EBE8406-DCCB-4549-A486-002692DE5B70}.Release|x86.Build.0 = Release|Win32
+		{CBA477AF-3246-4C1D-BD6B-F88A7E977440}.Debug|x64.ActiveCfg = Debug|x64
+		{CBA477AF-3246-4C1D-BD6B-F88A7E977440}.Debug|x64.Build.0 = Debug|x64
+		{CBA477AF-3246-4C1D-BD6B-F88A7E977440}.Debug|x86.ActiveCfg = Debug|Win32
+		{CBA477AF-3246-4C1D-BD6B-F88A7E977440}.Debug|x86.Build.0 = Debug|Win32
+		{CBA477AF-3246-4C1D-BD6B-F88A7E977440}.Release|x64.ActiveCfg = Release|x64
+		{CBA477AF-3246-4C1D-BD6B-F88A7E977440}.Release|x64.Build.0 = Release|x64
+		{CBA477AF-3246-4C1D-BD6B-F88A7E977440}.Release|x86.ActiveCfg = Release|Win32
+		{CBA477AF-3246-4C1D-BD6B-F88A7E977440}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
